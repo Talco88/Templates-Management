@@ -1,37 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Results;
 
 namespace TemplateCore.Controllers
 {
-    public class BaseController
+    [Route("api/[controller]")]
+    public class BaseController : ApiController
     {
-        [HttpGet]
-        public async Task<object> GetApartmentsAsync()
+        // GET api/<controller>
+        public IEnumerable<string> Get()
         {
-            var res =  new List<object>();
-
-            return res;
+            return new string[] { "value1", "value2" };
         }
 
-        [HttpPost]
-        public async Task<object> Login()
+        // GET api/<controller>/5
+        public string Get(int id)
         {
-            var res = new List<object>();
-
-            return res;
+            return "value";
         }
 
-
-        public async Task<object> PostLogin()
+        // POST api/<controller>
+        public void Post([FromBody]string value)
         {
-            var res = new List<object>();
+            var i = 0;
+            i++;
+            var j = i + 5;
+        }
 
-            return res;
+        // PUT api/<controller>/5
+        public void Put(int id, [FromBody]string value)
+        {
+            var i = 0;
+            i++;
+            var j = i + 5;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿var serverURL = "http://localhost:52530/";
+﻿var serverURL = "api/"; //"http://localhost:52530/";
 var serverRequestQeue = [];
 
 function RegisterPlayer(iPlayerData, iResponseFunc) {
