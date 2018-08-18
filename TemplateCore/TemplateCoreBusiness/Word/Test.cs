@@ -10,9 +10,9 @@ using Font = Xceed.Words.NET.Font;
 
 namespace TemplateCoreBusiness.Word
 {
-    class Test
+    public class Test
     {
-        static void Main(string[] args)
+        public static void BasicTest()
         {
             string jsonValue = "{\"values\": [2,3,4,5], \"Template\": \" this is a big \nstring <value0> contains <value1> some data\", \"numberOfChanges\": 2}";
 
