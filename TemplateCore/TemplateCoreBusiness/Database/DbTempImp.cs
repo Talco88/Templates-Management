@@ -1,15 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace TemplateCore.Models.DB
+namespace TemplateCoreBusiness.Database
 {
-    public class DbTempImp : IDataBase
+    class DbTempImp : IDataBase
     {
         public void CreateNewTemplate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SearchTemplate()
         {
             throw new NotImplementedException();
         }
@@ -20,6 +19,11 @@ namespace TemplateCore.Models.DB
         }
 
         public void GetUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SearchTemplate()
         {
             throw new NotImplementedException();
         }

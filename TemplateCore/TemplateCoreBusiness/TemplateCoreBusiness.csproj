@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DataBaseFactory.cs" />
+    <Compile Include="Database\DbTempImp.cs" />
+    <Compile Include="Database\IDataBase.cs" />
     <Compile Include="ExportTemplate\IExportableFormat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

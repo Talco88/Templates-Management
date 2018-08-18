@@ -9,9 +9,8 @@
     <title>Template Core</title>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
+    <div>
+        <button onclick="testLogin()"> Click</button>
+    </div>
 </body>
 </html>

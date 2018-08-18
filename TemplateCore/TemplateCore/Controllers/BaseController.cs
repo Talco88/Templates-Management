@@ -18,8 +18,16 @@ namespace TemplateCore.Controllers
             return res;
         }
 
+        [HttpPost]
+        public async Task<object> Login()
+        {
+            var res = new List<object>();
 
-        public async Task<object> PostLogInUser()
+            return res;
+        }
+
+
+        public async Task<object> PostLogin()
         {
             var res = new List<object>();
 
