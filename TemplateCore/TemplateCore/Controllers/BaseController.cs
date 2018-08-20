@@ -7,7 +7,6 @@ using System.Web.Http;
 
 namespace TemplateCore.Controllers
 {
-    [Route("api/[controller]")]
     public class BaseController : ApiController
     {
         // GET api/<controller>
@@ -20,6 +19,12 @@ namespace TemplateCore.Controllers
         public string Get(int id)
         {
             return "value";
+        }
+
+        [HttpPost]
+        public string Login([FromBody]string value)
+        {
+            return "valilanue";
         }
 
         // POST api/<controller>

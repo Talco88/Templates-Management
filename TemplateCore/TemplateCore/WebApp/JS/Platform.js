@@ -1,4 +1,4 @@
-﻿var serverURL = "api/"; //"http://localhost:52530/";
+﻿var serverURL = "api/base/"; //"http://localhost:52530/api/base/";
 var serverRequestQeue = [];
 
 function RegisterPlayer(iPlayerData, iResponseFunc) {
@@ -8,7 +8,7 @@ function RegisterPlayer(iPlayerData, iResponseFunc) {
 
 function testLogin() {
     var data = {};
-    data.username - "Tal";
+    data.username = "Tal";
     LogInPlayer(data, testCallback);
 }
 
@@ -32,7 +32,7 @@ function LogOut(iResponseFunc) {
 }
 
 function getDataFRomServer(path, requestData, callback) {
-    let url = path; // this.baseServerUrl + path;
+    let url = serverURL + path;
     fetch(`${url}`, {
         method: 'POST',
         credentials: 'include',
