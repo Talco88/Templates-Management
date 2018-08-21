@@ -1,34 +1,34 @@
-﻿var serverURL = "api/base/"; //"http://localhost:52530/api/base/";
+﻿var serverURL = "api/"; //"http://localhost:52530/api/base/";
 var serverRequestQeue = [];
-
-function RegisterPlayer(iPlayerData, iResponseFunc) {
-    var dataWrapper = { Data: iPlayerData };
-    SendServerRequest(iResponseFunc, "User", dataWrapper);
-}
 
 function testLogin() {
     var data = {};
     data.username = "Tal";
-    LogInPlayer(data, testCallback);
+    LogInPlayer(data, testCallback);   
 }
 
 function testCallback() {
     alert("Good!");
 }
 
+function RegisterUser(iPlayerData, iResponseFunc) {
+    var dataWrapper = { Data: iPlayerData };
+    getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
+}
+
 function LogInPlayer(iPlayerData, iResponseFunc) {
     var dataWrapper = { Data: iPlayerData };
-    getDataFRomServer("Login", dataWrapper, iResponseFunc);
+    getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 
 function IsLogIn(iResponseFunc) {
     var reqData = { Data: {} };
-    SendServerRequest(iResponseFunc, "IsLogin", reqData);
+    getDataFRomServer(iResponseFunc, "User/IsLogin", reqData);
 }
 
 function LogOut(iResponseFunc) {
     var reqData = { Data: {} };
-    SendServerRequest(iResponseFunc, "Logout", reqData);
+    getDataFRomServer(iResponseFunc, "User/Logout", reqData);
 }
 
 function getDataFRomServer(path, requestData, callback) {
@@ -44,49 +44,17 @@ function getDataFRomServer(path, requestData, callback) {
             if (contentType && contentType.indexOf("application/json") !== -1) {
                 return response.json().then((json) => {
                     if (callback != null) {
+                        alert(json.RetObject);
                         callback(json);
                     }
                 }).catch(err => {
                     console.log(err);
-                    let i = 0;
-                    i++;
                 });
             } else {
                 console.log("Oops, we haven't got JSON from server");
             }
         })
         .catch(err => console.log(err)); //Promise.reject(err));
-}
-
-function SendServerRequest(iReturnFunction, iReqUrl, iRequestParams) {
-    // check if isLock is define (for the first load)
-    if (SendServerRequest.isLock == undefined) {
-        // It has not... perform the initialization
-        SendServerRequest.isLock = false;
-    }
-
-    // if iReqUrl is define, adding new entry to the qeue
-    if (iReqUrl != undefined && iReqUrl != null && iReqUrl.length > 0) {
-        var dataWrapper = "Data=" + JSON.stringify(iRequestParams);
-        var requestData = { ReturnFunction: iReturnFunction, ReqUrl: iReqUrl, RequestParams: dataWrapper };
-        serverRequestQeue.push(requestData);
-    }
-
-    if (!SendServerRequest.isLock && serverRequestQeue.length > 0) {
-        var requestInfo = serverRequestQeue.shift();
-
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: serverURL + requestInfo.ReqUrl,
-            context: document.body,
-            data: requestInfo.RequestParams,
-            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-            success: function (response) {
-                HandleServerResponse(response, requestInfo.ReturnFunction);
-            }
-        });
-    }
 }
 
 function HandleServerResponse(iResponse, iResponseFunction) {

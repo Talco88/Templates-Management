@@ -1,46 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TemplateCore.Models;
 
 namespace TemplateCore.Controllers
 {
     public class BaseController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get()
+        /// <summary>
+        /// CTOR
+        /// </summary>
+        public BaseController()
         {
-            return new string[] { "value1", "value2" };
+
         }
 
         // GET api/<controller>/5
         public string Get(int id)
         {
             return "value";
-        }
-
-        [HttpPost]
-        public string Login([FromBody]string value)
-        {
-            return "valilanue";
-        }
-
-        // POST api/<controller>
-        public void Post([FromBody]string value)
-        {
-            var i = 0;
-            i++;
-            var j = i + 5;
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-            var i = 0;
-            i++;
-            var j = i + 5;
         }
     }
 }
