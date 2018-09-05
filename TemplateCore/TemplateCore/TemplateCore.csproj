@@ -87,6 +87,7 @@
     <Content Include="Web.config" />
     <Content Include="WebApp\CSS\BaseStyle.css" />
     <Content Include="WebApp\JS\Platform.js" />
+    <Content Include="WebApp\JS\Utill.js" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />

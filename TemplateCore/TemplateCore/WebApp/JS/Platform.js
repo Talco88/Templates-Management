@@ -1,38 +1,40 @@
-﻿var serverURL = "api/"; //"http://localhost:52530/api/base/";
-var serverRequestQeue = [];
+﻿var Platform = {};
 
-function testLogin() {
+Platform.serverURL = "api/"; //"http://localhost:52530/api/base/";
+Platform.serverRequestQeue = [];
+
+Platform.testLogin = function() {
     var data = {};
     data.username = "Tal";
     LogInPlayer(data, testCallback);   
 }
 
-function testCallback() {
+ Platform.testCallback = function() {
     alert("Good!");
 }
 
-function RegisterUser(iPlayerData, iResponseFunc) {
+ Platform.RegisterUser = function(iPlayerData, iResponseFunc) {
     var dataWrapper = { Data: iPlayerData };
     getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
 }
 
-function LogInPlayer(iPlayerData, iResponseFunc) {
+Platform.LogInPlayer = function(iPlayerData, iResponseFunc) {
     var dataWrapper = { Data: iPlayerData };
     getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 
-function IsLogIn(iResponseFunc) {
+Platform.IsLogIn = function(iResponseFunc) {
     var reqData = { Data: {} };
     getDataFRomServer(iResponseFunc, "User/IsLogin", reqData);
 }
 
-function LogOut(iResponseFunc) {
+ Platform.LogOut = function(iResponseFunc) {
     var reqData = { Data: {} };
     getDataFRomServer(iResponseFunc, "User/Logout", reqData);
 }
 
-function getDataFRomServer(path, requestData, callback) {
-    let url = serverURL + path;
+Platform.getDataFRomServer = function(path, requestData, callback) {
+    var url = serverURL + path;
     fetch(`${url}`, {
         method: 'POST',
         credentials: 'include',
@@ -57,7 +59,7 @@ function getDataFRomServer(path, requestData, callback) {
         .catch(err => console.log(err)); //Promise.reject(err));
 }
 
-function HandleServerResponse(iResponse, iResponseFunction) {
+ Platform.HandleServerResponse = function(iResponse, iResponseFunction) {
     SendServerRequest.isLock = false;
 
     iResponseFunction(iResponse);
