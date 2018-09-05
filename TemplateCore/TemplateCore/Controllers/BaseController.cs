@@ -16,7 +16,7 @@ namespace TemplateCore.Controllers
         /// </summary>
         public BaseController()
         {
-
+            
         }
 
         // GET api/<controller>/5
