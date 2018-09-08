@@ -34,7 +34,7 @@ namespace TemplateCoreBusiness.Engine
 
         public List<string> GetTemplateFromSearch(string iSearchKey)
         {
-            throw new NotImplementedException();
+            return new List<string>() { "template1", "template2", "template3", "template4" };
         }
     }
 }

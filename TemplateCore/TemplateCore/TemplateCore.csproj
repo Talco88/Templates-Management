@@ -88,6 +88,7 @@
     <Content Include="WebApp\CSS\BaseStyle.css" />
     <Content Include="WebApp\HTML\LoginPage.html" />
     <Content Include="WebApp\HTML\SearchPage.html" />
+    <Content Include="WebApp\JS\Login.js" />
     <Content Include="WebApp\JS\Platform.js" />
     <Content Include="WebApp\JS\Utill.js" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿var Utill = {};
 
-Util.BuildFromFromTemplate = function (iContainerDiv, iTemplate) {
+Utill.BuildFromFromTemplate = function (iContainerDiv, iTemplate) {
     
     for (var i = 0; i < iTemplate.Propertys.length; i++) {
         var propertyDiv = document.createElement('div');
