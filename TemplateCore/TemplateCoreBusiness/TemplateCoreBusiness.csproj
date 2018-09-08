@@ -54,8 +54,14 @@
     <Compile Include="Database\IDataBase.cs" />
     <Compile Include="Database\ListOfTables.cs" />
     <Compile Include="Engine\AppEngineBuilder.cs" />
+    <Compile Include="Engine\AppEngineImp.cs" />
     <Compile Include="Engine\IAppEngine.cs" />
+    <Compile Include="Engine\IUserEngine.cs" />
     <Compile Include="Engine\SomeAppEngineToDelete.cs" />
+    <Compile Include="Engine\UserEngienTestToDelete.cs" />
+    <Compile Include="Engine\UserEngineBuilder.cs" />
+    <Compile Include="Engine\UserEngineImp.cs" />
+    <Compile Include="Models\UserEntity.cs" />
     <Compile Include="WebAppData\TemplateFormation.cs" />
     <Compile Include="IAppService.cs" />
     <Compile Include="Models\NewTemplateEntity.cs" />
