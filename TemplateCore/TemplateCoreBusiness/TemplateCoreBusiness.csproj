@@ -52,6 +52,7 @@
     <Compile Include="Database\DataBaseFactory.cs" />
     <Compile Include="Database\DbTempImp.cs" />
     <Compile Include="Database\IDataBase.cs" />
+    <Compile Include="Database\ListOfTables.cs" />
     <Compile Include="Engine\IAppEngine.cs" />
     <Compile Include="ExportTemplate\IExportableFormat.cs" />
     <Compile Include="IAppService.cs" />

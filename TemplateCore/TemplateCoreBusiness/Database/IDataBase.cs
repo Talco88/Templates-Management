@@ -8,10 +8,10 @@ namespace TemplateCoreBusiness.Database
 {
     public interface IDataBase
     {
-        void CreateNewTemplate();
+        string CreateNewTemplate(object[] templateValues);
         void SearchTemplate();
-        void CreateNewUser();
-        void GetUser();
-
+        string CreateNewUser(object[] userValues);
+        Dictionary<string, object> GetUser(int id);
+        string DeleteTemplate(int userId, int templateId);
     }
 }

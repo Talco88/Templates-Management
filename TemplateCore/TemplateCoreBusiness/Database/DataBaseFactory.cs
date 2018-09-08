@@ -10,7 +10,7 @@ namespace TemplateCoreBusiness.Database
     {
         public static IDataBase GetDbInstance()
         {
-            return new DbTempImp();
+            return DbTempImp.GetInstance;
         }
     }
 }
