@@ -18,7 +18,7 @@ login.onPagedRecived = function(){
 
 login.onLoginClicked = function(){
     // do something when btn is clicked
-    Platform.login("username", "passworddddd", login.onLoginResponce);
+    Platform.LogIn("hardCodedUser", "passworddddd", login.onLoginResponce);
 }
 
 login.onLoginResponce = function (iData){

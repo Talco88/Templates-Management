@@ -16,7 +16,7 @@ namespace TemplateCore.Controllers
             {
                 StatusCode = 0,
                 Status = "OK",
-                RetObject = requestBody.Data.username.Value + " Is logged on"
+                RetObject = requestBody.Data.UserName.Value + " Is logged on"
             };
         }
 
