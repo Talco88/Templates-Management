@@ -3,10 +3,22 @@ var Global_LoginPage_BaseHTMLData = "";
 
 login.setPage = function () {
     login.LoadLobbyPageRes(true);
-    //$("#MainAppWindow").html(Global_LoginPage_BaseHTMLData);
 }
 
+login.example(){
+    Platform.SearchTemplate("some Keys", login.exampleReturnFunction);
+}
 
+login.exampleReturnFunction = function(iServerReturn){
+    if (iServerReturn.Status != "OK"){
+        // Error?
+    }
+
+    if (iServerReturn.StatusCode != 0){
+        // Error?
+    }
+
+}
 
 login.LoadLobbyPageRes = function (isSet) {
     $.ajax({
