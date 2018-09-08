@@ -7,11 +7,12 @@ using TemplateCoreBusiness.Models;
 
 namespace TemplateCoreBusiness.Engine
 {
-    interface IAppEngine
+    public interface IAppEngine
     {
         string GenerateTemplate();
-        string GetTemplate(string iTemplateName);
+        TemplateFormation GetTemplate(string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey);
         void CreateNewTemplate(GenerateNewTemplateEntity iNewTemplateData);
+
     }
 }

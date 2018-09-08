@@ -56,7 +56,7 @@ Platform.getDataFRomServer = function(path, requestData, callback) {
                 console.log("Oops, we haven't got JSON from server");
             }
         })
-        .catch(err => console.log(err)); //Promise.reject(err));
+        .catch(err => console.log(err));
 }
 
  Platform.HandleServerResponse = function(iResponse, iResponseFunction) {
