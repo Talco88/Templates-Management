@@ -12,6 +12,6 @@ namespace TemplateCoreBusiness.Database
         void SearchTemplate();
         string CreateNewUser(object[] userValues);
         Dictionary<string, object> GetUser(int id);
-        string DeleteTemplate(int userId, int templateId);
+        string DeleteTemplate(int templateId);
     }
 }

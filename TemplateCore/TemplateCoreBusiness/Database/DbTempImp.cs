@@ -10,8 +10,6 @@ namespace TemplateCoreBusiness.Database
 {
     public class DbTempImp : IDataBase
     {
-        private static DbTempImp m_instance = null;
-        private static readonly object m_padlock = new object();
         private static readonly string m_serverIp = "192.116.98.61";
         private static readonly string m_port = "1433";
         private static readonly string m_dataBaseName = "TemplateCore";
@@ -20,29 +18,12 @@ namespace TemplateCoreBusiness.Database
         private StringBuilder m_connetionString = null;
         private SqlConnection m_connection = null;
         private readonly string[] m_UserColumns = { "FirstName", "LastName", "AccessToken", "Email", "Id" };
-        private readonly string[] m_TemplateColumns = { "id", "TemplateText", "TemplateUser" };
+        private readonly string[] m_TemplateColumns = { "id", "TemplateText", "TemplateUser" , "TemplateHead", "Rate", "Comments" };
 
-        DbTempImp()
+        internal DbTempImp()
         {
         }
 
-        public static DbTempImp GetInstance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    lock (m_padlock)
-                    {
-                        if (m_instance == null)
-                        {
-                            m_instance = new DbTempImp();
-                        }
-                    }
-                }
-                return m_instance;
-            }
-        }
         public string CreateNewTemplate(object[] templateValues)
         {
             openConnection();
@@ -72,9 +53,50 @@ namespace TemplateCoreBusiness.Database
             throw new NotImplementedException();
         }
 
-        public string DeleteTemplate(int userId, int templateId)
+        public string DeleteTemplate(int templateId)
         {
-            return null;
+            openConnection();
+            string retVal = deleteFromDB(ListOfTables.Templates, templateId);
+            closeConnection();
+            return retVal;
+        }
+
+        private string deleteFromDB(string nameOftable, int templateId)
+        {
+            string retVal = null;
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    StringBuilder insertMessage = new StringBuilder();
+                    insertMessage.AppendFormat("DELETE from [TemplateCore].[dbo].[{0}] WHERE Id ={1}", nameOftable, templateId);
+                    command.CommandText = insertMessage.ToString();
+                    try
+                    {
+                        int recordsAffected = command.ExecuteNonQuery();
+                        if (recordsAffected == 1)
+                        {
+                            retVal = "Delete succeeded";
+                        }
+                        else
+                        {
+                            retVal = "Delete failed";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        retVal = "Delete failed " + ex.Message;
+                    }
+                }
+            }
+            else
+            {
+                retVal = "There is no connection there for can not delete the template";
+            }
+
+            return retVal;
         }
 
         private Dictionary<string, object> getUserInformation(int id)
@@ -114,8 +136,9 @@ namespace TemplateCoreBusiness.Database
             string retVal = "";
             if (m_connection != null)
             {
-                string column = createStringFromArrayOfObjects(columnList, false);
-                string values = createStringFromArrayOfObjects(valuesList, true);
+                int countOfFields = calculateNumberOfFileds(columnList.Length, valuesList.Length);
+                string column = createStringFromArrayOfObjects(columnList, false, countOfFields);
+                string values = createStringFromArrayOfObjects(valuesList, true, countOfFields);
 
                 StringBuilder insertMessage = new StringBuilder();
                 insertMessage.AppendFormat("INSERT into [TemplateCore].[dbo].[{0}] ({1}) VALUES ({2})", nameOftable, column, values);
@@ -148,17 +171,28 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        private string createStringFromArrayOfObjects(object[] array, bool isValue)
+        private int calculateNumberOfFileds(int lengh1, int length2)
+        {
+            int retVal = lengh1;
+            if (length2 < lengh1)
+            {
+                retVal = length2;
+            }
+
+            return retVal;
+        }
+
+        private string createStringFromArrayOfObjects(object[] array, bool isValue, int count)
         {
             StringBuilder values = new StringBuilder();
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < count; i++)
             {
                 object item = array[i];
-                if (item.GetType().Equals(typeof(string)) && isValue)
+                if (item!= null && item.GetType().Equals(typeof(string)) && isValue)
                 {
                     item = "'" + item + "'";
                 }
-                if (i < array.Length - 1)
+                if (i < count - 1)
                 {
                     values.Append(item).Append(", ");
                 }
