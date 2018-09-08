@@ -3,6 +3,12 @@ var Global_LoginPage_BaseHTMLData = "";
 
 login.setPage = function () {
     login.LoadLobbyPageRes(true);
+    let loginBtn = document.querySelector(".login-btn");
+    loginBtn.onclick = login.onLoginClicked;
+}
+
+login.onLoginClicked = function(){
+    // do something when btn is clicked
 }
 
 login.example = function(){
