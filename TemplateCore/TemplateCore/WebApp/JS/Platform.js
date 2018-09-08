@@ -3,13 +3,20 @@
 Platform.serverURL = "api/"; //"http://localhost:52530/api/base/";
 Platform.serverRequestQeue = [];
 
- Platform.RegisterUser = function(iPlayerData, iResponseFunc) {
-    var dataWrapper = { Data: iPlayerData };
+ Platform.RegisterUser = function(iUserName, iResponseFunc) {
+    var dataWrapper = { Data: {
+        UserName: iUserName
+    } };
     getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
 }
 
-Platform.LogInPlayer = function(iPlayerData, iResponseFunc) {
-    var dataWrapper = { Data: iPlayerData };
+Platform.LogIn = function(iUserName, iPassword, iResponseFunc) {
+    var dataWrapper = { 
+        Data: {
+            UserName: iUserName, 
+            Password: iPassword
+        } 
+    };
     getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 

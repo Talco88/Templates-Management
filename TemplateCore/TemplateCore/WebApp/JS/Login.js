@@ -18,7 +18,11 @@ login.onPagedRecived = function(){
 
 login.onLoginClicked = function(){
     // do something when btn is clicked
-    alert("loged on clicked");
+    Platform.login("username", "passworddddd", login.onLoginResponce);
+}
+
+login.onLoginResponce = function (iData){
+    console.log(iData);
 }
 
 login.example = function(){
