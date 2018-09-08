@@ -2,11 +2,39 @@
 var Global_LoginPage_BaseHTMLData = "";
 
 login.setPage = function () {
-    login.LoadLobbyPageRes(true);
-    //$("#MainAppWindow").html(Global_LoginPage_BaseHTMLData);
+    if(Global_LoginPage_BaseHTMLData === ""){
+        login.LoadLobbyPageRes(true);
+    }
+    else{
+        login.onPagedRecived();
+    }
 }
 
+login.onPagedRecived = function(){
+    $("#MainAppWindow").html(Global_LoginPage_BaseHTMLData);
+    let loginBtn = document.querySelector(".login-btn");
+    loginBtn.onclick = login.onLoginClicked;
+}
 
+login.onLoginClicked = function(){
+    // do something when btn is clicked
+    alert("loged on clicked");
+}
+
+login.example = function(){
+    Platform.SearchTemplate("some Keys", login.exampleReturnFunction);
+}
+
+login.exampleReturnFunction = function(iServerReturn){
+    if (iServerReturn.Status != "OK"){
+        // Error?
+    }
+
+    if (iServerReturn.StatusCode != 0){
+        // Error?
+    }
+
+}
 
 login.LoadLobbyPageRes = function (isSet) {
     $.ajax({
@@ -14,9 +42,7 @@ login.LoadLobbyPageRes = function (isSet) {
         dataType: 'text',
         success: function (data) {
             Global_LoginPage_BaseHTMLData = data;
-            if (isSet) {
-                $("#MainAppWindow").html(data);
-            }
+            login.onPagedRecived();
         },
         error: function () {
             alert("error Loading Lobby Page");

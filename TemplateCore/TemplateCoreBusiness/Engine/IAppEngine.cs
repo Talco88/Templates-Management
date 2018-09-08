@@ -13,6 +13,5 @@ namespace TemplateCoreBusiness.Engine
         TemplateFormation GetTemplate(string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey);
         void CreateNewTemplate(GenerateNewTemplateEntity iNewTemplateData);
-
     }
 }

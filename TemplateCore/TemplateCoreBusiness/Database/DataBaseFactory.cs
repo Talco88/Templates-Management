@@ -6,11 +6,25 @@ using System.Threading.Tasks;
 
 namespace TemplateCoreBusiness.Database
 {
-    public class DataBaseFactory
+    public static class DataBaseFactory
     {
+        private static DbTempImp m_instance = null;
+        private static readonly object m_padlock = new object();
+
         public static IDataBase GetDbInstance()
         {
-            return DbTempImp.GetInstance;
+            if (m_instance == null)
+            {
+                lock (m_padlock)
+                {
+                    if (m_instance == null)
+                    {
+                        m_instance = new DbTempImp();
+                    }
+                }
+            }
+
+            return m_instance;
         }
     }
 }

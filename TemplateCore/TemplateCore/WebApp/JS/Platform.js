@@ -3,16 +3,6 @@
 Platform.serverURL = "api/"; //"http://localhost:52530/api/base/";
 Platform.serverRequestQeue = [];
 
-Platform.testLogin = function() {
-    var data = {};
-    data.username = "Tal";
-    LogInPlayer(data, testCallback);   
-}
-
- Platform.testCallback = function() {
-    alert("Good!");
-}
-
  Platform.RegisterUser = function(iPlayerData, iResponseFunc) {
     var dataWrapper = { Data: iPlayerData };
     getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
@@ -31,6 +21,24 @@ Platform.IsLogIn = function(iResponseFunc) {
  Platform.LogOut = function(iResponseFunc) {
     var reqData = { Data: {} };
     getDataFRomServer(iResponseFunc, "User/Logout", reqData);
+}
+
+Platform.GetTemplate = function(iTemplateName, iResponseFunc) {
+    var reqData = { 
+        Data: {
+            templateName: iTemplateName
+        } 
+    };
+    getDataFRomServer(iResponseFunc, "Template/GetTemplate", reqData);
+}
+
+Platform.SearchTemplate = function(iSearchKey, iResponseFunc) {
+    var reqData = { 
+        Data: {
+        searchKey: iSearchKey
+        } 
+    };
+    getDataFRomServer(iResponseFunc, "Template/SearchTemplate", reqData);
 }
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
