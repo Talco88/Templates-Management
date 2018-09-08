@@ -4,31 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using TemplateCore.Models;
+using TemplateCoreBusiness.Engine;
 
 namespace TemplateCore.Controllers
 {
     public class TemplateController : ApiController
     {
-        [HttpPost]
-        public BaseWebResponce<string> Template([FromBody]dynamic requestBody)
+        protected IAppEngine appEngine { get; }
+
+        public TemplateController()
         {
-            return new BaseWebResponce<string>()
-            {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = "data"
-            };
+            appEngine = AppEngineBuilder.GetAppEngine();
+        }
+
+        [HttpPost]
+        public BaseWebResponce<string> GetTemplate([FromBody]dynamic requestBody)
+        {
+            return appEngine.GetTemplate(requestBody.Data.templateName.Value);
         }
 
         [HttpPost]
         public BaseWebResponce<string> SearchTemplate([FromBody]dynamic requestBody)
         {
-            return new BaseWebResponce<string>()
-            {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = "data"
-            };
+            return appEngine.GetTemplateFromSearch(requestBody.Data.searchKey.Value);
         }
 
 
