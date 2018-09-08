@@ -5,7 +5,7 @@ login.setPage = function () {
     login.LoadLobbyPageRes(true);
 }
 
-login.example(){
+login.example = function(){
     Platform.SearchTemplate("some Keys", login.exampleReturnFunction);
 }
 
