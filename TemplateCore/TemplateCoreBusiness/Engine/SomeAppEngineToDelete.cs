@@ -16,12 +16,20 @@ namespace TemplateCoreBusiness.Engine
 
         public string GenerateTemplate()
         {
-            throw new NotImplementedException();
+            return "Generated";
         }
 
         public TemplateFormation GetTemplate(string iTemplateName)
         {
-            throw new NotImplementedException();
+            return new TemplateFormation()
+            {
+                Name = "mocTemplate",
+                Propertys = new List<WebDataContainer>() {
+                    new WebDataContainer() { Name = "Field1" },
+                    new WebDataContainer() { Name = "Field2" },
+                    new WebDataContainer() { Name = "Field3" }
+                }
+            };
         }
 
         public List<string> GetTemplateFromSearch(string iSearchKey)
