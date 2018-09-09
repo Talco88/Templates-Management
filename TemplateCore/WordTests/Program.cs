@@ -22,7 +22,7 @@ namespace WordTests
                 //object[] userValues = { "or", "horovitz", "2244", "lvvsavasfa@gmail.com", 126 };
                 //Console.WriteLine(DataBaseFactory.GetDbInstance().CreateNewUser(userValues));
 
-                object[] templateValues = { 65445, "horovitz", 126 };
+                object[] templateValues = { 65446, "Ravid", 126 };
                 Console.WriteLine(DataBaseFactory.GetDbInstance().CreateNewTemplate(templateValues));
                 Console.WriteLine();
                 /*

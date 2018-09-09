@@ -5,16 +5,12 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TemplateCoreBusiness.Properties;
 
 namespace TemplateCoreBusiness.Database
 {
     public class DbTempImp : IDataBase
     {
-        private static readonly string m_serverIp = "192.116.98.61";
-        private static readonly string m_port = "1433";
-        private static readonly string m_dataBaseName = "TemplateCore";
-        private static readonly string m_userId = "orho";
-        private static readonly string m_password = "Aa123456";
         private StringBuilder m_connetionString = null;
         private SqlConnection m_connection = null;
         private readonly string[] m_UserColumns = { "FirstName", "LastName", "AccessToken", "Email", "Id" };
@@ -234,8 +230,8 @@ namespace TemplateCoreBusiness.Database
                 try
                 {
                     StringBuilder m_connetionString = new StringBuilder();
-                    m_connetionString.AppendFormat("Server ={0},{1}; Database={2} ;User ID = {3}; Password = {4}", m_serverIp,
-                        m_port, m_dataBaseName, m_userId, m_password);
+                    m_connetionString.AppendFormat("Server ={0},{1}; Database={2} ;User ID = {3}; Password = {4}", DataBaseSettings.Default.SERVER_IP,
+                        DataBaseSettings.Default.PORT, DataBaseSettings.Default.DATA_BASE_NAME, DataBaseSettings.Default.USER_ID, DataBaseSettings.Default.PASSWORD);
                     m_connection = new SqlConnection(m_connetionString.ToString());
                 }
                 catch (Exception e)
