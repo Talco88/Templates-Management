@@ -225,8 +225,8 @@ namespace TemplateCoreBusiness.Database
                 try
                 {
                     StringBuilder m_connetionString = new StringBuilder();
-                    m_connetionString.AppendFormat("Server ={0},{1}; Database={2} ;User ID = {3}; Password = {4}", DataBaseSettings.Default.SERVER_IP,
-                        DataBaseSettings.Default.PORT, DataBaseSettings.Default.DATA_BASE_NAME, DataBaseSettings.Default.USER_ID, DataBaseSettings.Default.PASSWORD);
+                    m_connetionString.AppendFormat("Server ={0},{1}; Database={2} ;User ID = {3}; Password = {4}", Settings.Default.SERVER_IP,
+                        Settings.Default.PORT, Settings.Default.DATA_BASE_NAME, Settings.Default.USER_ID, Settings.Default.PASSWORD);
                     m_connection = new SqlConnection(m_connetionString.ToString());
                 }
                 catch (Exception e)
