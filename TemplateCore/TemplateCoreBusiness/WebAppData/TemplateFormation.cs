@@ -6,6 +6,5 @@ namespace TemplateCoreBusiness.Engine
     {
         public string Name { get; set; }
         public List<WebDataContainer> Propertys { get; set; }
-
     }
 }

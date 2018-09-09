@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TemplateCoreBusiness.Database
 {
-    public class DataBaseFactory
+    public static class DataBaseFactory
     {
         private static DbTempImp m_instance = null;
         private static readonly object m_padlock = new object();

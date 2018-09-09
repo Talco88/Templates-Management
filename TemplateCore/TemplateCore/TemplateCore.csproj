@@ -86,8 +86,11 @@
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="WebApp\CSS\BaseStyle.css" />
+    <Content Include="WebApp\CSS\LogIn\Login.css" />
     <Content Include="WebApp\HTML\LoginPage.html" />
     <Content Include="WebApp\HTML\SearchPage.html" />
+    <Content Include="WebApp\Images\hand-writing.jpg" />
+    <Content Include="WebApp\Images\hand_writing_2.jpg" />
     <Content Include="WebApp\JS\Login.js" />
     <Content Include="WebApp\JS\Platform.js" />
     <Content Include="WebApp\JS\Utill.js" />
@@ -121,7 +124,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="WebApp\CSS\LogIn\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TemplateCoreBusiness\TemplateCoreBusiness.csproj">

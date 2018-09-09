@@ -136,8 +136,9 @@ namespace TemplateCoreBusiness.Database
                 string column = createStringFromArrayOfObjects(columnList, false, countOfFields);
                 string values = createStringFromArrayOfObjects(valuesList, true, countOfFields);
 
-                StringBuilder insertMessage = new StringBuilder();
-                insertMessage.AppendFormat("INSERT into [TemplateCore].[dbo].[{0}] ({1}) VALUES ({2})", nameOftable, column, values);
+                //StringBuilder insertMessage = new StringBuilder();
+                //insertMessage.AppendFormat("INSERT into [TemplateCore].[dbo].[{0}] ({1}) VALUES ({2})", nameOftable, column, values);
+                string insertMessage = $"INSERT into [TemplateCore].[dbo].[{nameOftable}] ({column}) VALUES ({values})";
                 try
                 {
                     using (SqlCommand command = new SqlCommand())

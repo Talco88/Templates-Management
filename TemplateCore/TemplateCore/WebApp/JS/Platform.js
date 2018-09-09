@@ -1,26 +1,32 @@
 ﻿var Platform = {};
 
 Platform.serverURL = "api/"; //"http://localhost:52530/api/base/";
-Platform.serverRequestQeue = [];
 
- Platform.RegisterUser = function(iPlayerData, iResponseFunc) {
-    var dataWrapper = { Data: iPlayerData };
-    getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
+ Platform.RegisterUser = function(iUserName, iResponseFunc) {
+    var dataWrapper = { Data: {
+        UserName: iUserName
+    } };
+    Platform.getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
 }
 
-Platform.LogInPlayer = function(iPlayerData, iResponseFunc) {
-    var dataWrapper = { Data: iPlayerData };
-    getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
+Platform.LogIn = function(iUserName, iPassword, iResponseFunc) {
+    var dataWrapper = { 
+        Data: {
+            UserName: iUserName, 
+            Password: iPassword
+        } 
+    };
+    Platform.getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 
 Platform.IsLogIn = function(iResponseFunc) {
     var reqData = { Data: {} };
-    getDataFRomServer(iResponseFunc, "User/IsLogin", reqData);
+    Platform.getDataFRomServer(iResponseFunc, "User/IsLogin", reqData);
 }
 
  Platform.LogOut = function(iResponseFunc) {
     var reqData = { Data: {} };
-    getDataFRomServer(iResponseFunc, "User/Logout", reqData);
+    Platform.getDataFRomServer(iResponseFunc, "User/Logout", reqData);
 }
 
 Platform.GetTemplate = function(iTemplateName, iResponseFunc) {
@@ -29,7 +35,7 @@ Platform.GetTemplate = function(iTemplateName, iResponseFunc) {
             templateName: iTemplateName
         } 
     };
-    getDataFRomServer(iResponseFunc, "Template/GetTemplate", reqData);
+    Platform.getDataFRomServer(iResponseFunc, "Template/GetTemplate", reqData);
 }
 
 Platform.SearchTemplate = function(iSearchKey, iResponseFunc) {
@@ -38,11 +44,11 @@ Platform.SearchTemplate = function(iSearchKey, iResponseFunc) {
         searchKey: iSearchKey
         } 
     };
-    getDataFRomServer(iResponseFunc, "Template/SearchTemplate", reqData);
+    Platform.getDataFRomServer(iResponseFunc, "Template/SearchTemplate", reqData);
 }
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
-    var url = serverURL + path;
+    var url = Platform.serverURL + path;
     fetch(`${url}`, {
         method: 'POST',
         credentials: 'include',
@@ -54,7 +60,6 @@ Platform.getDataFRomServer = function(path, requestData, callback) {
             if (contentType && contentType.indexOf("application/json") !== -1) {
                 return response.json().then((json) => {
                     if (callback != null) {
-                        alert(json.RetObject);
                         callback(json);
                     }
                 }).catch(err => {
