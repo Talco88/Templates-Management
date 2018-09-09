@@ -66,8 +66,7 @@ namespace TemplateCoreBusiness.Database
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
-                    StringBuilder insertMessage = new StringBuilder();
-                    insertMessage.AppendFormat("DELETE from [TemplateCore].[dbo].[{0}] WHERE Id ={1}", nameOftable, templateId);
+                    string insertMessage = $"DELETE from [TemplateCore].[dbo].[{nameOftable}] WHERE Id = {templateId}";
                     command.CommandText = insertMessage.ToString();
                     try
                     {
@@ -104,9 +103,7 @@ namespace TemplateCoreBusiness.Database
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
-                    StringBuilder insertMessage = new StringBuilder();
-                    insertMessage.AppendFormat("SELECT * from [TemplateCore].[dbo].[{0}] WHERE Id = {1}",
-                        ListOfTables.UserInformation, id);
+                    string insertMessage = $"SELECT * from [TemplateCore].[dbo].[{ListOfTables.UserInformation}] WHERE Id = {id}";
                     command.CommandText = insertMessage.ToString();
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
@@ -135,9 +132,6 @@ namespace TemplateCoreBusiness.Database
                 int countOfFields = calculateNumberOfFileds(columnList.Length, valuesList.Length);
                 string column = createStringFromArrayOfObjects(columnList, false, countOfFields);
                 string values = createStringFromArrayOfObjects(valuesList, true, countOfFields);
-
-                //StringBuilder insertMessage = new StringBuilder();
-                //insertMessage.AppendFormat("INSERT into [TemplateCore].[dbo].[{0}] ({1}) VALUES ({2})", nameOftable, column, values);
                 string insertMessage = $"INSERT into [TemplateCore].[dbo].[{nameOftable}] ({column}) VALUES ({values})";
                 try
                 {
