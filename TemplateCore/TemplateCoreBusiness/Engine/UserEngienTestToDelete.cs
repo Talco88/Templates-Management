@@ -9,7 +9,7 @@ namespace TemplateCoreBusiness.Engine
 {
     public class UserEngienTestToDelete : IUserEngine
     {
-        public UserEntity GetUserData(string iUserName)
+        public UserEntity GetUserData(string iEmail)
         {
             throw new NotImplementedException();
         }
@@ -19,7 +19,7 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public UserEntity LogInUser(string iUserName, string pass)
+        public UserEntity LogInUser(string iEmail, string pass)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +29,7 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public UserEntity RegisterNewUser(string iUserName, string pass)
+        public UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass)
         {
             throw new NotImplementedException();
         }

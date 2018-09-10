@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TemplateCoreBusiness.Models;
 using TemplateCoreBusiness.Properties;
 
 namespace TemplateCoreBusiness.Database
@@ -13,8 +15,10 @@ namespace TemplateCoreBusiness.Database
     {
         private StringBuilder m_connetionString = null;
         private SqlConnection m_connection = null;
-        private readonly string[] m_UserColumns = { "FirstName", "LastName", "AccessToken", "Email", "Id" };
-        private readonly string[] m_TemplateColumns = { "id", "TemplateText", "TemplateUser" , "TemplateHead", "Rate", "Comments" };
+        private readonly string[] m_UserColumns = {"FirstName", "LastName", "Password", "Email", "CreationTime"};
+
+        private readonly string[] m_TemplateColumns =
+            {"TemplateText", "TemplateUser", "TemplateHead", "Rate", "Comments"};
 
         internal DbTempImp()
         {
@@ -28,18 +32,22 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        public string CreateNewUser(object[] userValues)
+        public void CreateNewUser(UserEntity userEntity)
         {
             openConnection();
+            object[] userValues = getUserValues(userEntity);
             string retVal = insertRowToTable(ListOfTables.UserInformation, m_UserColumns, userValues);
+            if (String.IsNullOrEmpty(retVal) == false)
+            {
+                throw new Exception(retVal);
+            }
             closeConnection();
-            return retVal;
         }
 
-        public Dictionary<string, object> GetUser(int id)
+        public UserEntity GetUser(string iEmail)
         {
             openConnection();
-            Dictionary<string, object> retVal = getUserInformation(id);
+            UserEntity retVal = getUserInformation(iEmail);
             closeConnection();
             return retVal;
         }
@@ -55,6 +63,17 @@ namespace TemplateCoreBusiness.Database
             string retVal = deleteFromDB(ListOfTables.Templates, templateId);
             closeConnection();
             return retVal;
+        }
+
+        private object[] getUserValues(UserEntity userEntity)
+        {
+            List<object> userList = new List<object>();
+            userList.Add(userEntity.FirstName);
+            userList.Add(userEntity.LastName);
+            userList.Add(userEntity.Email);
+            userList.Add(userEntity.Password);
+            userList.Add(userEntity.CreationTime);
+            return userList.ToArray();
         }
 
         private string deleteFromDB(string nameOftable, int templateId)
@@ -94,34 +113,40 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        private Dictionary<string, object> getUserInformation(int id)
+        private UserEntity getUserInformation(string iEmail)
         {
-            Dictionary<string, object> retVal = null;
+            
             if (m_connection != null)
             {
+                
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
-                    string insertMessage = $"SELECT * from [TemplateCore].[dbo].[{ListOfTables.UserInformation}] WHERE Id = {id}";
+                    string insertMessage =
+                        $"SELECT * from [TemplateCore].[dbo].[{ListOfTables.UserInformation}] WHERE Email = '{iEmail}'";
                     command.CommandText = insertMessage.ToString();
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        retVal = new Dictionary<string, object>();
-                        retVal.Add("FirstName", reader.GetSqlValue(0));
-                        retVal.Add("LastName", reader.GetSqlValue(1));
-                        retVal.Add("AccessToken", reader.GetSqlValue(2));
-                        retVal.Add("Email", reader.GetSqlValue(3));
+                        UserEntity retVal = new UserEntity();
+                        retVal.FirstName = ((SqlString)reader.GetSqlValue(0)).ToString();
+                        retVal.LastName = ((SqlString)reader.GetSqlValue(1)).ToString();
+                        retVal.Password = ((SqlString)reader.GetSqlValue(2)).ToString();
+                        retVal.Email = ((SqlString)reader.GetSqlValue(3)).ToString();
+                        retVal.CreationTime = ((SqlDateTime)reader.GetSqlValue(4)).Value;
+                        return retVal;
+                    }
+                    else
+                    {
+                        throw new Exception("There was no result with email: " + iEmail);
                     }
                 }
             }
             else
             {
-                Console.WriteLine("There is no connection, there for can not return user information");
+                throw new Exception("There is no connection, there for can not return user information");
             }
-            
-            return retVal;
         }
 
         private string insertRowToTable(string nameOftable, string[] columnList, object[] valuesList)
@@ -141,24 +166,23 @@ namespace TemplateCoreBusiness.Database
                         command.CommandType = CommandType.Text;
                         command.CommandText = insertMessage.ToString();
                         int recordsAffected = command.ExecuteNonQuery();
-                        if (recordsAffected == 1)
+                        if (recordsAffected != 1)
                         {
-                            retVal = "The insert to DB succeeded";
+                            retVal = "The insert to DB falied";
                         }
                     }
                 }
                 catch (Exception e)
                 {
-                   retVal = "The insert to DB falied";
-                   Console.WriteLine(e.Message);
+                    retVal = "The insert to DB falied";
+                    Console.WriteLine(e.Message);
                 }
-                
             }
             else
             {
                 retVal = "There is no connection to DB therefore did not insert the row";
             }
-            
+
             return retVal;
         }
 
@@ -179,10 +203,15 @@ namespace TemplateCoreBusiness.Database
             for (int i = 0; i < count; i++)
             {
                 object item = array[i];
-                if (item!= null && item.GetType().Equals(typeof(string)) && isValue)
+                if (item != null && isValue)
                 {
-                    item = "'" + item + "'";
+                    if (item.GetType().Equals(typeof(string)) || item.GetType().Equals(typeof(DateTime)))
+                    {
+                        item = "'" + item + "'";
+                    }
+                    
                 }
+
                 if (i < count - 1)
                 {
                     values.Append(item).Append(", ");
@@ -205,16 +234,24 @@ namespace TemplateCoreBusiness.Database
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine(e.Message);
+                throw new Exception("Failed to open connection to db\n" + e.Message);
             }
         }
 
         private void closeConnection()
         {
-            if (m_connection != null)
+            try
             {
-                m_connection.Close();
+                if (m_connection != null)
+                {
+                    m_connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw new Exception("Failed to close connection to db\n" + e.Message);
             }
         }
 
@@ -224,10 +261,9 @@ namespace TemplateCoreBusiness.Database
             {
                 try
                 {
-                    StringBuilder m_connetionString = new StringBuilder();
-                    m_connetionString.AppendFormat("Server ={0},{1}; Database={2} ;User ID = {3}; Password = {4}", Settings.Default.SERVER_IP,
-                        Settings.Default.PORT, Settings.Default.DATA_BASE_NAME, Settings.Default.USER_ID, Settings.Default.PASSWORD);
-                    m_connection = new SqlConnection(m_connetionString.ToString());
+                    string m_connetionString =
+                        $"Server ={Settings.Default.SERVER_IP}, {Settings.Default.PORT}; Database={Settings.Default.DATA_BASE_NAME} ;User ID = {Settings.Default.USER_ID}; Password = {Settings.Default.PASSWORD}";
+                    m_connection = new SqlConnection(m_connetionString);
                 }
                 catch (Exception e)
                 {
@@ -236,6 +272,6 @@ namespace TemplateCoreBusiness.Database
                     throw new Exception("Failed to create sql connection\n" + e.Message);
                 }
             }
-        } 
+        }
     }
 }

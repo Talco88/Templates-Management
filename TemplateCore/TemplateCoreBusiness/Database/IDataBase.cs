@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TemplateCoreBusiness.Models;
 
 namespace TemplateCoreBusiness.Database
 {
@@ -10,8 +11,8 @@ namespace TemplateCoreBusiness.Database
     {
         string CreateNewTemplate(object[] templateValues);
         void SearchTemplate();
-        string CreateNewUser(object[] userValues);
-        Dictionary<string, object> GetUser(int id);
+        void CreateNewUser(UserEntity userEntity);
+        UserEntity GetUser(string iEmail);
         string DeleteTemplate(int templateId);
     }
 }
