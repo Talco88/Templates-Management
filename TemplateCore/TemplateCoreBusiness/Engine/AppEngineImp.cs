@@ -36,7 +36,7 @@ namespace TemplateCoreBusiness.Engine
 
         public List<string> GetTemplateFromSearch(string iSearchKey)
         {
-            throw new NotImplementedException();
+            return DataBaseFactory.GetDbInstance().SearchTemplate(iSearchKey);
         }
 
         private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail)

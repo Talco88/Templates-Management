@@ -10,9 +10,9 @@ namespace TemplateCoreBusiness.Database
     public interface IDataBase
     {
         string CreateNewTemplate(TemplateEntity templateEntity);
-        void SearchTemplate();
+        List<string> SearchTemplate(string iSearchKey);
         void CreateNewUser(UserEntity userEntity);
         UserEntity GetUser(string iEmail);
-        string DeleteTemplate(int templateId);
+        string DeleteTemplate(string templateName);
     }
 }

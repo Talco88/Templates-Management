@@ -15,7 +15,9 @@ namespace TemplateCoreBusiness.Database
     {
         private StringBuilder m_connetionString = null;
         private SqlConnection m_connection = null;
-        private readonly string[] m_UserColumns = {"FirstName", "LastName", "Password", "Email", "CreationTime", "FavoriteTemplates" };
+
+        private readonly string[] m_UserColumns =
+            {"FirstName", "LastName", "Password", "Email", "CreationTime", "FavoriteTemplates"};
 
         private readonly string[] m_TemplateColumns =
             {"Data", "HeadName", "UserEmail", "Rate", "Comments", "RateCounter"};
@@ -33,6 +35,7 @@ namespace TemplateCoreBusiness.Database
             {
                 throw new Exception(retVal);
             }
+
             closeConnection();
             return retVal;
         }
@@ -46,6 +49,7 @@ namespace TemplateCoreBusiness.Database
             {
                 throw new Exception(retVal);
             }
+
             closeConnection();
         }
 
@@ -57,17 +61,46 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        public void SearchTemplate()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string DeleteTemplate(int templateId)
+        public List<string> SearchTemplate(string iSearchKey)
         {
             openConnection();
-            string retVal = deleteFromDB(ListOfTables.Templates, templateId);
+            List<string> retVal = getSearchedTemplates(iSearchKey);
             closeConnection();
             return retVal;
+        }
+
+        public string DeleteTemplate(string templateName)
+        {
+            openConnection();
+            string retVal = deleteFromDB(ListOfTables.Templates, "HeadName", templateName);
+            closeConnection();
+            return retVal;
+        }
+
+        private List<string> getSearchedTemplates(string iSearchKey)
+        {
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"SELECT HeadName from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE HeadName like '%{iSearchKey}%'";
+                    command.CommandText = insertMessage;
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<string> retVal = new List<string>();
+                    while (reader.Read())
+                    {
+                        retVal.Add(reader.GetValue(0).ToString());
+                    }
+                    return retVal;
+                }
+            }
+            else
+            {
+                throw new Exception("There is no connection, there for can not return user information");
+            }
         }
 
         private object[] getUserValues(UserEntity userEntity)
@@ -93,7 +126,7 @@ namespace TemplateCoreBusiness.Database
             return templateList.ToArray();
         }
 
-        private string deleteFromDB(string nameOftable, int templateId)
+        private string deleteFromDB(string nameOftable, string nameOfColumn, string id)
         {
             string retVal = null;
             if (m_connection != null)
@@ -102,8 +135,8 @@ namespace TemplateCoreBusiness.Database
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
-                    string insertMessage = $"DELETE from [TemplateCore].[dbo].[{nameOftable}] WHERE Id = {templateId}";
-                    command.CommandText = insertMessage.ToString();
+                    string insertMessage = $"DELETE from [TemplateCore].[dbo].[{nameOftable}] WHERE {nameOfColumn} = {id}";
+                    command.CommandText = insertMessage;
                     try
                     {
                         int recordsAffected = command.ExecuteNonQuery();
@@ -132,26 +165,24 @@ namespace TemplateCoreBusiness.Database
 
         private UserEntity getUserInformation(string iEmail)
         {
-            
             if (m_connection != null)
             {
-                
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
                     string insertMessage =
                         $"SELECT * from [TemplateCore].[dbo].[{ListOfTables.UserInformation}] WHERE Email = '{iEmail}'";
-                    command.CommandText = insertMessage.ToString();
+                    command.CommandText = insertMessage;
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
                         UserEntity retVal = new UserEntity();
-                        retVal.FirstName = ((SqlString)reader.GetSqlValue(0)).ToString();
-                        retVal.LastName = ((SqlString)reader.GetSqlValue(1)).ToString();
-                        retVal.Password = ((SqlString)reader.GetSqlValue(2)).ToString();
-                        retVal.Email = ((SqlString)reader.GetSqlValue(3)).ToString();
-                        retVal.CreationTime = ((SqlDateTime)reader.GetSqlValue(4)).Value;
+                        retVal.FirstName = ((SqlString) reader.GetSqlValue(0)).ToString();
+                        retVal.LastName = ((SqlString) reader.GetSqlValue(1)).ToString();
+                        retVal.Password = ((SqlString) reader.GetSqlValue(2)).ToString();
+                        retVal.Email = ((SqlString) reader.GetSqlValue(3)).ToString();
+                        retVal.CreationTime = ((SqlDateTime) reader.GetSqlValue(4)).Value;
                         return retVal;
                     }
                     else
@@ -226,7 +257,6 @@ namespace TemplateCoreBusiness.Database
                     {
                         item = "'" + item + "'";
                     }
-                    
                 }
 
                 if (i < count - 1)

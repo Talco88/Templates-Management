@@ -20,18 +20,20 @@ namespace WordTests
 
             try
             {
-
+                /*
                 //INSERT
                 //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("shani", "vds", "vds44", "lvnfasfa@gmail.com"));
 
-                AppEngineBuilder.GetAppEngine().CreateNewTemplate("gsdkgbsdgb", "Guy", "lvnfasfa@gmail.com");
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("gsdkgbsdgb", "Guy mandel", "lvnfasfa@gmail.com");
                 Console.WriteLine();
-                /*
+                
                 //SELECT
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("lvnfasfa@gmail.com", "vds44");
                 Console.WriteLine();
-
-                
+                */
+                List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
+                Console.WriteLine();
+                /*
                 //DELETE
                 Console.WriteLine(DataBaseFactory.GetDbInstance().DeleteTemplate(65447));
                 Console.WriteLine();
