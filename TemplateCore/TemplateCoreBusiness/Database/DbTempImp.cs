@@ -15,19 +15,24 @@ namespace TemplateCoreBusiness.Database
     {
         private StringBuilder m_connetionString = null;
         private SqlConnection m_connection = null;
-        private readonly string[] m_UserColumns = {"FirstName", "LastName", "Password", "Email", "CreationTime"};
+        private readonly string[] m_UserColumns = {"FirstName", "LastName", "Password", "Email", "CreationTime", "FavoriteTemplates" };
 
         private readonly string[] m_TemplateColumns =
-            {"TemplateText", "TemplateUser", "TemplateHead", "Rate", "Comments"};
+            {"Data", "HeadName", "UserEmail", "Rate", "Comments", "RateCounter"};
 
         internal DbTempImp()
         {
         }
 
-        public string CreateNewTemplate(object[] templateValues)
+        public string CreateNewTemplate(TemplateEntity templateEntity)
         {
             openConnection();
+            object[] templateValues = getTemplateValues(templateEntity);
             string retVal = insertRowToTable(ListOfTables.Templates, m_TemplateColumns, templateValues);
+            if (String.IsNullOrEmpty(retVal) == false)
+            {
+                throw new Exception(retVal);
+            }
             closeConnection();
             return retVal;
         }
@@ -74,6 +79,18 @@ namespace TemplateCoreBusiness.Database
             userList.Add(userEntity.Password);
             userList.Add(userEntity.CreationTime);
             return userList.ToArray();
+        }
+
+        private object[] getTemplateValues(TemplateEntity templateEntity)
+        {
+            List<object> templateList = new List<object>();
+            templateList.Add(templateEntity.TemplateJsonRow);
+            templateList.Add(templateEntity.HeadName);
+            templateList.Add(templateEntity.UserIdentity);
+            templateList.Add(templateEntity.Rate);
+            templateList.Add(templateEntity.Comments);
+            templateList.Add(templateEntity.RateCounter);
+            return templateList.ToArray();
         }
 
         private string deleteFromDB(string nameOftable, int templateId)

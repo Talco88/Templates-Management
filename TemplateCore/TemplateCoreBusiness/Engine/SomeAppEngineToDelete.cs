@@ -9,7 +9,7 @@ namespace TemplateCoreBusiness.Engine
 {
     public class SomeAppEngineToDelete : IAppEngine
     {
-        public void CreateNewTemplate(GenerateNewTemplateEntity iNewTemplateData)
+        public void CreateNewTemplate(string iData, string iTemplateName, string iUserEmail)
         {
             throw new NotImplementedException();
         }

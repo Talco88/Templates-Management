@@ -10,7 +10,7 @@ namespace TemplateCoreBusiness.Engine
     {
         public static IAppEngine GetAppEngine()
         {
-            return new SomeAppEngineToDelete();
+            return new AppEngineImp();
         }
     }
 }

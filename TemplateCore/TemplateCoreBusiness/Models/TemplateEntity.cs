@@ -10,8 +10,13 @@ namespace TemplateCoreBusiness.Models
     public class TemplateEntity
     {
         private Dictionary<string, object> _templateData = null;
-        public string Name { get; set; }
+        private int _rate = 0;
+        private int _rateCounter = 0;
+        public string HeadName { get; set; }
         public string TemplateJsonRow { get; set; }
+        public string UserIdentity { get; set; }
+        public string Comments { get; set; }
+
         public Dictionary<string, object> TemplateData
         {
             get
@@ -21,6 +26,22 @@ namespace TemplateCoreBusiness.Models
                     _templateData = JsonConvert.DeserializeObject<Dictionary<string, object>>(TemplateJsonRow);
                 }
                 return _templateData;
+            }
+        }
+
+        public int RateCounter
+        {
+            get { return _rateCounter;}
+            set { _rateCounter++; }
+        }
+
+        public int Rate
+        {
+            get { return _rate; }
+            set
+            {
+                RateCounter = RateCounter;
+                _rate = (value + _rate) / RateCounter;
             }
         }
     }

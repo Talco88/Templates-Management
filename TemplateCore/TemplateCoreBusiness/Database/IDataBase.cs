@@ -9,7 +9,7 @@ namespace TemplateCoreBusiness.Database
 {
     public interface IDataBase
     {
-        string CreateNewTemplate(object[] templateValues);
+        string CreateNewTemplate(TemplateEntity templateEntity);
         void SearchTemplate();
         void CreateNewUser(UserEntity userEntity);
         UserEntity GetUser(string iEmail);
