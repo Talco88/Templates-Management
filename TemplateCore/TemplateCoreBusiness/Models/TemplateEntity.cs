@@ -12,6 +12,7 @@ namespace TemplateCoreBusiness.Models
         private Dictionary<string, object> _templateData = null;
         private int _rate = 0;
         private int _rateCounter = 0;
+        public string Category { get; set; } = "כללי";
         public string HeadName { get; set; }
         public string TemplateJsonRow { get; set; }
         public string UserIdentity { get; set; }
@@ -31,7 +32,7 @@ namespace TemplateCoreBusiness.Models
 
         public int RateCounter
         {
-            get { return _rateCounter;}
+            get { return _rateCounter; }
             set { _rateCounter++; }
         }
 

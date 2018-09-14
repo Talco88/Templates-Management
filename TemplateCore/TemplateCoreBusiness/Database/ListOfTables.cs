@@ -18,5 +18,10 @@ namespace TemplateCoreBusiness.Database
         {
             get { return "UserInformation"; }
         }
+
+        internal static string Topic
+        {
+            get { return "Topic"; }
+        }
     }
 }

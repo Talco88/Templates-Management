@@ -12,6 +12,12 @@ namespace TemplateCoreBusiness.Engine
         string GenerateTemplate();
         TemplateFormation GetTemplate(string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey);
-        void CreateNewTemplate(string iData, string iTemplateName, string iUserEmail);
+        string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail);
+        string CreateNewTopic(string i_categoryName, string i_headerName);
+        string UpdateHeaderInTopic(string i_categoryName, string i_oldHeaderName, string i_newHeaderName);
+        string DeleteTopic(string i_categoryName, string i_headerName);
+        string DeleteTemplate(string templateName);
+        List<string> getTopicsInCategory(string i_categoryName);
+        List<TopicEntity> getAllTopics();
     }
 }

@@ -67,5 +67,32 @@ namespace TemplateCoreBusiness.Properties {
                 return ((string)(this["PASSWORD"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("FirstName,LastName,Password,Email,CreationTime,FavoriteTemplates")]
+        public string USER_COLUMN {
+            get {
+                return ((string)(this["USER_COLUMN"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data,HeadName,UserEmail,Rate,Comments,RateCounter,Category")]
+        public string TEMPLATE_COLUMN {
+            get {
+                return ((string)(this["TEMPLATE_COLUMN"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Category,Header")]
+        public string TOPIC_COLUMN {
+            get {
+                return ((string)(this["TOPIC_COLUMN"]));
+            }
+        }
     }
 }

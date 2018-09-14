@@ -61,6 +61,7 @@
     <Compile Include="Engine\UserEngienTestToDelete.cs" />
     <Compile Include="Engine\UserEngineBuilder.cs" />
     <Compile Include="Engine\UserEngineImp.cs" />
+    <Compile Include="Models\TopicEntity.cs" />
     <Compile Include="Models\UserEntity.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

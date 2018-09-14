@@ -14,5 +14,10 @@ namespace TemplateCoreBusiness.Database
         void CreateNewUser(UserEntity userEntity);
         UserEntity GetUser(string iEmail);
         string DeleteTemplate(string templateName);
+        string CreateNewTopic(TopicEntity topicEntity);
+        string UpdateHeaderInTopic(TopicEntity topicEntity, string i_newHeaderName);
+        string DeleteTopic(TopicEntity topicEntity);
+        List<string> getTopicsInCategory(string i_categoryName);
+        List<TopicEntity> getAllTopics();
     }
 }
