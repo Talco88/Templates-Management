@@ -1,51 +1,84 @@
 ﻿var Platform = {};
 
-Platform.serverURL = "api/"; //"http://localhost:52530/api/base/";
+Platform.serverURL = "http://localhost:52530/api/"; //"api/"; //
 
- Platform.RegisterUser = function(iUserName, iResponseFunc) {
-    var dataWrapper = { Data: {
-        UserName: iUserName
-    } };
+// User Controller API
+Platform.RegisterUser = function (iFirstName, iLastName, iEmail, iPassword, iResponseFunc) {
+     var dataWrapper = {
+         Data: {
+             FirstName: iFirstName,
+             LastName: iLastName,
+             Email: iEmail,
+             Password: iPassword
+         }
+     };
     Platform.getDataFRomServer("User/RegisterNewUser", dataWrapper, iResponseFunc);
 }
 
-Platform.LogIn = function(iUserName, iPassword, iResponseFunc) {
+Platform.LogIn = function (iEmail, iPassword, iResponseFunc) {
     var dataWrapper = { 
         Data: {
-            UserName: iUserName, 
+            Email: iEmail,
             Password: iPassword
         } 
     };
     Platform.getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 
-Platform.IsLogIn = function(iResponseFunc) {
-    var reqData = { Data: {} };
-    Platform.getDataFRomServer(iResponseFunc, "User/IsLogin", reqData);
+Platform.IsLogIn = function (iEmail, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            Email: iEmail
+        }
+    };
+    Platform.getDataFRomServer("User/IsLogin", dataWrapper, iResponseFunc);
 }
 
- Platform.LogOut = function(iResponseFunc) {
-    var reqData = { Data: {} };
-    Platform.getDataFRomServer(iResponseFunc, "User/Logout", reqData);
+Platform.LogOut = function (iEmail, iResponseFunc) {
+    var dataWrapper = { Data: { Email: iEmail } };
+     Platform.getDataFRomServer("User/Logout", dataWrapper, iResponseFunc);
 }
 
+Platform.GetUserData = function (iEmail, iResponseFunc) {
+    var dataWrapper = { Data: { Email: iEmail } };
+    Platform.getDataFRomServer("User/GetUserData", dataWrapper, iResponseFunc);
+}
+
+// Template Controller API
 Platform.GetTemplate = function(iTemplateName, iResponseFunc) {
-    var reqData = { 
+    var dataWrapper = {
         Data: {
             templateName: iTemplateName
         } 
     };
-    Platform.getDataFRomServer(iResponseFunc, "Template/GetTemplate", reqData);
+    Platform.getDataFRomServer("Template/GetTemplate", dataWrapper, iResponseFunc);
 }
 
 Platform.SearchTemplate = function(iSearchKey, iResponseFunc) {
-    var reqData = { 
+    var dataWrapper = {
         Data: {
         searchKey: iSearchKey
         } 
     };
-    Platform.getDataFRomServer(iResponseFunc, "Template/SearchTemplate", reqData);
+    Platform.getDataFRomServer("Template/SearchTemplate", dataWrapper, iResponseFunc);
 }
+
+Platform.GetAllTopics = function (iResponseFunc) {
+    var dataWrapper = {
+        Data: { }
+    };
+    Platform.getDataFRomServer("Template/GetAllTopics", dataWrapper, iResponseFunc);
+}
+
+Platform.GetTopicsInCategory = function (iCategoryName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName
+        }
+    };
+    Platform.getDataFRomServer("Template/GetTopicsInCategory", dataWrapper, iResponseFunc);
+}
+
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
     var url = Platform.serverURL + path;
@@ -70,11 +103,4 @@ Platform.getDataFRomServer = function(path, requestData, callback) {
             }
         })
         .catch(err => console.log(err));
-}
-
- Platform.HandleServerResponse = function(iResponse, iResponseFunction) {
-    SendServerRequest.isLock = false;
-
-    iResponseFunction(iResponse);
-    SendServerRequest(); //recall for the send function to release the queue
 }

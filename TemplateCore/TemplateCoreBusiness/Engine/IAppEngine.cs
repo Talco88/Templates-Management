@@ -17,7 +17,7 @@ namespace TemplateCoreBusiness.Engine
         string UpdateHeaderInTopic(string i_categoryName, string i_oldHeaderName, string i_newHeaderName);
         string DeleteTopic(string i_categoryName, string i_headerName);
         string DeleteTemplate(string templateName);
-        List<string> getTopicsInCategory(string i_categoryName);
-        List<TopicEntity> getAllTopics();
+        List<string> GetTopicsInCategory(string iCategoryName);
+        List<TopicEntity> GetAllTopics();
     }
 }

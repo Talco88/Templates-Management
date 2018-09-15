@@ -38,10 +38,10 @@ namespace WordTests
                 Console.WriteLine();
                 */
 
-                List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().getAllTopics();
+                List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
                 Console.WriteLine();
 
-                List<string> headersList = AppEngineBuilder.GetAppEngine().getTopicsInCategory("מסמכים");
+                List<string> headersList = AppEngineBuilder.GetAppEngine().GetTopicsInCategory("מסמכים");
                 Console.WriteLine();
                 /*
                 //DELETE

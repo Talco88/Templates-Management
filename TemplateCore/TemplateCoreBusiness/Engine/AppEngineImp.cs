@@ -19,7 +19,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to create the new template:\n" + ex.Message);
+                throw new Exception($"Failed to create the new template: {ex.Message}");
             }
             
         }
@@ -48,7 +48,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception("Failed to create the new topic:\n" + ex.Message);
+                throw new Exception($"Failed to create the new topic: {ex.Message}");
             }
         }
 
@@ -61,7 +61,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to update the new topic {i_categoryName}:\n" + ex.Message);
+                throw new Exception($"Failed to update the new topic {i_categoryName}, Exception: {ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to delete the new topic {i_categoryName} + {i_headerName}:\n" + ex.Message);
+                throw new Exception($"Failed to delete the new topic {i_categoryName} + {i_headerName}, Exception: {ex.Message}");
             }
         }
 
@@ -85,16 +85,16 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to delete the new template {templateName}:\n" + ex.Message);
+                throw new Exception($"Failed to delete the new template {templateName},\n Exception: {ex.Message}");
             }
         }
 
-        public List<string> getTopicsInCategory(string i_categoryName)
+        public List<string> GetTopicsInCategory(string iCategoryName)
         {
-            return DataBaseFactory.GetDbInstance().getTopicsInCategory(i_categoryName);
+            return DataBaseFactory.GetDbInstance().getTopicsInCategory(iCategoryName);
         }
 
-        public List<TopicEntity> getAllTopics()
+        public List<TopicEntity> GetAllTopics()
         {
             return DataBaseFactory.GetDbInstance().getAllTopics();
         }

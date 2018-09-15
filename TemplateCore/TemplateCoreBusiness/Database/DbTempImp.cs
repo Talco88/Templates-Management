@@ -32,7 +32,7 @@ namespace TemplateCoreBusiness.Database
             object[] templateValues = getTemplateValues(templateEntity);
             string retVal = insertRowToTable(ListOfTables.Templates, m_TemplateColumns, templateValues);
             closeConnection();
-            if (String.IsNullOrEmpty(retVal) == false)
+            if (string.IsNullOrEmpty(retVal) == false)
             {
                 throw new Exception(retVal);
             }
@@ -46,7 +46,7 @@ namespace TemplateCoreBusiness.Database
             object[] userValues = getUserValues(userEntity);
             string retVal = insertRowToTable(ListOfTables.UserInformation, m_UserColumns, userValues);
             closeConnection();
-            if (String.IsNullOrEmpty(retVal) == false)
+            if (string.IsNullOrEmpty(retVal) == false)
             {
                 throw new Exception(retVal);
             }
@@ -82,7 +82,7 @@ namespace TemplateCoreBusiness.Database
             object[] templateValues = getTopicValues(topicEntity);
             string retVal = insertRowToTable(ListOfTables.Topic, m_TopicColumns, templateValues);
             closeConnection();
-            if (String.IsNullOrEmpty(retVal) == false)
+            if (string.IsNullOrEmpty(retVal) == false)
             {
                 throw new Exception(retVal);
             }
@@ -95,7 +95,7 @@ namespace TemplateCoreBusiness.Database
             openConnection();
             string retVal = updateTopicHeader(topicEntity, i_newHeaderName);
             closeConnection();
-            if (String.IsNullOrEmpty(retVal) == false)
+            if (string.IsNullOrEmpty(retVal) == false)
             {
                 throw new Exception(retVal);
             }
@@ -379,7 +379,6 @@ namespace TemplateCoreBusiness.Database
                 catch (Exception e)
                 {
                     throw new Exception($"The update to DB falied: {e.Message}");
-                    //Console.WriteLine(e.Message);
                 }
             }
             else

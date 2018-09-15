@@ -87,6 +87,7 @@
     <Content Include="Web.config" />
     <Content Include="WebApp\CSS\BaseStyle.css" />
     <Content Include="WebApp\CSS\LogIn\Login.css" />
+    <Content Include="WebApp\HtmlPageTest.html" />
     <Content Include="WebApp\HTML\LoginPage.html" />
     <Content Include="WebApp\HTML\SearchPage.html" />
     <Content Include="WebApp\Images\hand-writing.jpg" />

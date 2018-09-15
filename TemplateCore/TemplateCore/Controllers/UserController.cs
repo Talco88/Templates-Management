@@ -4,54 +4,100 @@ using System.Linq;
 using System.Web;
 using System.Web.Http;
 using TemplateCore.Models;
+using TemplateCoreBusiness.Engine;
+using TemplateCoreBusiness.Models;
 
 namespace TemplateCore.Controllers
 {
     public class UserController : BaseController
     {
-        [HttpPost]
-        public BaseWebResponce<string> Login([FromBody]dynamic requestBody)
+        private readonly string SESSION_USER_EMAIL = "UserMail";
+        protected IUserEngine userEngine { get; }
+
+        public UserController()
         {
-            return new BaseWebResponce<string>()
-            {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = requestBody.Data.UserName.Value + " Is logged on"
-            };
+            userEngine = UserEngineBuilder.GetUserEngine();
         }
 
         [HttpPost]
-        public BaseWebResponce<string> RegisterNewUser([FromBody]dynamic requestBody)
+        public dynamic Login([FromBody]dynamic requestBody)
         {
-            return new BaseWebResponce<string>()
+            try
             {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = requestBody.Data.username.Value + " Is Registered"
-            };
+                UserEntity user = userEngine.LogInUser(
+                    requestBody.Data.Email.Value, 
+                    requestBody.Data.Password.Value
+                );
+                HttpContext.Current.Session[SESSION_USER_EMAIL] = user.Email;
+                return SetSuccessResponce(user);
+            }
+            catch(Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
         }
 
         [HttpPost]
-        public BaseWebResponce<string> IsLogin([FromBody] dynamic requestBody)
+        public dynamic GetUserData([FromBody]dynamic requestBody)
         {
-            return new BaseWebResponce<string>()
+            try
             {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = "user log in"
-            };
+                var user = userEngine.GetUserData(requestBody.Data.Email.Value);
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
         }
 
         [HttpPost]
-        public BaseWebResponce<string> Logout([FromBody] dynamic requestBody)
+        public dynamic RegisterNewUser([FromBody]dynamic requestBody)
         {
-            return new BaseWebResponce<string>()
+            try
             {
-                StatusCode = 0,
-                Status = "OK",
-                RetObject = "user logged off"
-            };
+                var user = userEngine.RegisterNewUser(
+                    requestBody.Data.FirstName.Value,
+                    requestBody.Data.LastName.Value,
+                    requestBody.Data.Email.Value,
+                    requestBody.Data.Password.Value
+                );
+
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
         }
 
+        [HttpPost]
+        public dynamic IsLogin([FromBody] dynamic requestBody)
+        {
+            try
+            {
+                var user = userEngine.IsLogedOn(requestBody.Data.Email.Value);
+                HttpContext.Current.Session[SESSION_USER_EMAIL] = null;
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic Logout([FromBody] dynamic requestBody)
+        {
+            try
+            {
+                var user = userEngine.LogOut(requestBody.Data.Email.Value);
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
     }
 }
