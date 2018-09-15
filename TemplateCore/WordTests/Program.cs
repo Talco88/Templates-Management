@@ -26,9 +26,9 @@ namespace WordTests
 
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate("gsdkgbsdgb", "Guy mandel", "chen@gmail.com");
                 //Console.WriteLine();
-                */
+                
                 createTopics();
-
+                */
                 /*
                 //SELECT
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
@@ -42,6 +42,9 @@ namespace WordTests
                 Console.WriteLine();
 
                 List<string> headersList = AppEngineBuilder.GetAppEngine().GetTopicsInCategory("מסמכים");
+                Console.WriteLine();
+
+                List<string> topicsList = AppEngineBuilder.GetAppEngine().GetTopicsNames();
                 Console.WriteLine();
                 /*
                 //DELETE

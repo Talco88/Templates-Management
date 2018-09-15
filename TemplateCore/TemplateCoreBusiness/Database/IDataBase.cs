@@ -17,7 +17,8 @@ namespace TemplateCoreBusiness.Database
         string CreateNewTopic(TopicEntity topicEntity);
         string UpdateHeaderInTopic(TopicEntity topicEntity, string i_newHeaderName);
         string DeleteTopic(TopicEntity topicEntity);
-        List<string> getTopicsInCategory(string i_categoryName);
-        List<TopicEntity> getAllTopics();
+        List<string> GetTopicsInCategory(string iCategoryName);
+        List<string> GetTopicsNames();
+        List<TopicEntity> GetAllTopics();
     }
 }

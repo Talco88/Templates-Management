@@ -39,11 +39,11 @@ namespace TemplateCoreBusiness.Engine
             return DataBaseFactory.GetDbInstance().SearchTemplate(iSearchKey);
         }
 
-        public string CreateNewTopic(string i_categoryName, string i_headerName)
+        public string CreateNewTopic(string iCategoryName, string iHeaderName)
         {
             try
             {
-                TopicEntity topicEntity = new TopicEntity(i_categoryName, i_headerName);
+                TopicEntity topicEntity = new TopicEntity(iCategoryName, iHeaderName);
                 return DataBaseFactory.GetDbInstance().CreateNewTopic(topicEntity);
             }
             catch (Exception ex)
@@ -52,28 +52,28 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string UpdateHeaderInTopic(string i_categoryName, string i_oldHeaderName, string i_newHeaderName)
+        public string UpdateHeaderInTopic(string iCategoryName, string iOldHeaderName, string iNewHeaderName)
         {
             try
             {
-                TopicEntity topicEntity = new TopicEntity(i_categoryName, i_oldHeaderName);
-                return DataBaseFactory.GetDbInstance().UpdateHeaderInTopic(topicEntity, i_newHeaderName);
+                TopicEntity topicEntity = new TopicEntity(iCategoryName, iOldHeaderName);
+                return DataBaseFactory.GetDbInstance().UpdateHeaderInTopic(topicEntity, iNewHeaderName);
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to update the new topic {i_categoryName}, Exception: {ex.Message}");
+                throw new Exception($"Failed to update the new topic {iCategoryName}, Exception: {ex.Message}");
             }
         }
 
-        public string DeleteTopic(string i_categoryName, string i_headerName)
+        public string DeleteTopic(string iCategoryName, string iHeaderName)
         {
             try
             {
-                return DataBaseFactory.GetDbInstance().DeleteTopic(new TopicEntity(i_categoryName, i_headerName));
+                return DataBaseFactory.GetDbInstance().DeleteTopic(new TopicEntity(iCategoryName, iHeaderName));
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to delete the new topic {i_categoryName} + {i_headerName}, Exception: {ex.Message}");
+                throw new Exception($"Failed to delete the new topic {iCategoryName} + {iHeaderName}, Exception: {ex.Message}");
             }
         }
 
@@ -91,12 +91,17 @@ namespace TemplateCoreBusiness.Engine
 
         public List<string> GetTopicsInCategory(string iCategoryName)
         {
-            return DataBaseFactory.GetDbInstance().getTopicsInCategory(iCategoryName);
+            return DataBaseFactory.GetDbInstance().GetTopicsInCategory(iCategoryName);
+        }
+
+        public List<string> GetTopicsNames()
+        {
+            return DataBaseFactory.GetDbInstance().GetTopicsNames();
         }
 
         public List<TopicEntity> GetAllTopics()
         {
-            return DataBaseFactory.GetDbInstance().getAllTopics();
+            return DataBaseFactory.GetDbInstance().GetAllTopics();
         }
 
         private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail)

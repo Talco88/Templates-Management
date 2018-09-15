@@ -112,15 +112,23 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        public List<string> getTopicsInCategory(string i_categoryName)
+        public List<string> GetTopicsInCategory(string iCategoryName)
         {
             openConnection();
-            List<string> retVal = getTopicsInCategoryFromDB(i_categoryName);
+            List<string> retVal = getTopicsInCategoryFromDB(iCategoryName);
             closeConnection();
             return retVal;
         }
 
-        public List<TopicEntity> getAllTopics()
+        public List<string> GetTopicsNames()
+        {
+            openConnection();
+            List<string> retVal = getTopicNamesFromDB();
+            closeConnection();
+            return retVal;
+        }
+
+        public List<TopicEntity> GetAllTopics()
         {
             openConnection();
             List<TopicEntity> retVal = getAllTopicsFromDB();
@@ -128,7 +136,7 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        private List<string> getTopicsInCategoryFromDB(string i_categoryName)
+        private List<string> getTopicsInCategoryFromDB(string iCategoryName)
         {
             if (m_connection != null)
             {
@@ -137,7 +145,7 @@ namespace TemplateCoreBusiness.Database
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
                     string insertMessage =
-                        $"SELECT distinct {m_TopicColumns[1]} from [TemplateCore].[dbo].[{ListOfTables.Topic}] WHERE {m_TopicColumns[0]} = '{i_categoryName}'";
+                        $"SELECT distinct {m_TopicColumns[1]} from [TemplateCore].[dbo].[{ListOfTables.Topic}] WHERE {m_TopicColumns[0]} = '{iCategoryName}'";
                     command.CommandText = insertMessage;
                     SqlDataReader reader = command.ExecuteReader();
                     List<string> retVal = new List<string>();
@@ -152,6 +160,33 @@ namespace TemplateCoreBusiness.Database
             else
             {
                 throw new Exception("There is no connection, there for can not return topics");
+            }
+        }
+
+        private List<string> getTopicNamesFromDB()
+        {
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"SELECT distinct {m_TopicColumns[0]} from [TemplateCore].[dbo].[{ListOfTables.Topic}]";
+                    command.CommandText = insertMessage;
+                    SqlDataReader reader = command.ExecuteReader();
+                    List<string> retVal = new List<string>();
+                    while (reader.Read())
+                    {
+                        retVal.Add(reader.GetValue(0).ToString());
+                    }
+
+                    return retVal;
+                }
+            }
+            else
+            {
+                throw new Exception("There is no connection, there for can not return topics names");
             }
         }
 
@@ -356,14 +391,14 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
-        private string updateTopicHeader(TopicEntity topicEntity, string i_newHeaderName)
+        private string updateTopicHeader(TopicEntity topicEntity, string iNewHeaderName)
         {
             string retVal = "";
             if (m_connection != null)
             {
                 try
                 {
-                    string insertMessage = $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Topic}] SET {m_TopicColumns[1]} = '{i_newHeaderName}' WHERE {m_TopicColumns[0]} = '{topicEntity.Category}' and {m_TopicColumns[1]} = '{topicEntity.Header}'";
+                    string insertMessage = $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Topic}] SET {m_TopicColumns[1]} = '{iNewHeaderName}' WHERE {m_TopicColumns[0]} = '{topicEntity.Category}' and {m_TopicColumns[1]} = '{topicEntity.Header}'";
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = m_connection;
