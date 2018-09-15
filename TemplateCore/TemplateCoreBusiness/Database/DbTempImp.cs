@@ -378,7 +378,7 @@ namespace TemplateCoreBusiness.Database
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"The update to DB falied: {e.Message}");
+                    retVal = $"The update to DB falied: {e.Message}";
                 }
             }
             else
@@ -414,7 +414,7 @@ namespace TemplateCoreBusiness.Database
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"The insert to DB falied, Exeption: {e.Message}");
+                    retVal = $"The insert to DB falied, Exeption: {e.Message}";
                 }
             }
             else
