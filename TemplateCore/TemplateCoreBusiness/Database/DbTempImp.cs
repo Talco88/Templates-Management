@@ -346,7 +346,7 @@ namespace TemplateCoreBusiness.Database
                     }
                     else
                     {
-                        throw new Exception("There was no result with email: " + iEmail);
+                        throw new Exception($"There was no result with email: {iEmail}");
                     }
                 }
             }
@@ -378,8 +378,8 @@ namespace TemplateCoreBusiness.Database
                 }
                 catch (Exception e)
                 {
-                    retVal = "The update to DB falied: " + e.Message;
-                    Console.WriteLine(e.Message);
+                    throw new Exception($"The update to DB falied: {e.Message}");
+                    //Console.WriteLine(e.Message);
                 }
             }
             else
@@ -415,8 +415,7 @@ namespace TemplateCoreBusiness.Database
                 }
                 catch (Exception e)
                 {
-                    retVal = "The insert to DB falied";
-                    Console.WriteLine(e.Message);
+                    throw new Exception($"The insert to DB falied, Exeption: {e.Message}");
                 }
             }
             else
@@ -474,8 +473,7 @@ namespace TemplateCoreBusiness.Database
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                throw new Exception("Failed to open connection to db\n" + e.Message);
+                throw new Exception($"Failed to open connection to db, Exception: {e.Message}");
             }
         }
 
@@ -490,8 +488,7 @@ namespace TemplateCoreBusiness.Database
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
-                throw new Exception("Failed to close connection to db\n" + e.Message);
+                throw new Exception($"Failed to close connection to db Exception: {e.Message}");
             }
         }
 
@@ -509,7 +506,7 @@ namespace TemplateCoreBusiness.Database
                 {
                     m_connetionString = null;
                     m_connection = null;
-                    throw new Exception("Failed to create sql connection\n" + e.Message);
+                    throw new Exception($"Failed to create sql connection Exception: {e.Message}");
                 }
             }
         }
