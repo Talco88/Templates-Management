@@ -90,10 +90,10 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
-        public string UpdateHeaderInTopic(TopicEntity topicEntity, string i_newHeaderName)
+        public string UpdateHeaderInTopic(TopicEntity topicEntity, string iNewHeaderName)
         {
             openConnection();
-            string retVal = updateTopicHeader(topicEntity, i_newHeaderName);
+            string retVal = updateTopicHeader(topicEntity, iNewHeaderName);
             closeConnection();
             if (string.IsNullOrEmpty(retVal) == false)
             {

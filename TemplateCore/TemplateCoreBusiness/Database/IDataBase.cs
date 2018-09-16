@@ -15,7 +15,7 @@ namespace TemplateCoreBusiness.Database
         UserEntity GetUser(string iEmail);
         string DeleteTemplate(string templateName);
         string CreateNewTopic(TopicEntity topicEntity);
-        string UpdateHeaderInTopic(TopicEntity topicEntity, string i_newHeaderName);
+        string UpdateHeaderInTopic(TopicEntity topicEntity, string iNewHeaderName);
         string DeleteTopic(TopicEntity topicEntity);
         List<string> GetTopicsInCategory(string iCategoryName);
         List<string> GetTopicsNames();
