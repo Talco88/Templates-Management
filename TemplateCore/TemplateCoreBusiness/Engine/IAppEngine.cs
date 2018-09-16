@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TemplateCoreBusiness.Models;
+using Xceed.Words.NET;
 
 namespace TemplateCoreBusiness.Engine
 {
@@ -20,5 +21,11 @@ namespace TemplateCoreBusiness.Engine
         List<string> GetTopicsInCategory(string iCategoryName);
         List<string> GetTopicsNames();
         List<TopicEntity> GetAllTopics();
+        string RateTamplate(string iTemplateName, int iRateNumber);
+        string AddCommentToTemplate(string iTamplateName, string iUserEmail, string iComment);
+        string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared);
+        string InsertValuesToTemplate(string iTamplateName, string iValues);
+        string DeleteTemplate(string iTamplateName, string iUserEmail);
+        DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent);
     }
 }

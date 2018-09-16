@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TemplateCoreBusiness.Database;
 using TemplateCoreBusiness.Models;
+using Xceed.Words.NET;
 
 namespace TemplateCoreBusiness.Engine
 {
@@ -102,6 +103,36 @@ namespace TemplateCoreBusiness.Engine
         public List<TopicEntity> GetAllTopics()
         {
             return DataBaseFactory.GetDbInstance().GetAllTopics();
+        }
+
+        public string RateTamplate(string iTemplateName, int iRateNumber)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string AddCommentToTemplate(string iTamplateName, string iUserEmail, string iComment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string InsertValuesToTemplate(string iTamplateName, string iValues)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string DeleteTemplate(string iTamplateName, string iUserEmail)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent)
+        {
+            throw new NotImplementedException();
         }
 
         private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail)
