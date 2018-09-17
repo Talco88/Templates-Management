@@ -23,12 +23,12 @@ namespace WordTests
                 //INSERT
                 //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
                 //CreateAdminUsers();
-
+                /*
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("הקקהבגק", "מזל טוב", "chen@gmail.com", "כללי");
                 Console.WriteLine();
-                /*
-                CreateTopics();
                 */
+                CreateTopics();
+
                 /*
                 //SELECT
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
@@ -56,6 +56,10 @@ namespace WordTests
                 Console.WriteLine();
                 
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTopic("ברכות", "בר מצווה"));
+                Console.WriteLine();
+                
+
+                Console.WriteLine(DataBaseFactory.GetDbInstance().DeleteAllTable("Topic"));
                 Console.WriteLine();
                 */
             }

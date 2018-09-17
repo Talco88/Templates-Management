@@ -135,6 +135,14 @@ namespace TemplateCoreBusiness.Database
             closeConnection();
             return retVal;
         }
+        [Obsolete]
+        public string DeleteAllTable(string iTableName)
+        {
+            openConnection();
+            string retVal = deleteAllTableFromDB(iTableName);
+            closeConnection();
+            return retVal;
+        }
 
         private List<string> getTopicsInCategoryFromDB(string iCategoryName)
         {
@@ -299,7 +307,7 @@ namespace TemplateCoreBusiness.Database
                     try
                     {
                         int recordsAffected = command.ExecuteNonQuery();
-                        if (recordsAffected == 1)
+                        if (recordsAffected > 0)
                         {
                             retVal = "Delete succeeded";
                         }
@@ -322,6 +330,44 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
+        private string deleteAllTableFromDB(string nameOftable)
+        {
+            string retVal = null;
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"DELETE from [TemplateCore].[dbo].[{nameOftable}]";
+                    command.CommandText = insertMessage;
+                    try
+                    {
+                        int recordsAffected = command.ExecuteNonQuery();
+                        if (recordsAffected > 0)
+                        {
+                            retVal = "Delete succeeded";
+                        }
+                        else
+                        {
+                            retVal = "Delete failed";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        retVal = "Delete failed " + ex.Message;
+                    }
+                }
+            }
+            else
+            {
+                retVal = "There is no connection there for can not delete the template";
+            }
+
+            return retVal;
+        }
+
         private string deleteFromDB(string nameOftable, string nameOfColumn, string id)
         {
             string retVal = null;
@@ -337,7 +383,7 @@ namespace TemplateCoreBusiness.Database
                     try
                     {
                         int recordsAffected = command.ExecuteNonQuery();
-                        if (recordsAffected == 1)
+                        if (recordsAffected > 0)
                         {
                             retVal = "Delete succeeded";
                         }
@@ -415,7 +461,7 @@ namespace TemplateCoreBusiness.Database
                         command.CommandType = CommandType.Text;
                         command.CommandText = insertMessage;
                         int recordsAffected = command.ExecuteNonQuery();
-                        if (recordsAffected != 1)
+                        if (recordsAffected < 1)
                         {
                             retVal = "The update to DB falied";
                         }
@@ -451,7 +497,7 @@ namespace TemplateCoreBusiness.Database
                         command.CommandType = CommandType.Text;
                         command.CommandText = insertMessage;
                         int recordsAffected = command.ExecuteNonQuery();
-                        if (recordsAffected != 1)
+                        if (recordsAffected < 1)
                         {
                             retVal = "The insert to DB falied";
                         }

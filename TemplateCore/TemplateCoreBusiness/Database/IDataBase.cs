@@ -20,5 +20,8 @@ namespace TemplateCoreBusiness.Database
         List<string> GetTopicsInCategory(string iCategoryName);
         List<string> GetTopicsNames();
         List<TopicEntity> GetAllTopics();
+
+        [Obsolete]
+        string DeleteAllTable(string iTableName);
     }
 }
