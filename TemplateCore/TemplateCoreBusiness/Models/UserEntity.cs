@@ -15,5 +15,10 @@ namespace TemplateCoreBusiness.Models
         public DateTime CreationTime { get; set; }
         public bool IsAdmin { get; set; } = false;
         public string FavoriteTemplates { get; set; } = "";
+
+        public void AddFavoriteTemplate(string iNewTemplate)
+        {
+            FavoriteTemplates = $"{FavoriteTemplates}|{iNewTemplate}";
+        }
     }
 }

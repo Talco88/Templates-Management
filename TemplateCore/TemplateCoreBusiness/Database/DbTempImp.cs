@@ -209,6 +209,19 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
+        public string UpdateUser(UserEntity iUserEntity)
+        {
+            try
+            {
+                openConnection();
+                return updateUserInDB(iUserEntity);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
         [Obsolete]
         public string DeleteAllTable(string iTableName)
         {
@@ -610,7 +623,47 @@ namespace TemplateCoreBusiness.Database
                 {
                     int isShared = iTemplateEntity.IsShared ? 1 : 0;
                     string insertMessage =
-                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Templates}] SET {m_TemplateColumns[0]} = '{iTemplateEntity.TemplateJsonRow}', {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}', {m_TemplateColumns[2]} = '{iTemplateEntity.UserIdentity}', {m_TemplateColumns[3]} = '{iTemplateEntity.Rate}', {m_TemplateColumns[4]} = '{iTemplateEntity.Comments}', {m_TemplateColumns[5]} = '{iTemplateEntity.RateCounter}', {m_TemplateColumns[6]} = '{iTemplateEntity.Category}', {m_TemplateColumns[7]} = '{isShared}', {m_TemplateColumns[8]} = '{iTemplateEntity.RateSum}'";
+                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Templates}] SET {m_TemplateColumns[0]} = '{iTemplateEntity.TemplateJsonRow}', {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}', {m_TemplateColumns[2]} = '{iTemplateEntity.UserIdentity}', {m_TemplateColumns[3]} = '{iTemplateEntity.Rate}', {m_TemplateColumns[4]} = '{iTemplateEntity.Comments}', {m_TemplateColumns[5]} = '{iTemplateEntity.RateCounter}', {m_TemplateColumns[6]} = '{iTemplateEntity.Category}', {m_TemplateColumns[7]} = '{isShared}', {m_TemplateColumns[8]} = '{iTemplateEntity.RateSum}' WHERE {m_TemplateColumns[6]} = '{iTemplateEntity.Category}' and {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}";
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = m_connection;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = insertMessage;
+                        int recordsAffected = command.ExecuteNonQuery();
+                        if (recordsAffected < 1)
+                        {
+                            retVal = "The update to DB falied";
+                        }
+                        else
+                        {
+                            retVal = "The update to DB succeeded";
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    retVal = $"The update to DB falied: {e.Message}";
+                }
+            }
+            else
+            {
+                retVal = "There is no connection to DB therefore did not update the topic";
+            }
+
+            return retVal;
+        }
+
+        private string updateUserInDB(UserEntity iUserEntity)
+        {
+            string retVal = "";
+            if (m_connection != null)
+            {
+                try
+                {
+                    int isAdmin = iUserEntity.IsAdmin ? 1 : 0;
+                    string creationTime = iUserEntity.CreationTime.ToString("yyyy-MM-dd HH:mm:ss");
+                    string insertMessage =
+                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.UserInformation}] SET {m_UserColumns[0]} = '{iUserEntity.FirstName}', {m_UserColumns[1]} = '{iUserEntity.LastName}', {m_UserColumns[2]} = '{iUserEntity.Password}', {m_UserColumns[3]} = '{iUserEntity.Email}', {m_UserColumns[4]} = '{creationTime}', {m_UserColumns[5]} = '{iUserEntity.FavoriteTemplates}', {m_UserColumns[6]} = '{isAdmin}' WHERE {m_UserColumns[3]} = '{iUserEntity.Email}'";
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = m_connection;

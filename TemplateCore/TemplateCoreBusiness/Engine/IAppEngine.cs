@@ -26,6 +26,8 @@ namespace TemplateCoreBusiness.Engine
         string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared);
         string InsertValuesToTemplate(string iTamplateName, string iValues);
         string DeleteTemplate(string iTamplateName, string iUserEmail);
+        string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
+        string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent);
     }
 }

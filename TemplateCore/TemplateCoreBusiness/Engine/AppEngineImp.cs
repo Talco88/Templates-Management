@@ -162,6 +162,31 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
+        public string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail)
+        {
+            try
+            {
+                UserEntity userEntity = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
+                string templateName = $"{iCategoryName}:{iTemplateName}";
+                string[] favoriteTemplates = getListFavoriteTemplatesFromString(userEntity.FavoriteTemplates);
+                if (isTemplateExistsInFavoriteList(favoriteTemplates, templateName) == false)
+                {
+                    userEntity.AddFavoriteTemplate(templateName);
+                }
+                
+                return DataBaseFactory.GetDbInstance().UpdateUser(userEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to mark template as favorite: {ex.Message}");
+            }
+        }
+
+        public string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail)
+        {
+            throw new NotImplementedException();
+        }
+
         public DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent)
         {
             throw new NotImplementedException();
@@ -183,6 +208,16 @@ namespace TemplateCoreBusiness.Engine
         private bool isTemplateExistInDb(string iCategoryName, string iHeaderName)
         {
             return DataBaseFactory.GetDbInstance().IsTopicExistInCategory(iCategoryName, iHeaderName);
+        }
+
+        private string[] getListFavoriteTemplatesFromString(string iList)
+        {
+            return iList.Split('|');
+        }
+
+        private bool isTemplateExistsInFavoriteList(string[] iList, string iTemplateName)
+        {
+            return iList.Contains(iTemplateName);
         }
     }
 }

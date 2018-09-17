@@ -23,6 +23,7 @@ namespace TemplateCoreBusiness.Database
         bool IsTopicExistInCategory(string iCategoryName, string iHeaderName);
         TemplateEntity GetTemplateEntity(string iCategoryName, string iTemplateName);
         string UpdateTemplate(TemplateEntity iTemplateEntity);
+        string UpdateUser(UserEntity iUserEntity);
 
         [Obsolete]
         string DeleteAllTable(string iTableName);

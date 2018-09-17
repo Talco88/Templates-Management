@@ -21,13 +21,14 @@ namespace WordTests
             try
             {
                 //INSERT
+                //CreateAdminUsers();
                 //CreateTopics();
-                 
-               //AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "טלוויזיה", "chen@gmail.com", "כללי");
-               //Console.WriteLine();
+
+                //AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "טלוויזיה", "chen@gmail.com", "כללי");
+                //Console.WriteLine();
                 /* 
                Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
-               CreateAdminUsers();
+               
                */
 
                 /*
@@ -65,13 +66,18 @@ namespace WordTests
                 */
 
                 //Update
+                /*
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
                 //Console.WriteLine();
 
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "chen@gmail.com", "ממליצה בחום"));
-                Console.WriteLine();
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "chen@gmail.com", "ממליצה בחום"));
+                //Console.WriteLine();
 
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "orho@gmail.com", "אכן template מעולה"));
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "orho@gmail.com", "אכן template מעולה"));
+                //Console.WriteLine();
+                */
+
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().MarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
                 Console.WriteLine();
             }
             catch (Exception ex)
