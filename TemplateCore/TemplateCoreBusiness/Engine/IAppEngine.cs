@@ -13,7 +13,7 @@ namespace TemplateCoreBusiness.Engine
         string GenerateTemplate();
         TemplateFormation GetTemplate(string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey);
-        string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail);
+        string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail,string iCategory, bool isShared = false);
         string CreateNewTopic(string iCategoryName, string iHeaderName);
         string UpdateHeaderInTopic(string iCategoryName, string iOldHeaderName, string iNewHeaderName);
         string DeleteTopic(string iCategoryName, string iHeaderName);

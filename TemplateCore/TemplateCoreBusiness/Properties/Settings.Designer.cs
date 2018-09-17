@@ -70,7 +70,7 @@ namespace TemplateCoreBusiness.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("FirstName,LastName,Password,Email,CreationTime,FavoriteTemplates")]
+        [global::System.Configuration.DefaultSettingValueAttribute("FirstName,LastName,Password,Email,CreationTime,FavoriteTemplates,IsAdmin")]
         public string USER_COLUMN {
             get {
                 return ((string)(this["USER_COLUMN"]));
@@ -79,7 +79,7 @@ namespace TemplateCoreBusiness.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data,HeadName,UserEmail,Rate,Comments,RateCounter,Category")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data,HeadName,UserEmail,Rate,Comments,RateCounter,Category,IsShared")]
         public string TEMPLATE_COLUMN {
             get {
                 return ((string)(this["TEMPLATE_COLUMN"]));

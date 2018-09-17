@@ -40,11 +40,11 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass)
+        public UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass, bool isAdmin = false)
         {
             try
             {
-                UserEntity newUser = creatEntity(iUserFirstName, iUserLastName, iUserEmail, pass);
+                UserEntity newUser = creatEntity(iUserFirstName, iUserLastName, iUserEmail, pass, isAdmin);
                 DataBaseFactory.GetDbInstance().CreateNewUser(newUser);
                 return newUser;
             }
@@ -54,7 +54,7 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        private UserEntity creatEntity(string iUserFirstName, string iUserLastName, string iUserEmail, string pass)
+        private UserEntity creatEntity(string iUserFirstName, string iUserLastName, string iUserEmail, string pass, bool isAdmin)
         {
             UserEntity retValEntity = new UserEntity();
             retValEntity.FirstName = iUserFirstName;
@@ -62,6 +62,7 @@ namespace TemplateCoreBusiness.Engine
             retValEntity.Email = iUserEmail;
             retValEntity.Password = pass;
             retValEntity.CreationTime = DateTime.Now;
+            retValEntity.IsAdmin = isAdmin;
 
             return retValEntity;
         }

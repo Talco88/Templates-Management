@@ -21,13 +21,13 @@ namespace WordTests
             try
             {
                 //INSERT
-                /*
-                //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "maimaran", "03021991", "chen@gmail.com"));
+                //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
+                //CreateAdminUsers();
 
-                //AppEngineBuilder.GetAppEngine().CreateNewTemplate("gsdkgbsdgb", "Guy mandel", "chen@gmail.com");
-                //Console.WriteLine();
-                
-                createTopics();
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("הקקהבגק", "מזל טוב", "chen@gmail.com", "כללי");
+                Console.WriteLine();
+                /*
+                CreateTopics();
                 */
                 /*
                 //SELECT
@@ -36,8 +36,7 @@ namespace WordTests
                 
                 List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
                 Console.WriteLine();
-                */
-
+                
                 List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
                 Console.WriteLine();
 
@@ -46,6 +45,11 @@ namespace WordTests
 
                 List<string> topicsList = AppEngineBuilder.GetAppEngine().GetTopicsNames();
                 Console.WriteLine();
+                 
+
+                UserEntity userInformation = UserEngineBuilder.GetUserEngine().GetUserData("chen@gmail.com");
+                Console.WriteLine();
+                */
                 /*
                 //DELETE
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate(65447));
@@ -61,7 +65,7 @@ namespace WordTests
             }
         }
 
-        static void createTopics()
+        private static void CreateTopics()
         {
             Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבן"));
             Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבת"));
@@ -75,6 +79,14 @@ namespace WordTests
             Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "מייל לעובדים"));
             Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דפוס חוזר"));
             Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דף שער"));
+        }
+
+        private static void CreateAdminUsers()
+        {
+            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Or", "Horovitz", "25011991", "orho@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Tal", "cohen", "1234", "talCo@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Shani", "Somech", "1245", "Shani@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Nati", "Lehrer", "1246", "Nati@gmail.com", true));
         }
     }
 }

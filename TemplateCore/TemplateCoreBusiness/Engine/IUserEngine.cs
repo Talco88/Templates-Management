@@ -12,7 +12,7 @@ namespace TemplateCoreBusiness.Engine
         UserEntity GetUserData(string iEmail);
         UserEntity LogInUser(string iEmail, string pass);
         bool IsLogedOn(string iUserName);
-        UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass);
+        UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass, bool isAdmin = false);
         bool LogOut(string iUserName);
     }
 }

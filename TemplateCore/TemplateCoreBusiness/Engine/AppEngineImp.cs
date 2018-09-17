@@ -11,11 +11,11 @@ namespace TemplateCoreBusiness.Engine
 {
     public class AppEngineImp : IAppEngine
     {
-        public string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail)
+        public string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail, string iCategory, bool isShared = false)
         {
             try
             {
-                TemplateEntity templateEntity = creatNewTemplateEntity(iData, iTemplateName, iUserEmail);
+                TemplateEntity templateEntity = creatNewTemplateEntity(iData, iTemplateName, iUserEmail, iCategory, isShared);
                 return DataBaseFactory.GetDbInstance().CreateNewTemplate(templateEntity);
             }
             catch (Exception ex)
@@ -135,14 +135,15 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail)
+        private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail, string iCategory, bool isShared)
         {
             TemplateEntity retVal = new TemplateEntity();
             retVal.TemplateJsonRow = iData;
             retVal.HeadName = iTemplateName;
             retVal.UserIdentity = iUserEmail;
-            retVal.RateCounter = 0;
-            retVal.Comments = "";
+            retVal.RateCounter = -1;
+            retVal.Category = iCategory;
+            retVal.IsShared = isShared;
 
             return retVal;
         }

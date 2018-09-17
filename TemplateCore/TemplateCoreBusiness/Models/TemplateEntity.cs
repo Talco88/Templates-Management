@@ -16,7 +16,22 @@ namespace TemplateCoreBusiness.Models
         public string HeadName { get; set; }
         public string TemplateJsonRow { get; set; }
         public string UserIdentity { get; set; }
-        public string Comments { get; set; }
+        public string Comments { get; set; } = "";
+        public bool IsShared { get; set; } = false;
+        public int RateCounter
+        {
+            get { return _rateCounter; }
+            set { _rateCounter++; }
+        }
+        public int Rate
+        {
+            get { return _rate; }
+            set
+            {
+                RateCounter = RateCounter;
+                _rate = (value + _rate) / RateCounter;
+            }
+        }
 
         public Dictionary<string, object> TemplateData
         {
@@ -30,20 +45,6 @@ namespace TemplateCoreBusiness.Models
             }
         }
 
-        public int RateCounter
-        {
-            get { return _rateCounter; }
-            set { _rateCounter++; }
-        }
-
-        public int Rate
-        {
-            get { return _rate; }
-            set
-            {
-                RateCounter = RateCounter;
-                _rate = (value + _rate) / RateCounter;
-            }
-        }
+        
     }
 }

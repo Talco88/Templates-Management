@@ -252,6 +252,8 @@ namespace TemplateCoreBusiness.Database
             userList.Add(userEntity.Email);
             userList.Add(userEntity.Password);
             userList.Add(userEntity.CreationTime.ToString("yyyy-MM-dd HH:mm:ss"));
+            userList.Add(userEntity.FavoriteTemplates);
+            userList.Add(userEntity.IsAdmin);
             return userList.ToArray();
         }
 
@@ -270,6 +272,7 @@ namespace TemplateCoreBusiness.Database
             templateList.Add(templateEntity.Comments);
             templateList.Add(templateEntity.RateCounter);
             templateList.Add(templateEntity.Category);
+            templateList.Add(templateEntity.IsShared);
             return templateList.ToArray();
         }
 
@@ -371,13 +374,7 @@ namespace TemplateCoreBusiness.Database
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
-                        UserEntity retVal = new UserEntity();
-                        retVal.FirstName = ((SqlString) reader.GetSqlValue(0)).ToString();
-                        retVal.LastName = ((SqlString) reader.GetSqlValue(1)).ToString();
-                        retVal.Password = ((SqlString) reader.GetSqlValue(2)).ToString();
-                        retVal.Email = ((SqlString) reader.GetSqlValue(3)).ToString();
-                        retVal.CreationTime = ((SqlDateTime) reader.GetSqlValue(4)).Value;
-                        return retVal;
+                        return getUserFromDB(reader);
                     }
                     else
                     {
@@ -389,6 +386,19 @@ namespace TemplateCoreBusiness.Database
             {
                 throw new Exception("There is no connection, there for can not return user information");
             }
+        }
+
+        private UserEntity getUserFromDB(SqlDataReader reader)
+        {
+            UserEntity retVal = new UserEntity();
+            retVal.FirstName = ((SqlString)reader.GetSqlValue(0)).ToString();
+            retVal.LastName = ((SqlString)reader.GetSqlValue(1)).ToString();
+            retVal.Password = ((SqlString)reader.GetSqlValue(2)).ToString();
+            retVal.Email = ((SqlString)reader.GetSqlValue(3)).ToString();
+            retVal.CreationTime = ((SqlDateTime)reader.GetSqlValue(4)).Value;
+            retVal.FavoriteTemplates = ((SqlString)reader.GetSqlValue(5)).ToString();
+            retVal.IsAdmin = ((SqlBoolean)reader.GetSqlValue(6)).Value;
+            return retVal;
         }
 
         private string updateTopicHeader(TopicEntity topicEntity, string iNewHeaderName)
@@ -482,6 +492,20 @@ namespace TemplateCoreBusiness.Database
                     if (item.GetType().Equals(typeof(string)) || item.GetType().Equals(typeof(DateTime)))
                     {
                         item = "'" + item + "'";
+                    }
+                    else
+                    {
+                        if(item.GetType().Equals(typeof(bool)))
+                        {
+                            if ((bool) item)
+                            {
+                                item = "'1'";
+                            }
+                            else
+                            {
+                                item = "'0'";
+                            }
+                        }
                     }
                 }
 
