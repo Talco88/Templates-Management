@@ -57,8 +57,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                UserEntity retVal = getUserInformation(iEmail);
-                return retVal;
+                return getUserInformation(iEmail);
             }
             finally
             {
@@ -71,8 +70,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                List<string> retVal = getSearchedTemplates(iSearchKey);
-                return retVal;
+                return getSearchedTemplates(iSearchKey);
             }
             finally
             {
@@ -85,8 +83,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                string retVal = deleteFromDB(ListOfTables.Templates, m_TemplateColumns[1], templateName);
-                return retVal;
+                return deleteFromDB(ListOfTables.Templates, m_TemplateColumns[1], templateName);
             }
             finally
             {
@@ -119,7 +116,6 @@ namespace TemplateCoreBusiness.Database
             }
 
             return retVal;
-            
         }
 
         public string DeleteTopic(TopicEntity topicEntity)
@@ -127,8 +123,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                string retVal = deleteTopicFromDB(topicEntity);
-                return retVal;
+                return deleteTopicFromDB(topicEntity);
             }
             finally
             {
@@ -141,8 +136,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                List<string> retVal = getTopicsInCategoryFromDB(iCategoryName);
-                return retVal;
+                return getTopicsInCategoryFromDB(iCategoryName);
             }
             finally
             {
@@ -155,8 +149,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                List<string> retVal = getTopicNamesFromDB();
-                return retVal;
+                return getTopicNamesFromDB();
             }
             finally
             {
@@ -169,8 +162,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                List<TopicEntity> retVal = getAllTopicsFromDB();
-                return retVal;
+                return getAllTopicsFromDB();
             }
             finally
             {
@@ -178,13 +170,38 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
-        public bool isTopicExistInCategory(string iCategoryName, string iHeaderName)
+        public bool IsTopicExistInCategory(string iCategoryName, string iHeaderName)
         {
             try
             {
                 openConnection();
-                bool retVal = isCategoryAndHeaderExistsInDb(iCategoryName, iHeaderName);
-                return retVal;
+                return isCategoryAndHeaderExistsInDb(iCategoryName, iHeaderName);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
+        public TemplateEntity GetTemplateEntity(string iCategoryName, string iTemplateName)
+        {
+            try
+            {
+                openConnection();
+                return getTemplateEntityFromDB(iCategoryName, iTemplateName);
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
+        public string UpdateTemplate(TemplateEntity iTemplateEntity)
+        {
+            try
+            {
+                openConnection();
+                return updateTemplateInDB(iTemplateEntity);
             }
             finally
             {
@@ -198,8 +215,7 @@ namespace TemplateCoreBusiness.Database
             try
             {
                 openConnection();
-                string retVal = deleteAllTableFromDB(iTableName);
-                return retVal;
+                return deleteAllTableFromDB(iTableName);
             }
             finally
             {
@@ -276,7 +292,7 @@ namespace TemplateCoreBusiness.Database
                     bool retVal = false;
                     while (reader.Read())
                     {
-                        if ((int)reader.GetValue(0) != 0)
+                        if ((int) reader.GetValue(0) != 0)
                         {
                             retVal = true;
                         }
@@ -374,6 +390,7 @@ namespace TemplateCoreBusiness.Database
             templateList.Add(templateEntity.RateCounter);
             templateList.Add(templateEntity.Category);
             templateList.Add(templateEntity.IsShared);
+            templateList.Add(templateEntity.RateSum);
             return templateList.ToArray();
         }
 
@@ -499,6 +516,50 @@ namespace TemplateCoreBusiness.Database
             return retVal;
         }
 
+        private TemplateEntity getTemplateEntityFromDB(string iCategoryName, string iTemplateName)
+        {
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"SELECT distinct * from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE HeadName = '{iTemplateName}' and Category = '{iCategoryName}'";
+                    command.CommandText = insertMessage;
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        return getTemplateFromDB(reader);
+                    }
+                    else
+                    {
+                        throw new Exception(
+                            $"There was no result with HeadName = '{iTemplateName}' and Category = {iCategoryName}");
+                    }
+                }
+            }
+            else
+            {
+                throw new Exception("There is no connection, there for can not return template information");
+            }
+        }
+
+        private TemplateEntity getTemplateFromDB(SqlDataReader reader)
+        {
+            TemplateEntity retVal = new TemplateEntity();
+            retVal.TemplateJsonRow = (string) reader.GetValue(0);
+            retVal.HeadName = (string) reader.GetValue(1);
+            retVal.UserIdentity = (string) reader.GetValue(2);
+            retVal.Rate = (int) reader.GetValue(3);
+            retVal.Comments = (string) reader.GetValue(4);
+            retVal.RateCounter = (int) reader.GetValue(5);
+            retVal.Category = (string) reader.GetValue(6);
+            retVal.IsShared = (bool) reader.GetValue(7);
+            retVal.RateSum = (int) reader.GetValue(8);
+            return retVal;
+        }
+
         private UserEntity getUserInformation(string iEmail)
         {
             if (m_connection != null)
@@ -530,13 +591,52 @@ namespace TemplateCoreBusiness.Database
         private UserEntity getUserFromDB(SqlDataReader reader)
         {
             UserEntity retVal = new UserEntity();
-            retVal.FirstName = ((SqlString)reader.GetSqlValue(0)).ToString();
-            retVal.LastName = ((SqlString)reader.GetSqlValue(1)).ToString();
-            retVal.Password = ((SqlString)reader.GetSqlValue(2)).ToString();
-            retVal.Email = ((SqlString)reader.GetSqlValue(3)).ToString();
-            retVal.CreationTime = ((SqlDateTime)reader.GetSqlValue(4)).Value;
-            retVal.FavoriteTemplates = ((SqlString)reader.GetSqlValue(5)).ToString();
-            retVal.IsAdmin = ((SqlBoolean)reader.GetSqlValue(6)).Value;
+            retVal.FirstName = ((SqlString) reader.GetSqlValue(0)).Value;
+            retVal.LastName = ((SqlString) reader.GetSqlValue(1)).Value;
+            retVal.Password = ((SqlString) reader.GetSqlValue(2)).Value;
+            retVal.Email = ((SqlString) reader.GetSqlValue(3)).Value;
+            retVal.CreationTime = ((SqlDateTime) reader.GetSqlValue(4)).Value;
+            retVal.FavoriteTemplates = ((SqlString) reader.GetSqlValue(5)).Value;
+            retVal.IsAdmin = ((SqlBoolean) reader.GetSqlValue(6)).Value;
+            return retVal;
+        }
+
+        private string updateTemplateInDB(TemplateEntity iTemplateEntity)
+        {
+            string retVal = "";
+            if (m_connection != null)
+            {
+                try
+                {
+                    int isShared = iTemplateEntity.IsShared ? 1 : 0;
+                    string insertMessage =
+                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Templates}] SET {m_TemplateColumns[0]} = '{iTemplateEntity.TemplateJsonRow}', {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}', {m_TemplateColumns[2]} = '{iTemplateEntity.UserIdentity}', {m_TemplateColumns[3]} = '{iTemplateEntity.Rate}', {m_TemplateColumns[4]} = '{iTemplateEntity.Comments}', {m_TemplateColumns[5]} = '{iTemplateEntity.RateCounter}', {m_TemplateColumns[6]} = '{iTemplateEntity.Category}', {m_TemplateColumns[7]} = '{isShared}', {m_TemplateColumns[8]} = '{iTemplateEntity.RateSum}'";
+                    using (SqlCommand command = new SqlCommand())
+                    {
+                        command.Connection = m_connection;
+                        command.CommandType = CommandType.Text;
+                        command.CommandText = insertMessage;
+                        int recordsAffected = command.ExecuteNonQuery();
+                        if (recordsAffected < 1)
+                        {
+                            retVal = "The update to DB falied";
+                        }
+                        else
+                        {
+                            retVal = "The update to DB succeeded";
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    retVal = $"The update to DB falied: {e.Message}";
+                }
+            }
+            else
+            {
+                retVal = "There is no connection to DB therefore did not update the topic";
+            }
+
             return retVal;
         }
 
@@ -547,7 +647,8 @@ namespace TemplateCoreBusiness.Database
             {
                 try
                 {
-                    string insertMessage = $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Topic}] SET {m_TopicColumns[1]} = '{iNewHeaderName}' WHERE {m_TopicColumns[0]} = '{topicEntity.Category}' and {m_TopicColumns[1]} = '{topicEntity.Header}'";
+                    string insertMessage =
+                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Topic}] SET {m_TopicColumns[1]} = '{iNewHeaderName}' WHERE {m_TopicColumns[0]} = '{topicEntity.Category}' and {m_TopicColumns[1]} = '{topicEntity.Header}'";
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = m_connection;
@@ -634,7 +735,7 @@ namespace TemplateCoreBusiness.Database
                     }
                     else
                     {
-                        if(item.GetType().Equals(typeof(bool)))
+                        if (item.GetType().Equals(typeof(bool)))
                         {
                             if ((bool) item)
                             {

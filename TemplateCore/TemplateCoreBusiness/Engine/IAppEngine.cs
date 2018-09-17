@@ -21,7 +21,7 @@ namespace TemplateCoreBusiness.Engine
         List<string> GetTopicsInCategory(string iCategoryName);
         List<string> GetTopicsNames();
         List<TopicEntity> GetAllTopics();
-        string RateTamplate(string iTemplateName, int iRateNumber);
+        string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber);
         string AddCommentToTemplate(string iTamplateName, string iUserEmail, string iComment);
         string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared);
         string InsertValuesToTemplate(string iTamplateName, string iValues);

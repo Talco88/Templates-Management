@@ -22,14 +22,13 @@ namespace WordTests
             {
                 //INSERT
                 //CreateTopics();
-
-                AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "טלוויזיה", "chen@gmail.com", "כללי");
-                Console.WriteLine();
-
-                /*
-                Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
-                CreateAdminUsers();
-                */
+                 
+               AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "טלוויזיה", "chen@gmail.com", "כללי");
+               Console.WriteLine();
+                /* 
+               Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
+               CreateAdminUsers();
+               */
 
                 /*
                 //SELECT
@@ -38,7 +37,7 @@ namespace WordTests
                 
                 List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
                 Console.WriteLine();
-                */
+                
                 List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
                 Console.WriteLine();
 
@@ -51,7 +50,7 @@ namespace WordTests
 
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().GetUserData("chen@gmail.com");
                 Console.WriteLine();
-                
+                */
                 /*
                 //DELETE
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate(65447));
@@ -64,6 +63,16 @@ namespace WordTests
                 Console.WriteLine(DataBaseFactory.GetDbInstance().DeleteAllTable("Topic"));
                 Console.WriteLine();
                 */
+
+                //Update
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
+                Console.WriteLine();
+
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 10));
+                Console.WriteLine();
+
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 1));
+                Console.WriteLine();
             }
             catch (Exception ex)
             {
@@ -89,10 +98,14 @@ namespace WordTests
 
         private static void CreateAdminUsers()
         {
-            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Or", "Horovitz", "25011991", "orho@gmail.com", true));
-            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Tal", "cohen", "1234", "talCo@gmail.com", true));
-            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Shani", "Somech", "1245", "Shani@gmail.com", true));
-            Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Nati", "Lehrer", "1246", "Nati@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Or", "Horovitz", "25011991", "orho@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Tal", "cohen", "1234", "talCo@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Shani", "Somech", "1245", "Shani@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Nati", "Lehrer", "1246", "Nati@gmail.com", true));
         }
     }
 }

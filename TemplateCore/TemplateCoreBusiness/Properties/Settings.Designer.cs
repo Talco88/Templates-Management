@@ -79,7 +79,7 @@ namespace TemplateCoreBusiness.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data,HeadName,UserEmail,Rate,Comments,RateCounter,Category,IsShared")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data,HeadName,UserEmail,Rate,Comments,RateCounter,Category,IsShared, RateSum")]
         public string TEMPLATE_COLUMN {
             get {
                 return ((string)(this["TEMPLATE_COLUMN"]));

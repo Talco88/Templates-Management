@@ -11,27 +11,29 @@ namespace TemplateCoreBusiness.Engine
 {
     public class AppEngineImp : IAppEngine
     {
-        public string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail, string iCategory, bool isShared = false)
+        public string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail, string iCategory,
+            bool isShared = false)
         {
             try
             {
-                TemplateEntity templateEntity = creatNewTemplateEntity(iData, iTemplateName, iUserEmail, iCategory, isShared);
+                TemplateEntity templateEntity =
+                    creatNewTemplateEntity(iData, iTemplateName, iUserEmail, iCategory, isShared);
                 if (isTemplateExistInDb(templateEntity.Category, templateEntity.HeadName))
                 {
-                    throw new Exception($"The template in Category {templateEntity.Category} with name {templateEntity.HeadName} is already exist");
+                    throw new Exception(
+                        $"The template in Category {templateEntity.Category} with name {templateEntity.HeadName} is already exist");
                 }
                 else
                 {
-                    DataBaseFactory.GetDbInstance().CreateNewTopic(new TopicEntity(templateEntity.Category, templateEntity.HeadName));
+                    DataBaseFactory.GetDbInstance()
+                        .CreateNewTopic(new TopicEntity(templateEntity.Category, templateEntity.HeadName));
                     return DataBaseFactory.GetDbInstance().CreateNewTemplate(templateEntity);
                 }
-                
             }
             catch (Exception ex)
             {
                 throw new Exception($"Failed to create the new template: {ex.Message}");
             }
-            
         }
 
         public string GenerateTemplate()
@@ -83,7 +85,8 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception ex)
             {
-                throw new Exception($"Failed to delete the new topic {iCategoryName} + {iHeaderName}, Exception: {ex.Message}");
+                throw new Exception(
+                    $"Failed to delete the new topic {iCategoryName} + {iHeaderName}, Exception: {ex.Message}");
             }
         }
 
@@ -114,9 +117,19 @@ namespace TemplateCoreBusiness.Engine
             return DataBaseFactory.GetDbInstance().GetAllTopics();
         }
 
-        public string RateTamplate(string iTemplateName, int iRateNumber)
+        public string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TemplateEntity templateEntity =
+                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
+                templateEntity.AddRate(iRateNumber);
+                return DataBaseFactory.GetDbInstance().UpdateTemplate(templateEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to rate template: {ex.Message}");
+            }
         }
 
         public string AddCommentToTemplate(string iTamplateName, string iUserEmail, string iComment)
@@ -144,13 +157,13 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail, string iCategory, bool isShared)
+        private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail,
+            string iCategory, bool isShared)
         {
             TemplateEntity retVal = new TemplateEntity();
             retVal.TemplateJsonRow = iData;
             retVal.HeadName = iTemplateName;
             retVal.UserIdentity = iUserEmail;
-            retVal.RateCounter = -1;
             retVal.Category = iCategory;
             retVal.IsShared = isShared;
 
@@ -159,7 +172,7 @@ namespace TemplateCoreBusiness.Engine
 
         private bool isTemplateExistInDb(string iCategoryName, string iHeaderName)
         {
-           return DataBaseFactory.GetDbInstance().isTopicExistInCategory(iCategoryName, iHeaderName);
+            return DataBaseFactory.GetDbInstance().IsTopicExistInCategory(iCategoryName, iHeaderName);
         }
     }
 }
