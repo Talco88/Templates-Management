@@ -38,6 +38,11 @@ namespace TemplateCoreBusiness.Models
             Rate = (RateSum + iNewRate) / RateCounter;
         }
 
+        public void AddComment(string iNewComment)
+        {
+            Comments = $"{Comments}|{iNewComment}";
+        }
+
         public Dictionary<string, object> TemplateData
         {
             get

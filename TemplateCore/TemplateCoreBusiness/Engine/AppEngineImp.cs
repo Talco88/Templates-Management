@@ -132,9 +132,19 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string AddCommentToTemplate(string iTamplateName, string iUserEmail, string iComment)
+        public string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail, string iComment)
         {
-            throw new NotImplementedException();
+            try
+            {
+                TemplateEntity templateEntity =
+                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
+                templateEntity.AddComment($"{iUserEmail} :{iComment}");
+                return DataBaseFactory.GetDbInstance().UpdateTemplate(templateEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to rate template: {ex.Message}");
+            }
         }
 
         public string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared)
