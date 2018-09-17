@@ -16,7 +16,16 @@ namespace TemplateCoreBusiness.Engine
             try
             {
                 TemplateEntity templateEntity = creatNewTemplateEntity(iData, iTemplateName, iUserEmail, iCategory, isShared);
-                return DataBaseFactory.GetDbInstance().CreateNewTemplate(templateEntity);
+                if (isTemplateExistInDb(templateEntity.Category, templateEntity.HeadName))
+                {
+                    throw new Exception($"The template in Category {templateEntity.Category} with name {templateEntity.HeadName} is already exist");
+                }
+                else
+                {
+                    DataBaseFactory.GetDbInstance().CreateNewTopic(new TopicEntity(templateEntity.Category, templateEntity.HeadName));
+                    return DataBaseFactory.GetDbInstance().CreateNewTemplate(templateEntity);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -146,6 +155,11 @@ namespace TemplateCoreBusiness.Engine
             retVal.IsShared = isShared;
 
             return retVal;
+        }
+
+        private bool isTemplateExistInDb(string iCategoryName, string iHeaderName)
+        {
+           return DataBaseFactory.GetDbInstance().isTopicExistInCategory(iCategoryName, iHeaderName);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace TemplateCoreBusiness.Database
         List<string> GetTopicsInCategory(string iCategoryName);
         List<string> GetTopicsNames();
         List<TopicEntity> GetAllTopics();
+        bool isTopicExistInCategory(string iCategoryName, string iHeaderName);
 
         [Obsolete]
         string DeleteAllTable(string iTableName);

@@ -54,26 +54,44 @@ namespace TemplateCoreBusiness.Database
 
         public UserEntity GetUser(string iEmail)
         {
-            openConnection();
-            UserEntity retVal = getUserInformation(iEmail);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                UserEntity retVal = getUserInformation(iEmail);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public List<string> SearchTemplate(string iSearchKey)
         {
-            openConnection();
-            List<string> retVal = getSearchedTemplates(iSearchKey);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                List<string> retVal = getSearchedTemplates(iSearchKey);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public string DeleteTemplate(string templateName)
         {
-            openConnection();
-            string retVal = deleteFromDB(ListOfTables.Templates, m_TemplateColumns[1], templateName);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                string retVal = deleteFromDB(ListOfTables.Templates, m_TemplateColumns[1], templateName);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public string CreateNewTopic(TopicEntity topicEntity)
@@ -106,42 +124,87 @@ namespace TemplateCoreBusiness.Database
 
         public string DeleteTopic(TopicEntity topicEntity)
         {
-            openConnection();
-            string retVal = deleteTopicFromDB(topicEntity);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                string retVal = deleteTopicFromDB(topicEntity);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public List<string> GetTopicsInCategory(string iCategoryName)
         {
-            openConnection();
-            List<string> retVal = getTopicsInCategoryFromDB(iCategoryName);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                List<string> retVal = getTopicsInCategoryFromDB(iCategoryName);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public List<string> GetTopicsNames()
         {
-            openConnection();
-            List<string> retVal = getTopicNamesFromDB();
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                List<string> retVal = getTopicNamesFromDB();
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         public List<TopicEntity> GetAllTopics()
         {
-            openConnection();
-            List<TopicEntity> retVal = getAllTopicsFromDB();
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                List<TopicEntity> retVal = getAllTopicsFromDB();
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
+
+        public bool isTopicExistInCategory(string iCategoryName, string iHeaderName)
+        {
+            try
+            {
+                openConnection();
+                bool retVal = isCategoryAndHeaderExistsInDb(iCategoryName, iHeaderName);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
+        }
+
         [Obsolete]
         public string DeleteAllTable(string iTableName)
         {
-            openConnection();
-            string retVal = deleteAllTableFromDB(iTableName);
-            closeConnection();
-            return retVal;
+            try
+            {
+                openConnection();
+                string retVal = deleteAllTableFromDB(iTableName);
+                return retVal;
+            }
+            finally
+            {
+                closeConnection();
+            }
         }
 
         private List<string> getTopicsInCategoryFromDB(string iCategoryName)
@@ -187,6 +250,36 @@ namespace TemplateCoreBusiness.Database
                     while (reader.Read())
                     {
                         retVal.Add(reader.GetValue(0).ToString());
+                    }
+
+                    return retVal;
+                }
+            }
+            else
+            {
+                throw new Exception("There is no connection, there for can not return topics names");
+            }
+        }
+
+        private bool isCategoryAndHeaderExistsInDb(string iCategoryName, string iHeaderName)
+        {
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"SELECT count(*) from [TemplateCore].[dbo].[{ListOfTables.Topic}] WHERE {m_TopicColumns[0]} = '{iCategoryName}' and {m_TopicColumns[1]} = '{iHeaderName}'";
+                    command.CommandText = insertMessage;
+                    SqlDataReader reader = command.ExecuteReader();
+                    bool retVal = false;
+                    while (reader.Read())
+                    {
+                        if ((int)reader.GetValue(0) != 0)
+                        {
+                            retVal = true;
+                        }
                     }
 
                     return retVal;

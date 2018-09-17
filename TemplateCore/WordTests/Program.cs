@@ -21,13 +21,15 @@ namespace WordTests
             try
             {
                 //INSERT
-                //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
-                //CreateAdminUsers();
-                /*
-                AppEngineBuilder.GetAppEngine().CreateNewTemplate("הקקהבגק", "מזל טוב", "chen@gmail.com", "כללי");
+                //CreateTopics();
+
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "טלוויזיה", "chen@gmail.com", "כללי");
                 Console.WriteLine();
+
+                /*
+                Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
+                CreateAdminUsers();
                 */
-                CreateTopics();
 
                 /*
                 //SELECT
@@ -36,7 +38,7 @@ namespace WordTests
                 
                 List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
                 Console.WriteLine();
-                
+                */
                 List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
                 Console.WriteLine();
 
@@ -49,7 +51,7 @@ namespace WordTests
 
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().GetUserData("chen@gmail.com");
                 Console.WriteLine();
-                */
+                
                 /*
                 //DELETE
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate(65447));
