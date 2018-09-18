@@ -21,16 +21,14 @@ namespace WordTests
             try
             {
                 //INSERT
+                /*
                 //CreateAdminUsers();
                 //CreateTopics();
 
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
                 //Console.WriteLine();
-                /* 
-               Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Chen", "Maimaran", "0542021405", "chen@gmail.com"));
-               
-               */
-
+                Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Guy", "tvil", "0542021405", "guy@gmail.com"));
+                */
                 /*
                 //SELECT
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
@@ -83,6 +81,9 @@ namespace WordTests
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().RemoveMarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
                 Console.WriteLine();
                 */
+
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "טלוויזיה", "guy@gmail.com", false));
+                Console.WriteLine();
             }
             catch (Exception ex)
             {

@@ -132,7 +132,8 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail, string iComment)
+        public string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail,
+            string iComment)
         {
             try
             {
@@ -147,9 +148,29 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string SetSharedTemplate(string iTamplateName, string iUserEmail, bool isShared)
+        public string SetSharedTemplate(string iCategoryName, string iTamplateName, string iUserEmail, bool isShared)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserEntity userEntity = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
+                TemplateEntity templateEntity =
+                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTamplateName);
+                if (isAuthorizeToUpdateTemplate(templateEntity, userEntity))
+                {
+                    templateEntity.IsShared = isShared;
+                }
+                else
+                {
+                    throw new Exception(
+                        $"The User {userEntity.Email} has no authority to set share template {templateEntity.Category}:{templateEntity.HeadName}");
+                }
+
+                return DataBaseFactory.GetDbInstance().UpdateTemplate(templateEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to set shared template: {ex.Message}");
+            }
         }
 
         public string InsertValuesToTemplate(string iTamplateName, string iValues)
@@ -173,7 +194,7 @@ namespace TemplateCoreBusiness.Engine
                 {
                     userEntity.AddFavoriteTemplate(templateName);
                 }
-                
+
                 return DataBaseFactory.GetDbInstance().UpdateUser(userEntity);
             }
             catch (Exception ex)
@@ -243,13 +264,18 @@ namespace TemplateCoreBusiness.Engine
         private string buildFavoriteTemplatesStringFromArray(string[] iArrayStrings)
         {
             string retVal = "";
-            
+
             foreach (string item in iArrayStrings)
             {
                 retVal = Common.CommonUtilities.AddStringToStringWithSeparate(retVal, item, '|');
             }
 
             return retVal;
+        }
+
+        private bool isAuthorizeToUpdateTemplate(TemplateEntity iTemplateEntity, UserEntity iUserEntity)
+        {
+            return iUserEntity.IsAdmin || iTemplateEntity.UserIdentity.Equals(iUserEntity.Email);
         }
     }
 }
