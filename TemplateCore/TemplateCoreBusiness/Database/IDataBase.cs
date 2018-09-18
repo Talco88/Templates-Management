@@ -13,7 +13,7 @@ namespace TemplateCoreBusiness.Database
         List<string> SearchTemplate(string iSearchKey);
         void CreateNewUser(UserEntity userEntity);
         UserEntity GetUser(string iEmail);
-        string DeleteTemplate(string templateName);
+        string DeleteTemplate(string iCategoryName, string iTemplateName);
         string CreateNewTopic(TopicEntity topicEntity);
         string UpdateHeaderInTopic(TopicEntity topicEntity, string iNewHeaderName);
         string DeleteTopic(TopicEntity topicEntity);

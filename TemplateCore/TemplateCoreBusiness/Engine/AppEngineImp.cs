@@ -90,18 +90,6 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string DeleteTemplate(string templateName)
-        {
-            try
-            {
-                return DataBaseFactory.GetDbInstance().DeleteTemplate(templateName);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception($"Failed to delete the new template {templateName},\n Exception: {ex.Message}");
-            }
-        }
-
         public List<string> GetTopicsInCategory(string iCategoryName)
         {
             return DataBaseFactory.GetDbInstance().GetTopicsInCategory(iCategoryName);
@@ -148,13 +136,13 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string SetSharedTemplate(string iCategoryName, string iTamplateName, string iUserEmail, bool isShared)
+        public string SetSharedTemplate(string iCategoryName, string iTemplateName, string iUserEmail, bool isShared)
         {
             try
             {
                 UserEntity userEntity = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
                 TemplateEntity templateEntity =
-                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTamplateName);
+                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
                 if (isAuthorizeToUpdateTemplate(templateEntity, userEntity))
                 {
                     templateEntity.IsShared = isShared;
@@ -178,9 +166,28 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public string DeleteTemplate(string iTamplateName, string iUserEmail)
+        public string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserEntity userEntity = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
+                TemplateEntity templateEntity =
+                    DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
+                if (isAuthorizeToUpdateTemplate(templateEntity, userEntity))
+                {
+                    DataBaseFactory.GetDbInstance().DeleteTopic(new TopicEntity(iCategoryName, iTemplateName));
+                    return DataBaseFactory.GetDbInstance().DeleteTemplate(iCategoryName, iTemplateName);
+                }
+                else
+                {
+                    throw new Exception(
+                        $"The User {userEntity.Email} has no authority to delete the template {templateEntity.Category}:{templateEntity.HeadName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to delete the template: {ex.Message}");
+            }
         }
 
         public string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail)

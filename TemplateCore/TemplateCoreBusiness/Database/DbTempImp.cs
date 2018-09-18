@@ -78,12 +78,12 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
-        public string DeleteTemplate(string templateName)
+        public string DeleteTemplate(string iCategoryName, string iTemplateName)
         {
             try
             {
                 openConnection();
-                return deleteFromDB(ListOfTables.Templates, m_TemplateColumns[1], templateName);
+                return deleteTemplateFromDB(iCategoryName, iTemplateName);
             }
             finally
             {
@@ -464,6 +464,44 @@ namespace TemplateCoreBusiness.Database
                     command.CommandType = CommandType.Text;
                     string insertMessage =
                         $"DELETE from [TemplateCore].[dbo].[{nameOftable}]";
+                    command.CommandText = insertMessage;
+                    try
+                    {
+                        int recordsAffected = command.ExecuteNonQuery();
+                        if (recordsAffected > 0)
+                        {
+                            retVal = "Delete succeeded";
+                        }
+                        else
+                        {
+                            retVal = "Delete failed";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        retVal = "Delete failed " + ex.Message;
+                    }
+                }
+            }
+            else
+            {
+                retVal = "There is no connection there for can not delete the template";
+            }
+
+            return retVal;
+        }
+
+        private string deleteTemplateFromDB(string iCategoryName, string iHeadName)
+        {
+            string retVal = null;
+            if (m_connection != null)
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = m_connection;
+                    command.CommandType = CommandType.Text;
+                    string insertMessage =
+                        $"DELETE from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE {m_TemplateColumns[6]} = '{iCategoryName}' and {m_TemplateColumns[1]} = '{iHeadName}'";
                     command.CommandText = insertMessage;
                     try
                     {

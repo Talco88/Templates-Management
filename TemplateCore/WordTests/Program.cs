@@ -24,10 +24,10 @@ namespace WordTests
                 /*
                 //CreateAdminUsers();
                 //CreateTopics();
-
-                //AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
+                
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
                 //Console.WriteLine();
-                Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Guy", "tvil", "0542021405", "guy@gmail.com"));
+                //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Guy", "tvil", "0542021405", "guy@gmail.com"));
                 */
                 /*
                 //SELECT
@@ -50,9 +50,10 @@ namespace WordTests
                 UserEntity userInformation = UserEngineBuilder.GetUserEngine().GetUserData("chen@gmail.com");
                 Console.WriteLine();
                 */
-                /*
+
                 //DELETE
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate(65447));
+                /*
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate("כללי", "שלט חוצות", "chen@gmail.com"));
                 Console.WriteLine();
                 
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTopic("ברכות", "בר מצווה"));
@@ -74,16 +75,15 @@ namespace WordTests
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "orho@gmail.com", "אכן template מעולה"));
                 Console.WriteLine();
                 
-
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().MarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
                 //Console.WriteLine();
 
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().RemoveMarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
                 Console.WriteLine();
-                */
-
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "טלוויזיה", "guy@gmail.com", false));
-                Console.WriteLine();
+     
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "שלט חוצות", "chen@gmail.com", false));
+                //Console.WriteLine();
+               */ 
             }
             catch (Exception ex)
             {
