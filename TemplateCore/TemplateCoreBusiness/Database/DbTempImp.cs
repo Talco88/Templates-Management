@@ -623,7 +623,7 @@ namespace TemplateCoreBusiness.Database
                 {
                     int isShared = iTemplateEntity.IsShared ? 1 : 0;
                     string insertMessage =
-                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Templates}] SET {m_TemplateColumns[0]} = '{iTemplateEntity.TemplateJsonRow}', {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}', {m_TemplateColumns[2]} = '{iTemplateEntity.UserIdentity}', {m_TemplateColumns[3]} = '{iTemplateEntity.Rate}', {m_TemplateColumns[4]} = '{iTemplateEntity.Comments}', {m_TemplateColumns[5]} = '{iTemplateEntity.RateCounter}', {m_TemplateColumns[6]} = '{iTemplateEntity.Category}', {m_TemplateColumns[7]} = '{isShared}', {m_TemplateColumns[8]} = '{iTemplateEntity.RateSum}' WHERE {m_TemplateColumns[6]} = '{iTemplateEntity.Category}' and {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}";
+                        $"UPDATE [TemplateCore].[dbo].[{ListOfTables.Templates}] SET {m_TemplateColumns[0]} = '{iTemplateEntity.TemplateJsonRow}', {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}', {m_TemplateColumns[2]} = '{iTemplateEntity.UserIdentity}', {m_TemplateColumns[3]} = '{iTemplateEntity.Rate}', {m_TemplateColumns[4]} = '{iTemplateEntity.Comments}', {m_TemplateColumns[5]} = '{iTemplateEntity.RateCounter}', {m_TemplateColumns[6]} = '{iTemplateEntity.Category}', {m_TemplateColumns[7]} = '{isShared}', {m_TemplateColumns[8]} = '{iTemplateEntity.RateSum}' WHERE {m_TemplateColumns[6]} = '{iTemplateEntity.Category}' and {m_TemplateColumns[1]} = '{iTemplateEntity.HeadName}'";
                     using (SqlCommand command = new SqlCommand())
                     {
                         command.Connection = m_connection;

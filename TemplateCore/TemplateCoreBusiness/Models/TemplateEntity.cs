@@ -40,7 +40,7 @@ namespace TemplateCoreBusiness.Models
 
         public void AddComment(string iNewComment)
         {
-            Comments = $"{Comments}|{iNewComment}";
+            Comments = Common.CommonUtilities.AddStringToStringWithSeparate(Comments, iNewComment, '|');
         }
 
         public Dictionary<string, object> TemplateData

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TemplateCoreBusiness.Common;
 
 namespace TemplateCoreBusiness.Models
 {
@@ -18,7 +19,7 @@ namespace TemplateCoreBusiness.Models
 
         public void AddFavoriteTemplate(string iNewTemplate)
         {
-            FavoriteTemplates = $"{FavoriteTemplates}|{iNewTemplate}";
+            FavoriteTemplates = Common.CommonUtilities.AddStringToStringWithSeparate(FavoriteTemplates, iNewTemplate, '|');
         }
     }
 }

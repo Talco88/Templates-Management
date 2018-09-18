@@ -184,7 +184,20 @@ namespace TemplateCoreBusiness.Engine
 
         public string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserEntity userEntity = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
+                string templateName = $"{iCategoryName}:{iTemplateName}";
+                string[] oldFavoriteTemplates = getListFavoriteTemplatesFromString(userEntity.FavoriteTemplates);
+                string[] newFavoriteTemplatesArray = removeTemplateFromList(oldFavoriteTemplates, templateName);
+                string newFavoriteTemplateString = buildFavoriteTemplatesStringFromArray(newFavoriteTemplatesArray);
+                userEntity.FavoriteTemplates = newFavoriteTemplateString;
+                return DataBaseFactory.GetDbInstance().UpdateUser(userEntity);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to mark template as favorite: {ex.Message}");
+            }
         }
 
         public DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent)
@@ -218,6 +231,25 @@ namespace TemplateCoreBusiness.Engine
         private bool isTemplateExistsInFavoriteList(string[] iList, string iTemplateName)
         {
             return iList.Contains(iTemplateName);
+        }
+
+        private string[] removeTemplateFromList(string[] iArrayStrings, string iTemplateName)
+        {
+            List<string> iList = iArrayStrings.ToList();
+            iList.Remove(iTemplateName);
+            return iList.ToArray();
+        }
+
+        private string buildFavoriteTemplatesStringFromArray(string[] iArrayStrings)
+        {
+            string retVal = "";
+            
+            foreach (string item in iArrayStrings)
+            {
+                retVal = Common.CommonUtilities.AddStringToStringWithSeparate(retVal, item, '|');
+            }
+
+            return retVal;
         }
     }
 }

@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonUtilities.cs" />
     <Compile Include="Database\DataBaseFactory.cs" />
     <Compile Include="Database\DbTempImp.cs" />
     <Compile Include="Database\IDataBase.cs" />
