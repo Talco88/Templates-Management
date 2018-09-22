@@ -8,7 +8,7 @@ using TemplateCoreBusiness.Engine;
 
 namespace TemplateCore.Controllers
 {
-    public class TemplateController : ApiController
+    public class TemplateController : BaseController
     {
         protected IAppEngine appEngine { get; }
 
@@ -18,17 +18,59 @@ namespace TemplateCore.Controllers
         }
 
         [HttpPost]
-        public BaseWebResponce<string> GetTemplate([FromBody]dynamic requestBody)
+        public dynamic GetTemplate([FromBody]dynamic requestBody)
         {
-            return appEngine.GetTemplate(requestBody.Data.templateName.Value);
+            try
+            {
+                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value);
+                return SetSuccessResponce(template);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
         }
 
         [HttpPost]
-        public BaseWebResponce<string> SearchTemplate([FromBody]dynamic requestBody)
+        public dynamic SearchTemplate([FromBody]dynamic requestBody)
         {
-            return appEngine.GetTemplateFromSearch(requestBody.Data.searchKey.Value);
+            try
+            {
+                var templateList = appEngine.GetTemplateFromSearch(requestBody.Data.searchKey.Value);
+                return SetSuccessResponce(templateList);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
         }
 
+        [HttpPost]
+        public dynamic GetAllTopics([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var templateTopicList = appEngine.GetAllTopics();
+                return SetSuccessResponce(templateTopicList);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
 
+        [HttpPost]
+        public dynamic GetTopicsInCategory([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var templateTopicList = appEngine.GetTopicsInCategory(requestBody.Data.CategoryName.Value);
+                return SetSuccessResponce(templateTopicList);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
     }
 }

@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Page</title>
+    <script src="JS/Platform.js"></script>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div>
+        <b>Email</b>
+        <input type="text" id="loginEmail">
+
+        <b>Password</b>
+        <input type="password" name="psw" id="loginPass">
+
+        <button id="LoginBtn" onclick="loginTest()">Login Test</button>
+    </div>
+    <div>
+        <b>FirstName</b>
+        <input type="text" id="regFirstName">
+        <b>LastName</b>
+        <input type="text" id="regLastName">
+        <b>Email</b>
+        <input type="text" id="regEmail">
+        <b>Password</b>
+        <input type="text" id="regPass">
+        <button id="RegisterBtn" onclick="RegisterTest()">Register Test</button>
+    </div>
+    <div>
+        <b>Email</b>
+        <input type="text" id="logoutEmail">
+        <button id="LogoutBtn" onclick="LogoutTest()">Logout Test</button>
+    </div>
+    <div>
+        <b>Email</b>
+        <input type="text" id="gudEmail">
+        <button id="GetUserDataBtn" onclick="GetUserDataTest()">GetUserData Test</button>
+    </div>
+    <div>
+        <b>template name</b>
+        <input type="text" id="gtName">
+        <button id="GetTemplateBtn" onclick="GetTemplateTest()">GetTemplate Test</button>
+    </div>
+    <div>
+        <b>template name</b>
+        <input type="text" id="stName">
+        <button id="SearchTemplateBtn" onclick="SearchTemplateTest()">SearchTemplate Test</button>
+    </div>
+    <div>
+        <button id="GetAllTopicsBtn" onclick="GetAllTopicsTest()">GetAllTopics Test</button>
+    </div>
+    <div>
+        <b>template name</b>
+        <input type="text" id="ticName">
+        <button id="GetTopicsInCategoryBtn" onclick="GetTopicsInCategoryTest()">GetTopicsInCategory Test</button>
+    </div>
+    <div>
+        Responce: <p id="responce"></p>
+    </div>
+
+
+    <script>
+        function loginTest() {
+            let email = document.querySelector('#loginEmail');
+            let pass = document.querySelector('#loginPass');
+            Platform.LogIn(email.value, pass.value, ResponceFunction);
+        }
+
+        function RegisterTest() {
+            let fName = document.querySelector('#regFirstName');
+            let lName = document.querySelector('#regLastName');
+            let email = document.querySelector('#regEmail');
+            let pass = document.querySelector('#regPass');
+            Platform.RegisterUser(fName.value, lName.value, email.value, pass.value, ResponceFunction);
+        }
+
+        function LogoutTest() {
+            let email = document.querySelector('#logoutEmail');
+            Platform.LogOut(email.value, ResponceFunction);
+        }
+
+        function GetUserDataTest() {
+            let email = document.querySelector('#gudEmail');
+            Platform.GetUserData(email.value, ResponceFunction);
+        }
+
+        function GetTemplateTest() {
+            let name = document.querySelector('#gtName');
+            Platform.GetTemplate(name.value, ResponceFunction);
+        }
+
+        function SearchTemplateTest() {
+            let name = document.querySelector('#stName');
+            Platform.GetTemplate(name.value, ResponceFunction);
+        }
+
+        function GetAllTopicsTest() {
+            Platform.GetAllTopics(ResponceFunction);
+        }
+
+        function GetTopicsInCategoryTest() {
+            let name = document.querySelector('#ticName');
+            Platform.GetTopicsInCategory(name.value, ResponceFunction);
+        }
+
+
+        /// *****  /////
+        function ResponceFunction(iResponce) {
+            let respoDiv = document.querySelector('#responce');
+            respoDiv.innerText = iResponce.RetObject;
+            console.log(iResponce.RetObject);
+        }
+    </script>
+</body>
+</html>

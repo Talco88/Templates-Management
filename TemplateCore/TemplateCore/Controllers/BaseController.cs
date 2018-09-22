@@ -24,5 +24,25 @@ namespace TemplateCore.Controllers
         {
             return "value";
         }
+
+        protected BaseWebResponce<object> SetExceptionResponce(Exception exception)
+        {
+            return new BaseWebResponce<object>()
+            {
+                StatusCode = 1,
+                Status = "Error",
+                RetObject = exception.Message
+            };
+        }
+
+        protected BaseWebResponce<T> SetSuccessResponce<T>(T retrunObject)
+        {
+            return new BaseWebResponce<T>()
+            {
+                StatusCode = 0,
+                Status = "OK",
+                RetObject = retrunObject
+            };
+        }
     }
 }

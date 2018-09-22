@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TemplateCoreBusiness.Models;
+using Xceed.Words.NET;
 
 namespace TemplateCoreBusiness.Engine
 {
@@ -12,6 +13,20 @@ namespace TemplateCoreBusiness.Engine
         string GenerateTemplate();
         TemplateFormation GetTemplate(string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey);
-        void CreateNewTemplate(GenerateNewTemplateEntity iNewTemplateData);
+        string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail,string iCategory, bool isShared = false);
+        string CreateNewTopic(string iCategoryName, string iHeaderName);
+        string UpdateHeaderInTopic(string iCategoryName, string iOldHeaderName, string iNewHeaderName);
+        string DeleteTopic(string iCategoryName, string iHeaderName);
+        List<string> GetTopicsInCategory(string iCategoryName);
+        List<string> GetTopicsNames();
+        List<TopicEntity> GetAllTopics();
+        string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber);
+        string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail, string iComment);
+        string SetSharedTemplate(string iCategoryName, string iTemplateName, string iUserEmail, bool isShared);
+        string InsertValuesToTemplate(string iTamplateName, string iValues);
+        string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail);
+        string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
+        string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
+        DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent);
     }
 }

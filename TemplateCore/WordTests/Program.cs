@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TemplateCoreBusiness.Word;
 using TemplateCoreBusiness.Database;
+using TemplateCoreBusiness.Engine;
+using TemplateCoreBusiness.Models;
 
 namespace WordTests
 {
@@ -19,27 +21,102 @@ namespace WordTests
             try
             {
                 //INSERT
-                //object[] userValues = { "or", "horovitz", "2244", "lvvsavasfa@gmail.com", 126 };
-                //Console.WriteLine(DataBaseFactory.GetDbInstance().CreateNewUser(userValues));
-
-                object[] templateValues = { 65445, "horovitz", 126 };
-                Console.WriteLine(DataBaseFactory.GetDbInstance().CreateNewTemplate(templateValues));
-                Console.WriteLine();
+                /*
+                //CreateAdminUsers();
+                //CreateTopics();
+                
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
+                //Console.WriteLine();
+                //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Guy", "tvil", "0542021405", "guy@gmail.com"));
+                */
                 /*
                 //SELECT
-                Dictionary<string, object> userInformation = DataBaseFactory.GetDbInstance().GetUser(125);
+                UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
+                Console.WriteLine();
+                
+                List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
+                Console.WriteLine();
+                
+                List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
+                Console.WriteLine();
+
+                List<string> headersList = AppEngineBuilder.GetAppEngine().GetTopicsInCategory("מסמכים");
+                Console.WriteLine();
+
+                List<string> topicsList = AppEngineBuilder.GetAppEngine().GetTopicsNames();
+                Console.WriteLine();
+                 
+
+                UserEntity userInformation = UserEngineBuilder.GetUserEngine().GetUserData("chen@gmail.com");
+                Console.WriteLine();
+                */
+
+                //DELETE
+                /*
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTemplate("כללי", "שלט חוצות", "chen@gmail.com"));
+                Console.WriteLine();
+                
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().DeleteTopic("ברכות", "בר מצווה"));
                 Console.WriteLine();
                 
 
-                //DELETE
-                Console.WriteLine(DataBaseFactory.GetDbInstance().DeleteTemplate(65445));
+                Console.WriteLine(DataBaseFactory.GetDbInstance().DeleteAllTable("Topic"));
                 Console.WriteLine();
                 */
+
+                //Update
+                /*
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
+                //Console.WriteLine();
+
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "chen@gmail.com", "ממליצה בחום"));
+                //Console.WriteLine();
+                
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().AddCommentToTemplate("כללי", "טלוויזיה", "orho@gmail.com", "אכן template מעולה"));
+                Console.WriteLine();
+                
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().MarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
+                //Console.WriteLine();
+
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().RemoveMarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
+                Console.WriteLine();
+     
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "שלט חוצות", "chen@gmail.com", false));
+                //Console.WriteLine();
+               */ 
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        private static void CreateTopics()
+        {
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבן"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבת"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "יום הולדת"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "שנה טובה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "בר מצווה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "בת מצווה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "חוזה עבודה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "חוזה שכר דירה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "תביעה"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "מייל לעובדים"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דפוס חוזר"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דף שער"));
+        }
+
+        private static void CreateAdminUsers()
+        {
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Or", "Horovitz", "25011991", "orho@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Tal", "cohen", "1234", "talCo@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Shani", "Somech", "1245", "Shani@gmail.com", true));
+            Console.WriteLine(UserEngineBuilder.GetUserEngine()
+                .RegisterNewUser("Nati", "Lehrer", "1246", "Nati@gmail.com", true));
         }
     }
 }

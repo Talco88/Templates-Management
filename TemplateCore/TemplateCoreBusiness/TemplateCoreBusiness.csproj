@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CommonUtilities.cs" />
     <Compile Include="Database\DataBaseFactory.cs" />
     <Compile Include="Database\DbTempImp.cs" />
     <Compile Include="Database\IDataBase.cs" />
@@ -57,11 +58,16 @@
     <Compile Include="Engine\AppEngineImp.cs" />
     <Compile Include="Engine\IAppEngine.cs" />
     <Compile Include="Engine\IUserEngine.cs" />
-    <Compile Include="Engine\SomeAppEngineToDelete.cs" />
-    <Compile Include="Engine\UserEngienTestToDelete.cs" />
     <Compile Include="Engine\UserEngineBuilder.cs" />
     <Compile Include="Engine\UserEngineImp.cs" />
+    <Compile Include="Models\TopicEntity.cs" />
     <Compile Include="Models\UserEntity.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="WebAppData\TemplateFormation.cs" />
     <Compile Include="IAppService.cs" />
     <Compile Include="Models\NewTemplateEntity.cs" />
@@ -71,7 +77,12 @@
     <Compile Include="Word\Test.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\connectionAndDBInfo.txt" />
