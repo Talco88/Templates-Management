@@ -43,9 +43,16 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public TemplateFormation GetTemplate(string iTemplateName)
+        public TemplateFormation GetTemplate(string iCategoryName, string iTemplateName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return getTemplateFromDB(iCategoryName, iTemplateName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error during GetTemplate: " + e.Message);
+            }
         }
 
         public List<string> GetTemplateFromSearch(string iSearchKey, bool isAdmin = false, string iUserEmail = "")
@@ -251,10 +258,57 @@ namespace TemplateCoreBusiness.Engine
         {
             for (int i = 0; i < iValues.Count; i++)
             {
-                iTemplate = iTemplate.Replace($"<{iValues[i].Name}>", iValues[i].Value);
+                iTemplate = iTemplate.Replace($"${iValues[i].Name}", iValues[i].Value);
             }
 
             return iTemplate;
+        }
+
+        private TemplateFormation getTemplateFromDB(string iCategoryName, string iTemplateName)
+        {
+            TemplateEntity templateEntity = DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
+            Dictionary<string, object> templateData = templateEntity.TemplateData;
+            List<string> fieldsNames = getListFieldsNamesFromTemplate(templateData["Template"].ToString());
+
+            return createTemplateFormationWithValues(templateEntity.Category, templateEntity.HeadName, fieldsNames);
+        }
+
+        private TemplateFormation createTemplateFormationWithValues(string iCategoryName, string iTemplateName,
+            List<string> iWebDataContainerValues)
+        {
+            TemplateFormation retVal = new TemplateFormation();
+            retVal.CategoryName = iCategoryName;
+            retVal.HeaderName = iTemplateName;
+            retVal.Values = createWebDataContainerWithNames(iWebDataContainerValues);
+            return retVal;
+        }
+
+        private List<WebDataContainer> createWebDataContainerWithNames(List<string> iWebDataContainerValues)
+        {
+            List<WebDataContainer> retVal = new List<WebDataContainer>();
+            foreach (string item in iWebDataContainerValues)
+            {
+                WebDataContainer webDataContainer = new WebDataContainer();
+                webDataContainer.Name = item;
+                retVal.Add(webDataContainer);
+            }
+
+            return retVal;
+        }
+
+        private List<string> getListFieldsNamesFromTemplate(string iTemplateJson)
+        {
+            List<string> retVal = new List<string>();
+            string[] splittedArray = iTemplateJson.Split('$');
+            for (int i = 0; i < splittedArray.Length; i++)
+            {
+                if (i != 0)
+                {
+                    retVal.Add(splittedArray[i].Split(' ')[0]);
+                }
+            }
+
+            return retVal;
         }
 
         private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail,

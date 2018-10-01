@@ -11,7 +11,7 @@ namespace TemplateCoreBusiness.Engine
     public interface IAppEngine
     {
         string GenerateTemplate();
-        TemplateFormation GetTemplate(string iTemplateName);
+        TemplateFormation GetTemplate(string iCategoryName, string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey, bool isAdmin = false, string iUserEmail = "");
         string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail,string iCategory, bool isShared = false);
         string CreateNewTopic(string iCategoryName, string iHeaderName);

@@ -24,7 +24,7 @@ namespace WordTests
                 //INSERT
                 //CreateAdminUsers();
                 //CreateTopics();
-                //string jsonValue = "{\"Template\": \" this is a <firstName> <lastName> \n <FriendFirstName> <FriendLastName>\", \"numberOfChanges\": 4}";
+                //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
                 /*
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("טל", "שלטים", "talCo@gmail.com", "כללי");
@@ -68,7 +68,10 @@ namespace WordTests
                 */
 
                 //Update
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().GenerateHTMLTemplateWithValues(CreateTemplateFormation()));
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().GenerateHTMLTemplateWithValues(CreateTemplateFormation()));
+                //Console.WriteLine();
+
+                TemplateFormation templateFormation = AppEngineBuilder.GetAppEngine().GetTemplate("ברכות", "יום הולדת");
                 Console.WriteLine();
                 /*
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
