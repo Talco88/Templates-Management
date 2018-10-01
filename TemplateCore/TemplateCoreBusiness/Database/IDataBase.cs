@@ -10,7 +10,7 @@ namespace TemplateCoreBusiness.Database
     public interface IDataBase
     {
         string CreateNewTemplate(TemplateEntity templateEntity);
-        List<string> SearchTemplate(string iSearchKey);
+        List<string> SearchTemplate(string iSearchKey, bool isAdmin = false, string iUserEmail = "");
         void CreateNewUser(UserEntity userEntity);
         UserEntity GetUser(string iEmail);
         string DeleteTemplate(string iCategoryName, string iTemplateName);

@@ -26,15 +26,17 @@ namespace WordTests
                 //CreateTopics();
                 
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate("טל", "שלטים", "talCo@gmail.com", "כללי");
+                
                 //Console.WriteLine();
                 //Console.WriteLine(UserEngineBuilder.GetUserEngine().RegisterNewUser("Guy", "tvil", "0542021405", "guy@gmail.com"));
                 */
-                /*
+
                 //SELECT
-                UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
-                Console.WriteLine();
-                
-                List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("Guy");
+                //UserEntity userInformation = UserEngineBuilder.GetUserEngine().LogInUser("chen@gmail.com", "03021991");
+                //Console.WriteLine();
+                /*
+                List<string> templateNames = AppEngineBuilder.GetAppEngine().GetTemplateFromSearch("שלט",false, "orchen@gmail.com");
                 Console.WriteLine();
                 
                 List<TopicEntity> listEntities = AppEngineBuilder.GetAppEngine().GetAllTopics();
@@ -80,10 +82,10 @@ namespace WordTests
 
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().RemoveMarkTemplateAsFavorite("כללי", "טלוויזיה", "orho@gmail.com"));
                 Console.WriteLine();
-     
-                //Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "שלט חוצות", "chen@gmail.com", false));
-                //Console.WriteLine();
-               */ 
+                 
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "שלט חוצות", "chen@gmail.com", true));
+                Console.WriteLine();
+                */
             }
             catch (Exception ex)
             {

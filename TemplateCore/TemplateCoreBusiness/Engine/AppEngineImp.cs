@@ -46,9 +46,9 @@ namespace TemplateCoreBusiness.Engine
             throw new NotImplementedException();
         }
 
-        public List<string> GetTemplateFromSearch(string iSearchKey)
+        public List<string> GetTemplateFromSearch(string iSearchKey, bool isAdmin = false, string iUserEmail = "")
         {
-            return DataBaseFactory.GetDbInstance().SearchTemplate(iSearchKey);
+            return DataBaseFactory.GetDbInstance().SearchTemplate(iSearchKey, isAdmin, iUserEmail);
         }
 
         public string CreateNewTopic(string iCategoryName, string iHeaderName)
