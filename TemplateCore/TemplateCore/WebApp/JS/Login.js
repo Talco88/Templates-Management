@@ -1,8 +1,8 @@
 ﻿var login = {};
-var Global_index_BaseHTMLData = "";
+var Global_singIn_BaseHTMLData = "";
 
 login.setPage = function () {
-    if(Global_index_BaseHTMLData === ""){
+    if (Global_singIn_BaseHTMLData === "") {
         login.LoadLobbyPageRes(true);
     }
     else{
@@ -11,7 +11,7 @@ login.setPage = function () {
 }
 
 login.onPagedRecived = function(){
-    $("#MainAppWindow").html(Global_index_BaseHTMLData);
+    $("#MainAppWindow").html(Global_singIn_BaseHTMLData);
     let loginBtn = document.querySelector(".login-btn");
     loginBtn.onclick = login.onLoginClicked;
 }
@@ -34,7 +34,7 @@ login.nevigateToSignUpPage = function (iServerReturn) {
             url: "/WebApp/signIn.html",
             dataType: 'text',
             success: function (data) {
-                Global_index_BaseHTMLData = data;
+                Global_singIn_BaseHTMLData = data;
                 login.onPagedRecived();
             },
             error: function () {
@@ -99,10 +99,10 @@ login.exampleReturnFunction = function (iServerReturn) {
 
 login.LoadLobbyPageRes = function (isSet) {
     $.ajax({
-        url: "/WebApp/index.html",
+        url: "/WebApp/HTML/signIn.html",
         dataType: 'text',
         success: function (data) {
-            Global_index_BaseHTMLData = data;
+            Global_singIn_BaseHTMLData = data;
             login.onPagedRecived();
         },
         error: function () {

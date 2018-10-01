@@ -9,8 +9,10 @@
     <script src="WebApp/JS/Platform.js"></script>
     <script src="WebApp/JS/Utill.js"></script>
     <script src="WebApp/JS/Login.js"></script>
+    <script src="WebApp/JS/MainPage.js"></script>
 
-    <%-- CSS --%>
+
+<%--     CSS --%>
     <link href="WebApp/CSS/LogIn/Login.css" rel="stylesheet" />
     <title>Template Core</title>
 </head>
@@ -19,7 +21,7 @@
         
     </div>
     <script>
-        login.setPage();
+        mainPage.setPage();
     </script>
 </body>
 </html>

@@ -89,7 +89,9 @@
     <Content Include="WebApp\CSS\creative.min.css" />
     <Content Include="WebApp\gulpfile.js" />
     <Content Include="WebApp\HtmlPageTest.html" />
+    <Content Include="WebApp\HTML\index.html" />
     <Content Include="WebApp\HTML\LoginPage.html" />
+    <Content Include="WebApp\HTML\signIn.html" />
     <Content Include="WebApp\Images\ALL_TEAM.jpg" />
     <Content Include="WebApp\Images\hand-writing.jpg" />
     <Content Include="WebApp\Images\hand_writing_2.jpg" />
@@ -102,7 +104,6 @@
     <Content Include="WebApp\img\birthday.jpg" />
     <Content Include="WebApp\img\buisness.jpg" />
     <Content Include="WebApp\img\header.jpg" />
-    <Content Include="WebApp\img\LinkedIn_logo.png" />
     <Content Include="WebApp\img\logo2.png" />
     <Content Include="WebApp\img\portfolio\fullsize\1.jpg" />
     <Content Include="WebApp\img\portfolio\fullsize\2.jpg" />
@@ -122,13 +123,12 @@
     <Content Include="WebApp\img\team\SHANI.jpg" />
     <Content Include="WebApp\img\team\TAL.jpg" />
     <Content Include="WebApp\img\thankyou.jpg" />
-    <Content Include="WebApp\index.html" />
     <Content Include="WebApp\JS\creative.js" />
     <Content Include="WebApp\JS\creative.min.js" />
     <Content Include="WebApp\JS\Login.js" />
+    <Content Include="WebApp\JS\MainPage.js" />
     <Content Include="WebApp\JS\Platform.js" />
     <Content Include="WebApp\JS\Utill.js" />
-    <Content Include="WebApp\signIn.html" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.min.css" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-reboot.css" />
@@ -182,12 +182,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="WebApp\.gitignore" />
     <Content Include="WebApp\.travis.yml" />
-    <Content Include="WebApp\LICENSE" />
     <Content Include="WebApp\package-lock.json" />
     <Content Include="WebApp\package.json" />
-    <Content Include="WebApp\README.md" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap.css.map" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="WebApp\vendor\bootstrap\js\bootstrap.bundle.js.map" />
