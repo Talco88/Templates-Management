@@ -21,8 +21,9 @@ namespace WordTests
             try
             {
                 //INSERT
+
+                CreateAdminUsers();
                 /*
-                //CreateAdminUsers();
                 //CreateTopics();
                 
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
@@ -112,13 +113,13 @@ namespace WordTests
         private static void CreateAdminUsers()
         {
             Console.WriteLine(UserEngineBuilder.GetUserEngine()
-                .RegisterNewUser("Or", "Horovitz", "25011991", "orho@gmail.com", true));
+                .RegisterNewUser("Or", "Horovitz", "orho@gmail.com", "25011991", true));
             Console.WriteLine(UserEngineBuilder.GetUserEngine()
-                .RegisterNewUser("Tal", "cohen", "1234", "talCo@gmail.com", true));
+                .RegisterNewUser("Tal", "cohen", "talCo@gmail.com", "1234", true));
             Console.WriteLine(UserEngineBuilder.GetUserEngine()
-                .RegisterNewUser("Shani", "Somech", "1245", "Shani@gmail.com", true));
+                .RegisterNewUser("Shani", "Somech", "Shani@gmail.com", "1245", true));
             Console.WriteLine(UserEngineBuilder.GetUserEngine()
-                .RegisterNewUser("Nati", "Lehrer", "1246", "Nati@gmail.com", true));
+                .RegisterNewUser("Nati", "Lehrer", "Nati@gmail.com", "1246", true));
         }
     }
 }

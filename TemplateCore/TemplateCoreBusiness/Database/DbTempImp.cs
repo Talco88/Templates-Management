@@ -394,8 +394,8 @@ namespace TemplateCoreBusiness.Database
             List<object> userList = new List<object>();
             userList.Add(userEntity.FirstName);
             userList.Add(userEntity.LastName);
-            userList.Add(userEntity.Email);
             userList.Add(userEntity.Password);
+            userList.Add(userEntity.Email);
             userList.Add(userEntity.CreationTime.ToString("yyyy-MM-dd HH:mm:ss"));
             userList.Add(userEntity.FavoriteTemplates);
             userList.Add(userEntity.IsAdmin);
