@@ -125,7 +125,7 @@
     <Content Include="WebApp\img\thankyou.jpg" />
     <Content Include="WebApp\JS\creative.js" />
     <Content Include="WebApp\JS\creative.min.js" />
-    <Content Include="WebApp\JS\Login.js" />
+    <Content Include="WebApp\JS\SignIn.js" />
     <Content Include="WebApp\JS\MainPage.js" />
     <Content Include="WebApp\JS\Platform.js" />
     <Content Include="WebApp\JS\Utill.js" />
