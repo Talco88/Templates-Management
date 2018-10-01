@@ -22,13 +22,15 @@ namespace TemplateCore.Controllers
         [HttpPost]
         public dynamic Login([FromBody]dynamic requestBody)
         {
+            
             try
             {
                 UserEntity user = userEngine.LogInUser(
                     requestBody.Data.Email.Value, 
                     requestBody.Data.Password.Value
                 );
-                HttpContext.Current.Session[SESSION_USER_EMAIL] = user.Email;
+
+                SetPrincipal(user.Email, user.IsAdmin);
                 return SetSuccessResponce(user);
             }
             catch(Exception ex)
@@ -77,8 +79,7 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.IsLogedOn(requestBody.Data.Email.Value);
-                HttpContext.Current.Session[SESSION_USER_EMAIL] = null;
-                return SetSuccessResponce(user);
+                return SetSuccessResponce(isUserLogedOn());
             }
             catch (Exception ex)
             {
@@ -92,6 +93,7 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.LogOut(requestBody.Data.Email.Value);
+                RemovePrincipal();
                 return SetSuccessResponce(user);
             }
             catch (Exception ex)
