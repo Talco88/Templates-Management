@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,12 +22,11 @@ namespace WordTests
             try
             {
                 //INSERT
-
-                CreateAdminUsers();
-                /*
+                //CreateAdminUsers();
                 //CreateTopics();
-                
-                AppEngineBuilder.GetAppEngine().CreateNewTemplate("גמגמ", "שלט חוצות", "chen@gmail.com", "כללי");
+                //string jsonValue = "{\"Template\": \" this is a <firstName> <lastName> \n <FriendFirstName> <FriendLastName>\", \"numberOfChanges\": 4}";
+                //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
+                /*
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("טל", "שלטים", "talCo@gmail.com", "כללי");
                 
                 //Console.WriteLine();
@@ -68,6 +68,8 @@ namespace WordTests
                 */
 
                 //Update
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().GenerateHTMLTemplateWithValues(CreateTemplateFormation()));
+                Console.WriteLine();
                 /*
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
                 //Console.WriteLine();
@@ -120,6 +122,42 @@ namespace WordTests
                 .RegisterNewUser("Shani", "Somech", "Shani@gmail.com", "1245", true));
             Console.WriteLine(UserEngineBuilder.GetUserEngine()
                 .RegisterNewUser("Nati", "Lehrer", "Nati@gmail.com", "1246", true));
+        }
+
+        private static TemplateFormation CreateTemplateFormation()
+        {
+            TemplateFormation retVal = new TemplateFormation();
+            retVal.CategoryName = "ברכות";
+            retVal.HeaderName = "יום הולדת";
+            retVal.Values = createWebDataContainerList();
+
+            return retVal;
+        }
+
+        private static List<WebDataContainer> createWebDataContainerList()
+        {
+            List<WebDataContainer> retVal = new List<WebDataContainer>();
+            WebDataContainer webDataContainer = new WebDataContainer();
+            webDataContainer.Name = "firstName";
+            webDataContainer.Value = "or";
+            retVal.Add(webDataContainer);
+
+            WebDataContainer webDataContainer1 = new WebDataContainer();
+            webDataContainer1.Name = "lastName";
+            webDataContainer1.Value = "horovitz";
+            retVal.Add(webDataContainer1);
+
+            WebDataContainer webDataContainer2 = new WebDataContainer();
+            webDataContainer2.Name = "FriendFirstName";
+            webDataContainer2.Value = "tal";
+            retVal.Add(webDataContainer2);
+
+            WebDataContainer webDataContainer3 = new WebDataContainer();
+            webDataContainer3.Name = "FriendLastName";
+            webDataContainer3.Value = "cohen";
+            retVal.Add(webDataContainer3);
+
+            return retVal;
         }
     }
 }

@@ -23,10 +23,10 @@ namespace TemplateCoreBusiness.Engine
         string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber);
         string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail, string iComment);
         string SetSharedTemplate(string iCategoryName, string iTemplateName, string iUserEmail, bool isShared);
-        string InsertValuesToTemplate(string iTamplateName, string iValues);
         string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail);
         string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent);
+        string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate);
     }
 }

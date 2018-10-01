@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using TemplateCoreBusiness.Database;
 using TemplateCoreBusiness.Models;
 using Xceed.Words.NET;
@@ -161,11 +163,6 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string InsertValuesToTemplate(string iTamplateName, string iValues)
-        {
-            throw new NotImplementedException();
-        }
-
         public string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail)
         {
             try
@@ -231,6 +228,34 @@ namespace TemplateCoreBusiness.Engine
         public DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent)
         {
             throw new NotImplementedException();
+        }
+
+        public string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate)
+        {
+            try
+            {
+                TemplateEntity templateEntity = DataBaseFactory.GetDbInstance().GetTemplateEntity(iTemplate.CategoryName, iTemplate.HeaderName);
+                Dictionary<string, object> templateData =  templateEntity.TemplateData;
+                string template = switchValuesInTemplate(templateData["Template"].ToString(), iTemplate.Values);
+                
+
+                return template;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error during GenerateHTMLTemplateWithValues: " + e.Message);
+                throw;
+            }
+        }
+
+        private string switchValuesInTemplate(string iTemplate, List<WebDataContainer> iValues)
+        {
+            for (int i = 0; i < iValues.Count; i++)
+            {
+                iTemplate = iTemplate.Replace($"<{iValues[i].Name}>", iValues[i].Value);
+            }
+
+            return iTemplate;
         }
 
         private TemplateEntity creatNewTemplateEntity(string iData, string iTemplateName, string iUserEmail,
