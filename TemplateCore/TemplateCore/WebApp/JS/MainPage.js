@@ -10,6 +10,26 @@ mainPage.setPage = function () {
     }
 }
 
+mainPage.onLoginClicked = function () {
+    // do something when btn is clicked
+    let email = document.querySelector('#loginEmail');
+    let pass = document.querySelector('#loginPass');
+    Platform.LogIn(email.value, pass.value, mainPage.onLoginResponce);
+}
+
+mainPage.onLoginResponce = function (iData) {
+    mainPage.nevigateToSignUpPage(iData);
+}
+
+mainPage.nevigateToSignUpPage = function (iServerReturn) {
+    if (iServerReturn.Status != "OK") {
+        signIn.setPage(); // Go to LogIn page
+    }
+    if (iServerReturn.StatusCode != 0) {
+        signIn.setPage(); // Go to LogIn page
+    }
+}
+
 mainPage.onPagedRecived = function () {
     $("#MainAppWindow").html(Global_index_BaseHTMLData);
 

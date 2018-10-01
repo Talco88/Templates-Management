@@ -87,7 +87,6 @@
     <Content Include="Web.config" />
     <Content Include="WebApp\CSS\creative.css" />
     <Content Include="WebApp\CSS\creative.min.css" />
-    <Content Include="WebApp\gulpfile.js" />
     <Content Include="WebApp\HtmlPageTest.html" />
     <Content Include="WebApp\HTML\index.html" />
     <Content Include="WebApp\HTML\LoginPage.html" />
@@ -125,6 +124,7 @@
     <Content Include="WebApp\img\thankyou.jpg" />
     <Content Include="WebApp\JS\creative.js" />
     <Content Include="WebApp\JS\creative.min.js" />
+    <Content Include="WebApp\JS\gulpfile.js" />
     <Content Include="WebApp\JS\SignIn.js" />
     <Content Include="WebApp\JS\MainPage.js" />
     <Content Include="WebApp\JS\Platform.js" />

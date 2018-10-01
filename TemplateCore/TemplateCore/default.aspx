@@ -8,12 +8,12 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="WebApp/JS/Platform.js"></script>
     <script src="WebApp/JS/Utill.js"></script>
-    <script src="WebApp/JS/Login.js"></script>
     <script src="WebApp/JS/MainPage.js"></script>
-
+    <script src="WebApp/JS/SignIn.js"></script>
 
 <%--     CSS --%>
-    <link href="WebApp/CSS/LogIn/Login.css" rel="stylesheet" />
+    <link href="WebApp/CSS/creative.css" rel="stylesheet" />
+    <link href="WebApp/CSS/creative.min.css" rel="stylesheet" />
     <title>Template Core</title>
 </head>
 <body>
