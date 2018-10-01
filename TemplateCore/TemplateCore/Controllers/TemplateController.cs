@@ -157,6 +157,19 @@ namespace TemplateCore.Controllers
             }
         }
 
+        [HttpPost]
+        public dynamic GenerateHTMLTemplateWithValues([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var generatedTemplate = appEngine.GenerateHTMLTemplateWithValues(requestBody.Data.Template.Value);
+                return SetSuccessResponce(generatedTemplate);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
 
 
 
