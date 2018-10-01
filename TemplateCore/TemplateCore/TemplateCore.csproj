@@ -89,6 +89,7 @@
     <Content Include="WebApp\CSS\creative.min.css" />
     <Content Include="WebApp\gulpfile.js" />
     <Content Include="WebApp\HtmlPageTest.html" />
+    <Content Include="WebApp\HTML\LoginPage.html" />
     <Content Include="WebApp\Images\ALL_TEAM.jpg" />
     <Content Include="WebApp\Images\hand-writing.jpg" />
     <Content Include="WebApp\Images\hand_writing_2.jpg" />
@@ -126,6 +127,7 @@
     <Content Include="WebApp\JS\creative.min.js" />
     <Content Include="WebApp\JS\Login.js" />
     <Content Include="WebApp\JS\Platform.js" />
+    <Content Include="WebApp\JS\Utill.js" />
     <Content Include="WebApp\signIn.html" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.min.css" />
@@ -230,7 +232,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="WebApp\HTML\" />
     <Folder Include="WebApp\scss\" />
   </ItemGroup>
   <ItemGroup>
