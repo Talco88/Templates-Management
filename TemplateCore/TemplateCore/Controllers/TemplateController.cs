@@ -73,6 +73,92 @@ namespace TemplateCore.Controllers
             }
         }
 
+        [HttpPost]
+        public dynamic RateTamplate([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var rateResponce = appEngine.RateTamplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, requestBody.Data.RateNumber.Value);
+                return SetSuccessResponce(rateResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic AddCommentToTemplate([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var addComentResponce = appEngine.AddCommentToTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name, requestBody.Data.Comment.Value);
+                return SetSuccessResponce(addComentResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic SetSharedTemplate([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var setSheredResponce = appEngine.SetSharedTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name, requestBody.Data.IsShared.Value);
+                return SetSuccessResponce(setSheredResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic DeleteTemplate([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var deleteResponce = appEngine.DeleteTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                return SetSuccessResponce(deleteResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic MarkTemplateAsFavorite([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var favoritResponce = appEngine.MarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                return SetSuccessResponce(favoritResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic RemoveMarkTemplateAsFavorite([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var favoritResponce = appEngine.RemoveMarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                return SetSuccessResponce(favoritResponce);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+
+
 
 
         [HttpPost]
