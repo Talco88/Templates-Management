@@ -51,7 +51,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception e)
             {
-                throw new Exception("Error during GetTemplate: " + e.Message);
+                throw new Exception($"Error during GetTemplate: {e.Message}");
             }
         }
 
