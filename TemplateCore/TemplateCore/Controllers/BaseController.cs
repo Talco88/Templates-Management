@@ -28,6 +28,16 @@ namespace TemplateCore.Controllers
             return "value";
         }
 
+        protected void RemovePrincipal()
+        {
+            HttpContext.Current.User = null;
+        }
+
+        protected bool isUserLogedOn()
+        {
+            return (HttpContext.Current.User != null);
+        }
+
         protected void SetPrincipal(string iUserMail, bool iIsAdmin)
         {
             var principal = createUserIdentety(iUserMail, iIsAdmin);

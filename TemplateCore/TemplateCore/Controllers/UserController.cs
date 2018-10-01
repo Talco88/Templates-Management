@@ -79,8 +79,7 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.IsLogedOn(requestBody.Data.Email.Value);
-                HttpContext.Current.Session[SESSION_USER_EMAIL] = null;
-                return SetSuccessResponce(user);
+                return SetSuccessResponce(isUserLogedOn());
             }
             catch (Exception ex)
             {
@@ -94,6 +93,7 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.LogOut(requestBody.Data.Email.Value);
+                RemovePrincipal();
                 return SetSuccessResponce(user);
             }
             catch (Exception ex)
