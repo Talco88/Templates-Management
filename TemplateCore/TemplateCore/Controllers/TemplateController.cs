@@ -72,5 +72,21 @@ namespace TemplateCore.Controllers
                 return SetExceptionResponce(ex);
             }
         }
+
+
+
+        [HttpPost]
+        [Authorize(Roles = "Administrators")]
+        public dynamic AdminStuff([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                return SetSuccessResponce("you are admin!");
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
     }
 }
