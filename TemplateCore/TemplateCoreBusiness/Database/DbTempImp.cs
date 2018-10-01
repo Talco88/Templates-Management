@@ -65,12 +65,12 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
-        public List<string> SearchTemplate(string iSearchKey)
+        public List<string> SearchTemplate(string iSearchKey, bool isAdmin = false, string iUserEmail = "")
         {
             try
             {
                 openConnection();
-                return getSearchedTemplates(iSearchKey);
+                return getSearchedTemplates(iSearchKey, isAdmin, iUserEmail);
             }
             finally
             {
@@ -347,7 +347,7 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
-        private List<string> getSearchedTemplates(string iSearchKey)
+        private List<string> getSearchedTemplates(string iSearchKey, bool isAdmin, string iUserEmail)
         {
             if (m_connection != null)
             {
@@ -355,8 +355,8 @@ namespace TemplateCoreBusiness.Database
                 {
                     command.Connection = m_connection;
                     command.CommandType = CommandType.Text;
-                    string insertMessage =
-                        $"SELECT distinct {m_TemplateColumns[1]} from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE HeadName like '%{iSearchKey}%'";
+
+                    string insertMessage = getInsertMessageForSearchTamplate(iSearchKey, isAdmin, iUserEmail);
                     command.CommandText = insertMessage;
                     SqlDataReader reader = command.ExecuteReader();
                     List<string> retVal = new List<string>();
@@ -374,13 +374,28 @@ namespace TemplateCoreBusiness.Database
             }
         }
 
+        private string getInsertMessageForSearchTamplate(string iSearchKey, bool isAdmin, string iUserEmail)
+        {
+            string retVal;
+            if (isAdmin)
+            {
+                retVal = $"SELECT distinct {m_TemplateColumns[1]} from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE {m_TemplateColumns[1]} like '%{iSearchKey}%'";
+            }
+            else
+            {
+                retVal = $"SELECT distinct {m_TemplateColumns[1]} from [TemplateCore].[dbo].[{ListOfTables.Templates}] WHERE {m_TemplateColumns[1]} like '%{iSearchKey}%' and({m_TemplateColumns[2]} = '{iUserEmail}' or {m_TemplateColumns[7]} = 1)";
+            }
+
+            return retVal;
+        }
+
         private object[] getUserValues(UserEntity userEntity)
         {
             List<object> userList = new List<object>();
             userList.Add(userEntity.FirstName);
             userList.Add(userEntity.LastName);
-            userList.Add(userEntity.Email);
             userList.Add(userEntity.Password);
+            userList.Add(userEntity.Email);
             userList.Add(userEntity.CreationTime.ToString("yyyy-MM-dd HH:mm:ss"));
             userList.Add(userEntity.FavoriteTemplates);
             userList.Add(userEntity.IsAdmin);

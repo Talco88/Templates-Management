@@ -59,8 +59,8 @@ namespace TemplateCoreBusiness.Engine
             UserEntity retValEntity = new UserEntity();
             retValEntity.FirstName = iUserFirstName;
             retValEntity.LastName = iUserLastName;
-            retValEntity.Email = iUserEmail;
             retValEntity.Password = pass;
+            retValEntity.Email = iUserEmail;
             retValEntity.CreationTime = DateTime.Now;
             retValEntity.IsAdmin = isAdmin;
 
