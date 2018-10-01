@@ -10,6 +10,15 @@ mainPage.setPage = function () {
     }
 }
 
+mainPage.onPagedRecived = function () {
+    $("#MainAppWindow").html(Global_index_BaseHTMLData);
+
+    // all the btn registered here
+
+    let loginBtn = document.querySelector(".login-btn");
+    loginBtn.onclick = mainPage.onLoginClicked;
+}
+
 mainPage.onLoginClicked = function () {
     // do something when btn is clicked
     let email = document.querySelector('#loginEmail');
@@ -28,16 +37,6 @@ mainPage.nevigateToSignUpPage = function (iServerReturn) {
     if (iServerReturn.StatusCode != 0) {
         signIn.setPage(); // Go to LogIn page
     }
-}
-
-mainPage.onPagedRecived = function () {
-    $("#MainAppWindow").html(Global_index_BaseHTMLData);
-
-    // all the btn registered here
-
-
-    //let loginBtn = document.querySelector(".login-btn");
-    //loginBtn.onclick = mainPage.onLoginClicked;
 }
 
 mainPage.LoadLobbyPageRes = function (isSet) {
