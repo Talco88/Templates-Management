@@ -243,8 +243,7 @@ namespace TemplateCoreBusiness.Engine
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error during GenerateHTMLTemplateWithValues: " + e.Message);
-                throw;
+                throw new Exception("Error during GenerateHTMLTemplateWithValues: " + e.Message);
             }
         }
 
