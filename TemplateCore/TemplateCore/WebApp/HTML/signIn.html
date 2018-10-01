@@ -8,15 +8,15 @@
     <meta name="author" content="">
     <title>Template-Me-SignUp</title>
     <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="WebApp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="WebApp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
     <!-- Plugin CSS -->
-    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <link href="WebApp/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="WebApp/css/creative.min.css" rel="stylesheet">
 
     <style>
         body, html {
@@ -139,7 +139,7 @@
         <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
 
             <!--<div class="main-login main-center">-->
-            <form name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
+            <div name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
 
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Your Name</label>
@@ -209,7 +209,7 @@
                 <div class="form-group ">
                     <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                 </div>
-            </form>
+            </div>
         </div>
     </section>
     <a href="/login" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-sign-in"></span> Login</a>
@@ -276,7 +276,7 @@
                     <p>
                         <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
                     </p>
-                    <img class="img-circle" src="./img/logo.jpg" height="8" width="12"><br>
+                    <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
                 </div>
             </div>
         </div>

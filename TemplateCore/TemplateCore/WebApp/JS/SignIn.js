@@ -13,7 +13,7 @@ signIn.setPage = function () {
 signIn.onPagedRecived = function () {
     $("#MainAppWindow").html(Global_singIn_BaseHTMLData);
     let loginBtn = document.querySelector(".login-btn");
-    loginBtn.onclick = login.onLoginClicked;
+    loginBtn.onclick = signIn.onLoginClicked;
 }
 
 signIn.LoadLobbyPageRes = function (isSet) {
@@ -22,7 +22,7 @@ signIn.LoadLobbyPageRes = function (isSet) {
         dataType: 'text',
         success: function (data) {
             Global_singIn_BaseHTMLData = data;
-            login.onPagedRecived();
+            signIn.onPagedRecived();
         },
         error: function () {
             alert("error Loading Lobby Page");

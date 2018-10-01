@@ -31,6 +31,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="#page-top">Template-Me</a>
+        <a id="logged_in_username_text_field" class="navbar-brand page-scroll" href="/"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -121,7 +122,7 @@
         <div class="row no-gutters popup-gallery">
           <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="WebApp/img/birthday.jpg">
-              <img class="img-fluid" src="WebApp/img/birthday.jpg" alt="">
+              <img id="birthdayBtn" class="img-fluid" src="WebApp/img/birthday.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -285,11 +286,11 @@
                       <a class="psw" href="#">Forgot  password?</a>
                   </div>
               </div>
-              <form method="get" action="./signIn.html">
+              <div method="get" action="./signIn.html">
                   <div class="container" style="margin-left: 10%">
                       <button type="submit" style="width: 45%">Sign up</button>
                   </div>
-              </form>
+              </div>
           </div>
           <script>
     // Get the modal
@@ -306,43 +307,43 @@
 
         }
     }
-          </script>
-    <script>
-        var loggedInUser = "";
-        if(loggedInUser == ""){
-            //show login button, hide logout button:
-            document.getElementById("logout_button").style.display="none";
-            document.getElementById("login_button").style.display="block";
+</script>
+<script>
+    var loggedInUser = "";
+    if(loggedInUser == ""){
+        //show login button, hide logout button:
+        document.getElementById("logout_button").style.display="none";
+        document.getElementById("login_button").style.display="block";
 
-            // define user as guest:
-            document.getElementById("logged_in_username_text_field").textContent = "Guest";
+        // define user as guest:
+        document.getElementById("logged_in_username_text_field").textContent = "Guest";
 
-        }else{
-            document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
-            //show logout button, hide login button:
-            document.getElementById("logout_button").style.display="block";
-            document.getElementById("login_button").style.display="none";
+    }else{
+        document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
+        //show logout button, hide login button:
+        document.getElementById("logout_button").style.display="block";
+        document.getElementById("login_button").style.display="none";
 
-            var userRole = loggedInUser.role;
-            switch(userRole){
-                case "mall_manager":
-                case "store_manager":
-                    //hide shopping chart:
-                    document.getElementById("shopping_cart").style.display="none";
+        var userRole = loggedInUser.role;
+        switch(userRole){
+            case "mall_manager":
+            case "store_manager":
+                //hide shopping chart:
+                document.getElementById("shopping_cart").style.display="none";
 
-                    //hide search gifts:
-                    document.getElementById("search_gifts").style.display="none";
+                //hide search gifts:
+                document.getElementById("search_gifts").style.display="none";
 
-                    //hide about:
-                    document.getElementById("wishlists_label").style.display="none";
-                    break;
+                //hide about:
+                document.getElementById("wishlists_label").style.display="none";
+                break;
 
-                default:
-                    break;
-            }
+            default:
+                break;
         }
-      </script>
-      </div>
+    }
+    </script>
+    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="WebApp/vendor/jquery/jquery.min.js"></script>

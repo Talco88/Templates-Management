@@ -78,7 +78,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var user = userEngine.IsLogedOn(requestBody.Data.Email.Value);
+                //var user = userEngine.IsLogedOn(requestBody.Data.Email.Value);
                 return SetSuccessResponce(isUserLogedOn());
             }
             catch (Exception ex)

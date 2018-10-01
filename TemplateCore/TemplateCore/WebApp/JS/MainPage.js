@@ -17,6 +17,9 @@ mainPage.onPagedRecived = function () {
 
     let loginBtn = document.querySelector(".login-btn");
     loginBtn.onclick = mainPage.onLoginClicked;
+
+    let birthdayBtn = document.querySelector("#birthdayBtn");
+    birthdayBtn.onclick = mainPage.onCategoryClicked;
 }
 
 mainPage.onLoginClicked = function () {
@@ -37,6 +40,9 @@ mainPage.nevigateToSignUpPage = function (iServerReturn) {
     if (iServerReturn.StatusCode != 0) {
         signIn.setPage(); // Go to LogIn page
     }
+    else {
+        mainPage.setPage(); // Go again to Main page
+    }
 }
 
 mainPage.LoadLobbyPageRes = function (isSet) {
@@ -51,4 +57,27 @@ mainPage.LoadLobbyPageRes = function (isSet) {
             alert("error Loading Lobby Page");
         }
     });
+}
+
+mainPage.onCategoryClicked = function () {
+    mainPage.IsLoggedIn;
+}
+
+mainPage.IsLoggedIn = function () {
+    if (mainPage.isLoggedinParam === undefined) {
+        Platform.IsLogIn(mainPage.onIsloginCallback);
+    }
+    else {
+        if (mainPage.isLoggedinParam) {
+            birthdayCategory.setPage(); // Navigate to category
+        }
+        else {
+            signIn.setPage(); // Go to LogIn page
+        }
+    }
+}
+
+mainPage.onIsloginCallback = function (iResponse) {
+    mainPage.isLoggedinParam = iResponse.RetObject;
+    mainPage.IsLoggedIn();
 }
