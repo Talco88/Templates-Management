@@ -1,8 +1,8 @@
 ﻿var login = {};
-var Global_LoginPage_BaseHTMLData = "";
+var Global_index_BaseHTMLData = "";
 
 login.setPage = function () {
-    if(Global_LoginPage_BaseHTMLData === ""){
+    if(Global_index_BaseHTMLData === ""){
         login.LoadLobbyPageRes(true);
     }
     else{
@@ -11,41 +11,98 @@ login.setPage = function () {
 }
 
 login.onPagedRecived = function(){
-    $("#MainAppWindow").html(Global_LoginPage_BaseHTMLData);
+    $("#MainAppWindow").html(Global_index_BaseHTMLData);
     let loginBtn = document.querySelector(".login-btn");
     loginBtn.onclick = login.onLoginClicked;
 }
 
 login.onLoginClicked = function(){
     // do something when btn is clicked
-    Platform.LogIn("hardCodedUser", "passworddddd", login.onLoginResponce);
+    let email = document.querySelector('#loginEmail');
+    let pass = document.querySelector('#loginPass');
+    Platform.LogIn(email.value, pass.value, login.onLoginResponce);
 }
 
 login.onLoginResponce = function (iData){
-    console.log(iData);
+    login.nevigateToSignUpPage(iData);
+}
+
+login.nevigateToSignUpPage = function (iServerReturn) {
+    if (iServerReturn.Status != "OK") {
+        // Go to LogIn page
+        $.ajax({
+            url: "/WebApp/signIn.html",
+            dataType: 'text',
+            success: function (data) {
+                Global_index_BaseHTMLData = data;
+                login.onPagedRecived();
+            },
+            error: function () {
+                alert("error Loading SignIn Page");
+            }
+        });
+    }
+
+    if (iServerReturn.StatusCode != 0) {
+        // Go to LogIn page
+        $.ajax({
+            url: "/WebApp/signIn.html",
+            dataType: 'text',
+            success: function (data) {
+                Global_index_BaseHTMLData = data;
+                login.onPagedRecived();
+            },
+            error: function () {
+                alert("error Loading SignIn Page");
+            }
+        });
+    }
+
 }
 
 login.example = function(){
     Platform.SearchTemplate("some Keys", login.exampleReturnFunction);
 }
 
-login.exampleReturnFunction = function(iServerReturn){
+login.exampleReturnFunction = function (iServerReturn) {
     if (iServerReturn.Status != "OK"){
-        // Error?
+        // Go to LogIn page
+        $.ajax({
+            url: "/WebApp/signIn.html",
+            dataType: 'text',
+            success: function (data) {
+                Global_index_BaseHTMLData = data;
+                login.onPagedRecived();
+            },
+            error: function () {
+                alert("error Loading SignIn Page");
+            }
+        });
     }
 
     if (iServerReturn.StatusCode != 0){
-        // Error?
+        // Go to LogIn page
+        $.ajax({
+            url: "/WebApp/signIn.html",
+            dataType: 'text',
+            success: function (data) {
+                Global_index_BaseHTMLData = data;
+                login.onPagedRecived();
+            },
+            error: function () {
+                alert("error Loading SignIn Page");
+            }
+        });
     }
 
 }
 
 login.LoadLobbyPageRes = function (isSet) {
     $.ajax({
-        url: "/WebApp/HTML/LoginPage.html",
+        url: "/WebApp/index.html",
         dataType: 'text',
         success: function (data) {
-            Global_LoginPage_BaseHTMLData = data;
+            Global_index_BaseHTMLData = data;
             login.onPagedRecived();
         },
         error: function () {
