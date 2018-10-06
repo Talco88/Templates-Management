@@ -18,15 +18,23 @@ mainPage.onPagedRecived = function () {
     let loginBtn = document.querySelector(".login-btn");
     loginBtn.onclick = mainPage.onLoginClicked;
 
+    let signinBtn = document.querySelector(".signin-btn");
+    signinBtn.onclick = mainPage.onSignUpClicked;
+
     let birthdayBtn = document.querySelector("#birthdayBtn");
     birthdayBtn.onclick = mainPage.onCategoryClicked;
 }
 
 mainPage.onLoginClicked = function () {
-    // do something when btn is clicked
+    // do this when btn is clicked
     let email = document.querySelector('#loginEmail');
     let pass = document.querySelector('#loginPass');
     Platform.LogIn(email.value, pass.value, mainPage.onLoginResponce);
+}
+
+mainPage.onSignUpClicked = function () {
+    // do this when btn is clicked
+    signIn.setPage();
 }
 
 mainPage.onLoginResponce = function (iData) {

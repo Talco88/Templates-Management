@@ -30,7 +30,8 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Template-Me</a>
+        <a class="navbar-brand page-scroll" href="/">Template-Me</a>
+        <i class="fa fa-4x fa fa-pencil text-primary sr-icons"></i>
         <a id="logged_in_username_text_field" class="navbar-brand page-scroll" href="/"></a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -39,6 +40,9 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a id="login_button" class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display='block'" style="display: block;">Log In</a>
+            </li>
+            <li>
+                <a id="logout_button" class="page-scroll" href="/users/logout">Logout</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Services</a>
@@ -196,7 +200,7 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-6 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="WebApp/img/team/NATI.jpg" alt="">
+                            <img class="mx-auto rounded-circle" src="WebApp/img/team/NATI.JPG" alt="">
                             <h4>Nati Lehrer</h4>
                             <p class="text-muted">Lead UI Designer</p>
                                 <a href="https://www.linkedin.com/in/nati-lehrer-946421146/">
@@ -288,7 +292,7 @@
               </div>
               <div method="get" action="./signIn.html">
                   <div class="container" style="margin-left: 10%">
-                      <button type="submit" style="width: 45%">Sign up</button>
+                      <button class="signin-btn" type="submit" style="width: 45%">Sign up</button>
                   </div>
               </div>
           </div>

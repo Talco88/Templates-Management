@@ -102,6 +102,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#067c8d" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="index.html">Template-Me</a>
+            <i class="fa fa-4x fa fa-pencil text-primary sr-icons"></i>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -128,10 +129,9 @@
         <div class="container">
             <div class="imgcontainer">
                 <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
-                <!--<img class="img-circle" src="/img/gifter.jpg" alt="Avatar" class="avatar">-->
             </div>
             <div style="text-align: center">
-                <!--<i class="fa fa-4x fa fa-gift text-primary sr-icons"></i>-->
+                <h1 style="color: #808080" class="card-title">OOPS! You didn't sign up yet </h1>
                 <h1 style="color: #067c8d" class="title">TemplateMe Sign Up </h1>
                 <hr />
             </div>
@@ -140,7 +140,7 @@
 
             <!--<div class="main-login main-center">-->
             <div name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
-
+                <br>
                 <div class="form-group">
                     <label for="name" class="cols-sm-2 control-label">Your Name</label>
                     <div class="cols-sm-10">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <div class="form-group">
                     <label for="email" class="cols-sm-2 control-label">Your Email</label>
                     <div class="cols-sm-10">
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                 </div>
-           
+                <br>
                 <div class="form-group">
                     <label for="age" class="cols-sm-2 control-label">Your Gender</label>
                     <div class="cols-sm-10">
@@ -176,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="username" class="cols-sm-2 control-label">Username</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
@@ -184,8 +184,8 @@
                             <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" required />
                         </div>
                     </div>
-                </div>
-
+                </div>-->
+                <br>
                 <div class="form-group">
                     <label for="password" class="cols-sm-2 control-label">Password</label>
                     <div class="cols-sm-10">
@@ -195,7 +195,7 @@
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <div class="form-group">
                     <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
                     <div class="cols-sm-10">
@@ -205,15 +205,16 @@
                         </div>
                     </div>
                 </div>
-
+                <br><br>
                 <div class="form-group ">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+                    <button id="register-btn" type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                 </div>
             </div>
         </div>
     </section>
-    <a href="/login" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-sign-in"></span> Login</a>
-    <a href="/signup" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-user"></span> Signup</a>
+    <a href="/login" class="btn btn-default" style="background-color: #d3d3d3">
+    <span class="fa fa-sign-in"></span>Login</a>
+    <!--<a href="/signup" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-user"></span> Signup</a>-->
 
     <script type="text/javascript">
     function validationUserInput()
