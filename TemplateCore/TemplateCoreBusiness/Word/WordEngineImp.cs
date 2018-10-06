@@ -17,6 +17,8 @@ namespace TemplateCoreBusiness.Word
 {
     public class WordEngineImp : IWordEngine
     {
+        private const string UNNECESSARY_PATH = "C:\\inetpub\\wwwroot";
+
         //TODO: implement Docx from real db template and not from default
         public string createTemplateInWord(string iTamplateName, string iTemlateContent)
         {
@@ -31,11 +33,7 @@ namespace TemplateCoreBusiness.Word
             bool exists = Directory.Exists(@fielsDirectory);
             if (!exists)
             {
-                DirectorySecurity securityRules = new DirectorySecurity();
-                securityRules.AddAccessRule(new FileSystemAccessRule(@"Administrator", FileSystemRights.Read, AccessControlType.Allow));
-                securityRules.AddAccessRule(new FileSystemAccessRule(@"Administrator", FileSystemRights.Write, AccessControlType.Allow));
-                securityRules.AddAccessRule(new FileSystemAccessRule(@"Administrator", FileSystemRights.Delete, AccessControlType.Allow));
-                Directory.CreateDirectory(@fielsDirectory, securityRules);
+                Directory.CreateDirectory(@fielsDirectory);
             }
 
             string fileName = @fielsDirectory + $"/{iTamplateName}.docx";
@@ -87,7 +85,7 @@ namespace TemplateCoreBusiness.Word
             // Save to the output directory:
             doc.Save();
             string serverIp = getLocalIPAddress();
-            string newValue = Path.GetFullPath(fileName).Replace("C:", serverIp);
+            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
             return newValue;
         }
 

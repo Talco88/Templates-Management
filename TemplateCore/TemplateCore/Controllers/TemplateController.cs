@@ -22,7 +22,8 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value);
+                //TODO: replace the empty string with the real name of the template
+                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value, "");
                 return SetSuccessResponce(template);
             }
             catch (Exception ex)
