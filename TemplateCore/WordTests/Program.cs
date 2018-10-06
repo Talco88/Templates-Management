@@ -94,8 +94,8 @@ namespace WordTests
                 */
 
                 //Office
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("orrr", "afaeaeg"));
-                Console.WriteLine();
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("orrr", "afaeaeg"));
+                //Console.WriteLine();
             }
             catch (Exception ex)
             {

@@ -230,10 +230,17 @@ namespace TemplateCoreBusiness.Engine
         
         public string OpenTemplateInWord(string iTamplateName, string iTemlateContent)
         {
-            return WordEngineFactory.GetDbInstance().createTemplateInWord(iTamplateName, iTemlateContent);
+            try
+            {
+                string updatedTemplate = TemplateSignsConvertor.switchSignsInTemplateForWord(iTemlateContent);
+                return WordEngineFactory.GetDbInstance().createTemplateInWord(iTamplateName, updatedTemplate);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error during OpenTemplateInWord: " + e.Message);
+            }
         }
 
-        //TODO: translate to Html sign
         public string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate)
         {
             try
@@ -241,8 +248,8 @@ namespace TemplateCoreBusiness.Engine
                 TemplateEntity templateEntity = DataBaseFactory.GetDbInstance().GetTemplateEntity(iTemplate.CategoryName, iTemplate.HeaderName);
                 Dictionary<string, object> templateData =  templateEntity.TemplateData;
                 string template = switchValuesInTemplate(templateData["Template"].ToString(), iTemplate.Values);
+                template = TemplateSignsConvertor.switchSignsInTemplateForHtml(template);
 
-                //TODO: translate to Html sign
                 return template;
             }
             catch (Exception e)
