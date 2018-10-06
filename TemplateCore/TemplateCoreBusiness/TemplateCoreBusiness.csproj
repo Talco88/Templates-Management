@@ -74,7 +74,10 @@
     <Compile Include="Models\TemplateEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebAppData\WebDataContainer.cs" />
+    <Compile Include="Word\IWordEngine.cs" />
     <Compile Include="Word\Test.cs" />
+    <Compile Include="Word\WordEngineFactory.cs" />
+    <Compile Include="Word\WordEngineImp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

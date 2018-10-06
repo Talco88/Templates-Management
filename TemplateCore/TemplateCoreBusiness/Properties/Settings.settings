@@ -26,5 +26,8 @@
     <Setting Name="TOPIC_COLUMN" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Category,Header</Value>
     </Setting>
+    <Setting Name="FIELS_DIRECTORY" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\inetpub\wwwroot\TemplateCore</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
