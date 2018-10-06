@@ -142,11 +142,21 @@
             <div name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
                 <br>
                 <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <label for="name" class="cols-sm-2 control-label">Your First Name</label>
                     <div class="cols-sm-10">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" required />
+                            <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter your First Name" required />
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Your Last Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter your Last Name" required />
                         </div>
                     </div>
                 </div>
@@ -195,7 +205,7 @@
                         </div>
                     </div>
                 </div>
-                <br>
+
                 <div class="form-group">
                     <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
                     <div class="cols-sm-10">
@@ -212,8 +222,7 @@
             </div>
         </div>
     </section>
-    <a href="/login" class="btn btn-default" style="background-color: #d3d3d3">
-    <span class="fa fa-sign-in"></span>Login</a>
+    <a href="/login" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-sign-in"></span>Login</a>
     <!--<a href="/signup" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-user"></span> Signup</a>-->
 
     <script type="text/javascript">

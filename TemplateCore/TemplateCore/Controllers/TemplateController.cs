@@ -22,7 +22,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value);
+                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value, "");
                 return SetSuccessResponce(template);
             }
             catch (Exception ex)
