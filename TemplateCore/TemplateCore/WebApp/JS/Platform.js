@@ -25,11 +25,9 @@ Platform.LogIn = function (iEmail, iPassword, iResponseFunc) {
     Platform.getDataFRomServer("User/Login", dataWrapper, iResponseFunc);
 }
 
-Platform.IsLogIn = function (iEmail, iResponseFunc) {
+Platform.IsLogIn = function (iResponseFunc) {
     var dataWrapper = {
-        Data: {
-            Email: iEmail
-        }
+        Data: { }
     };
     Platform.getDataFRomServer("User/IsLogin", dataWrapper, iResponseFunc);
 }
