@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using TemplateCoreBusiness.Database;
 using TemplateCoreBusiness.Models;
-using Xceed.Words.NET;
+using TemplateCoreBusiness.Word;
 
 namespace TemplateCoreBusiness.Engine
 {
@@ -231,10 +227,18 @@ namespace TemplateCoreBusiness.Engine
                 throw new Exception($"Failed to mark template as favorite: {ex.Message}");
             }
         }
-
-        public DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent)
+        
+        public string OpenTemplateInWord(string iTamplateName, string iTemlateContent)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string updatedTemplate = TemplateSignsConvertor.switchSignsInTemplateForWord(iTemlateContent);
+                return WordEngineFactory.GetDbInstance().createTemplateInWord(iTamplateName, updatedTemplate);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error during OpenTemplateInWord: " + e.Message);
+            }
         }
 
         public string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate)
@@ -244,7 +248,7 @@ namespace TemplateCoreBusiness.Engine
                 TemplateEntity templateEntity = DataBaseFactory.GetDbInstance().GetTemplateEntity(iTemplate.CategoryName, iTemplate.HeaderName);
                 Dictionary<string, object> templateData =  templateEntity.TemplateData;
                 string template = switchValuesInTemplate(templateData["Template"].ToString(), iTemplate.Values);
-                
+                template = TemplateSignsConvertor.switchSignsInTemplateForHtml(template);
 
                 return template;
             }

@@ -71,8 +71,8 @@ namespace WordTests
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().GenerateHTMLTemplateWithValues(CreateTemplateFormation()));
                 //Console.WriteLine();
 
-                TemplateFormation templateFormation = AppEngineBuilder.GetAppEngine().GetTemplate("ברכות", "יום הולדת");
-                Console.WriteLine();
+                //TemplateFormation templateFormation = AppEngineBuilder.GetAppEngine().GetTemplate("ברכות", "יום הולדת");
+                //Console.WriteLine();
                 /*
                 //Console.WriteLine(AppEngineBuilder.GetAppEngine().RateTamplate("כללי", "טלוויזיה", 2));
                 //Console.WriteLine();
@@ -92,6 +92,10 @@ namespace WordTests
                 Console.WriteLine(AppEngineBuilder.GetAppEngine().SetSharedTemplate("כללי", "שלט חוצות", "chen@gmail.com", true));
                 Console.WriteLine();
                 */
+
+                //Office
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("orrr", "afaeaeg"));
+                //Console.WriteLine();
             }
             catch (Exception ex)
             {

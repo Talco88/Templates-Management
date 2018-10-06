@@ -94,5 +94,14 @@ namespace TemplateCoreBusiness.Properties {
                 return ((string)(this["TOPIC_COLUMN"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\inetpub\\wwwroot\\TemplateCore")]
+        public string FIELS_DIRECTORY {
+            get {
+                return ((string)(this["FIELS_DIRECTORY"]));
+            }
+        }
     }
 }
