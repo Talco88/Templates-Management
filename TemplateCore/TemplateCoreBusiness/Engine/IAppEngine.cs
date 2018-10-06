@@ -11,7 +11,7 @@ namespace TemplateCoreBusiness.Engine
     public interface IAppEngine
     {
         string GenerateTemplate();
-        TemplateFormation GetTemplate(string iTemplateName);
+        TemplateFormation GetTemplate(string iCategoryName, string iTemplateName);
         List<string> GetTemplateFromSearch(string iSearchKey, bool isAdmin = false, string iUserEmail = "");
         string CreateNewTemplate(string iData, string iTemplateName, string iUserEmail,string iCategory, bool isShared = false);
         string CreateNewTopic(string iCategoryName, string iHeaderName);
@@ -23,10 +23,10 @@ namespace TemplateCoreBusiness.Engine
         string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber);
         string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail, string iComment);
         string SetSharedTemplate(string iCategoryName, string iTemplateName, string iUserEmail, bool isShared);
-        string InsertValuesToTemplate(string iTamplateName, string iValues);
         string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail);
         string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         DocX OpenTemplateInWord(string iTamplateName, string iTemlateContent);
+        string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate);
     }
 }

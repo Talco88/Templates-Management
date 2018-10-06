@@ -77,6 +77,82 @@ Platform.GetTopicsInCategory = function (iCategoryName, iResponseFunc) {
     Platform.getDataFRomServer("Template/GetTopicsInCategory", dataWrapper, iResponseFunc);
 }
 
+Platform.RateTamplate = function (iCategoryName, iTemplateName, iRateNumber, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName,
+            RateNumber: iRateNumber
+        }
+    };
+    Platform.getDataFRomServer("Template/RateTamplate", dataWrapper, iResponseFunc);
+}
+
+Platform.AddCommentToTemplate = function (iCategoryName, iTemplateName, iComment, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName,
+            Comment: iComment
+        }
+    };
+    Platform.getDataFRomServer("Template/AddCommentToTemplate", dataWrapper, iResponseFunc);
+}
+
+Platform.SetSharedTemplate = function (iCategoryName, iTemplateName, iIsShared, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName,
+            IsShared: iIsShared
+        }
+    };
+    Platform.getDataFRomServer("Template/SetSharedTemplate", dataWrapper, iResponseFunc);
+}
+
+Platform.DeleteTemplate = function (iCategoryName, iTemplateName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName
+        }
+    };
+    Platform.getDataFRomServer("Template/DeleteTemplate", dataWrapper, iResponseFunc);
+}
+
+Platform.MarkTemplateAsFavorite = function (iCategoryName, iTemplateName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName
+        }
+    };
+    Platform.getDataFRomServer("Template/MarkTemplateAsFavorite", dataWrapper, iResponseFunc);
+}
+
+Platform.RemoveMarkTemplateAsFavorite = function (iCategoryName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            TemplateName: iTemplateName
+        }
+    };
+    Platform.getDataFRomServer("Template/RemoveMarkTemplateAsFavorite", dataWrapper, iResponseFunc);
+}
+
+Platform.GenerateHTMLTemplateWithValues = function (iHeaderName, iCategoryName, Values, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            Template: {
+                HeaderName: iHeaderName,
+                CategoryName: iCategoryName,
+                Values: iValues
+            }
+        }
+    };
+    Platform.getDataFRomServer("Template/GenerateHTMLTemplateWithValues", dataWrapper, iResponseFunc);
+}
+
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
     var url = Platform.serverURL + path;

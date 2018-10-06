@@ -39,12 +39,15 @@ namespace TemplateCoreBusiness.Word
             string ser = JsonConvert.SerializeObject(obj);
             Console.WriteLine("this is the serilized obj: \n" + ser);
 
+            Console.WriteLine("template: " + obj.Template);
+            
             string fileName = @"C:\Users\orhor\Desktop\myfolder\DocXExample.docx";
             var doc = DocX.Create(fileName);
             CultureInfo english = new CultureInfo("en-US");
             CultureInfo hebrew = new CultureInfo("he-IL");
             string headlineText = "Example";
 
+            
             // A formatting object for our headline:
             var headLineFormat = new Xceed.Words.NET.Formatting();
             headLineFormat.FontFamily = new Font("Arial Black");
@@ -58,27 +61,27 @@ namespace TemplateCoreBusiness.Word
             // A formatting object for our normal paragraph text:
             Paragraph p1 = doc.InsertParagraph();
             p1.Alignment = Alignment.right;
-            p1.Append("אור ");
+            p1.Append("אור הורוביץ\n");
+            p1.Append(" וטל");
+            p1.FontSize(18);
             p1.Culture(hebrew);
-            p1.Append("הורוביץ").Bold();
-            p1.Culture(hebrew);
-            p1.Append(" וטל כהן.");
-            p1.Culture(hebrew);
+            p1.Bold();
+            p1.Color(Color.Blue);
+            p1.Append(" כהן.");
 
             Paragraph p2 = doc.InsertParagraph();
-            p2.Direction = Direction.LeftToRight;
             p2.Alignment = Alignment.left;
             p2.AppendLine("Can you help \nme figure it out?");
             p2.Culture(english);
 
             Console.WriteLine();
-            /*
+            
             var paraFormat = new Xceed.Words.NET.Formatting();
             paraFormat.FontFamily = new Font("Calibri");
             paraFormat.Size = 10D;
             paraFormat.Bold = true;
             paraFormat.UnderlineStyle = UnderlineStyle.singleLine;
-            */
+            
 
             // Insert the now text obejcts;
             //doc.InsertParagraph(obj.Template, false, paraFormat);
@@ -89,8 +92,7 @@ namespace TemplateCoreBusiness.Word
 
             // Open in Word:
             Process.Start("WINWORD.EXE", fileName);
-
-
+            
             Console.ReadKey();
         }
     }
