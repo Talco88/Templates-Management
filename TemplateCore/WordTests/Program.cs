@@ -26,6 +26,8 @@ namespace WordTests
                 //CreateTopics();
                 //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
+                //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
+                //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
                 /*
                 AppEngineBuilder.GetAppEngine().CreateNewTemplate("טל", "שלטים", "talCo@gmail.com", "כללי");
                 
@@ -94,7 +96,7 @@ namespace WordTests
                 */
 
                 //Office
-                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("orrr", "afaeaeg"));
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("shani", "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>"));
                 //Console.WriteLine();
             }
             catch (Exception ex)

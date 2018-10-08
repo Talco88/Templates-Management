@@ -13,30 +13,240 @@ namespace TemplateCoreBusiness.Word
     public class WordEngineImp : IWordEngine
     {
         private const string UNNECESSARY_PATH = "C:\\inetpub\\wwwroot";
+        private string FILES_DIRECTORY = Settings.Default.FIELS_DIRECTORY;
+        private CultureInfo english = new CultureInfo("en-US");
+        private CultureInfo hebrew = new CultureInfo("he-IL");
+        private ParagraphProperties m_ParagraphProperties = new ParagraphProperties();
 
-        //TODO: implement Docx from real db template and not from default
         public string createTemplateInWord(string iTamplateName, string iTemlateContent)
         {
-            return getDefaultDocxLink(iTamplateName);
+            try
+            {
+                createDirectory();
+                return createDocumentFromTemplate(iTamplateName, iTemlateContent);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error during createTemplateInWord: {e.Message}");
+            }
+            
+            //return getDefaultDocxLink(iTamplateName);
+        }
+
+        private void createDirectory()
+        {
+            bool exists = Directory.Exists(@FILES_DIRECTORY);
+            if (!exists)
+            {
+                Directory.CreateDirectory(@FILES_DIRECTORY);
+            }
+        }
+
+        private string createDocumentFromTemplate(string iTamplateName, string iTemlateContent)
+        {
+            string fileName = @FILES_DIRECTORY + $"/{iTamplateName}.docx";
+            DocX doc = DocX.Create(fileName);
+
+            Paragraph paragraph = doc.InsertParagraph();
+            bool isFirst = true;
+            string appendContent = "";
+            string templateCopy = iTemlateContent;
+            int index = 0;
+            int remainingSize = iTemlateContent.Length;
+            while (remainingSize != 0)
+            {
+                int indexOfStart = templateCopy.IndexOf('<');
+                if (indexOfStart == 0)
+                {
+                    int indexOfClose = templateCopy.IndexOf('>');
+                    string properties = templateCopy.Substring(indexOfStart + 1, indexOfClose - indexOfStart - 1);
+                    switch (properties)
+                    {
+                        case "b":
+                        {
+                            m_ParagraphProperties.IsBold = true;
+                            break;
+                        }
+                        case "/b":
+                        {
+                            m_ParagraphProperties.IsBold = false;
+                            break;
+                        }
+                        case "p":
+                        {
+                            createNewParagrapg(ref doc, ref paragraph, ref isFirst);
+                            break;
+                        }
+                        case "/p":
+                        {
+                            createNewParagrapg(ref doc, ref paragraph, ref isFirst);
+                            break;
+                        }
+                        default:
+                        {
+                            updateParagraphProperties(properties, ref isFirst);
+                            break;
+                        }
+                    }
+
+                    index = indexOfClose + 1;
+                }
+                else
+                {
+                    appendContent = templateCopy.Substring(0, indexOfStart);
+                    finishAppend(ref paragraph, appendContent);
+                    index = indexOfStart;
+                }
+
+                remainingSize = remainingSize - index;
+                templateCopy = templateCopy.Substring(index, remainingSize);
+            }
+
+            // Save to the output directory:
+            doc.Save();
+            string serverIp = getLocalIPAddress();
+            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
+            return newValue;
+        }
+
+        private void updateParagraphProperties(string i_StringProperties, ref bool i_IsFirst)
+        {
+            if (i_StringProperties[0].Equals('p'))
+            {
+                i_IsFirst = false;
+                updateAlignment(i_StringProperties);
+                updateColor(i_StringProperties);
+                updateFontSize(i_StringProperties);
+            }
+        }
+
+        private void updateFontSize(string i_StringProperties)
+        {
+            int indexOfFontSize = i_StringProperties.IndexOf("font-size");
+            if (indexOfFontSize != -1)
+            {
+                string afterFontSize = i_StringProperties.Substring(indexOfFontSize);
+                int indexFirst = afterFontSize.IndexOf(':');
+                string cutOne = afterFontSize.Substring(indexFirst + 1);
+                int indexLast = cutOne.IndexOf("px;");
+                string fontSizeValue = afterFontSize.Substring(indexFirst + 1, indexLast);
+                try
+                {
+                    m_ParagraphProperties.FontSize = int.Parse(fontSizeValue);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Error during parse font size {e.Message}");
+                }
+            }
+        }
+
+        private void updateColor(string i_StringProperties)
+        {
+            int indexOfColor = i_StringProperties.IndexOf("color");
+            if (indexOfColor != -1)
+            {
+                string afterColor = i_StringProperties.Substring(indexOfColor);
+                int indexFirst = afterColor.IndexOf(':');
+                string cutOne = afterColor.Substring(indexFirst + 1);
+                int indexLast = cutOne.IndexOf(';');
+                string colorValue = afterColor.Substring(indexFirst + 1, indexLast);
+                switch (colorValue)
+                {
+                    case "green":
+                    {
+                        m_ParagraphProperties.TextColor = Color.Green;
+                        break;
+                    }
+                    case "red":
+                    {
+                        m_ParagraphProperties.TextColor = Color.Red;
+                        break;
+                    }
+                    case "blue":
+                    {
+                        m_ParagraphProperties.TextColor = Color.Blue;
+                        break;
+                    }
+                    case "yellow":
+                    {
+                        m_ParagraphProperties.TextColor = Color.Yellow;
+                        break;
+                    }
+                    default:
+                    {
+                        m_ParagraphProperties.TextColor = Color.Black;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void updateAlignment(string i_StringProperties)
+        {
+            int indexOfAlign = i_StringProperties.IndexOf("align");
+            if (indexOfAlign != -1)
+            {
+                string afterAlign = i_StringProperties.Substring(indexOfAlign);
+                int indexFirst = afterAlign.IndexOf('\"');
+                string cutOne = afterAlign.Substring(indexFirst + 1);
+                int indexLast = cutOne.IndexOf('\"');
+                string alignValue = afterAlign.Substring(indexFirst + 1, indexLast);
+                if (alignValue.Equals("right"))
+                {
+                    m_ParagraphProperties.IsRight = true;
+                }
+                else
+                {
+                    m_ParagraphProperties.IsRight = false;
+                }
+            }
+        }
+
+        private void createNewParagrapg(ref DocX i_Doc, ref Paragraph i_Paragraph, ref bool i_IsFirst)
+        {
+            if (!i_IsFirst)
+            {
+                i_Paragraph = i_Doc.InsertParagraph();
+            }
+            else
+            {
+                i_IsFirst = false;
+            }
+        }
+
+        private void finishAppend(ref Paragraph i_Paragraph, string i_Content)
+        {
+            i_Paragraph.Append(i_Content);
+            i_Paragraph.Color(m_ParagraphProperties.TextColor);
+            i_Paragraph.FontSize(m_ParagraphProperties.FontSize);
+
+            if (m_ParagraphProperties.IsBold)
+            {
+                i_Paragraph.Bold();
+            }
+
+            if (m_ParagraphProperties.IsRight)
+            {
+                i_Paragraph.Culture(hebrew);
+                i_Paragraph.Alignment = Alignment.right;
+            }
+
+            else
+            {
+                i_Paragraph.Culture(english);
+                i_Paragraph.Alignment = Alignment.left;
+            }
         }
 
         [Obsolete]
         //This function is for tests only
         private string getDefaultDocxLink(string iTamplateName)
         {
-            string fielsDirectory = Settings.Default.FIELS_DIRECTORY;
-            bool exists = Directory.Exists(@fielsDirectory);
-            if (!exists)
-            {
-                Directory.CreateDirectory(@fielsDirectory);
-            }
-
-            string fileName = @fielsDirectory + $"/{iTamplateName}.docx";
+            string fileName = @FILES_DIRECTORY + $"/{iTamplateName}.docx";
             DocX doc = DocX.Create(fileName);
-            CultureInfo english = new CultureInfo("en-US");
-            CultureInfo hebrew = new CultureInfo("he-IL");
-            string headlineText = "Example";
 
+            string headlineText = "Example";
 
             // A formatting object for our headline:
             var headLineFormat = new Xceed.Words.NET.Formatting();
@@ -53,11 +263,12 @@ namespace TemplateCoreBusiness.Word
             p1.Alignment = Alignment.right;
             p1.Append("אור הורוביץ\n");
             p1.Append(" וטל");
+            p1.Append(" כהן.");
             p1.FontSize(18);
             p1.Culture(hebrew);
             p1.Bold();
             p1.Color(Color.Blue);
-            p1.Append(" כהן.");
+
 
             Paragraph p2 = doc.InsertParagraph();
             p2.Alignment = Alignment.left;
@@ -94,7 +305,16 @@ namespace TemplateCoreBusiness.Word
                     return ip.ToString();
                 }
             }
+
             throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
+
+        private class ParagraphProperties
+        {
+            public bool IsBold { get; set; } = false;
+            public bool IsRight { get; set; } = false;
+            public Color TextColor { get; set; } = Color.Black;
+            public int FontSize { get; set; } = 12;
         }
     }
 }

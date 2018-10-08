@@ -25,8 +25,7 @@ namespace TemplateCoreBusiness.Engine
             }
             else
             {
-                string message = $"The password for the email: {iEmail} is incorrect";
-                throw new Exception(message);
+                throw new Exception($"The password for the email: {iEmail} is incorrect");
             }
         }
 

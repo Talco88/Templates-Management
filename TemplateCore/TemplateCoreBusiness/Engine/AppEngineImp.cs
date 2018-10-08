@@ -232,8 +232,7 @@ namespace TemplateCoreBusiness.Engine
         {
             try
             {
-                string updatedTemplate = TemplateSignsConvertor.switchSignsInTemplateForWord(iTemlateContent);
-                return WordEngineFactory.GetDbInstance().createTemplateInWord(iTamplateName, updatedTemplate);
+                return WordEngineFactory.GetDbInstance().createTemplateInWord(iTamplateName, iTemlateContent);
             }
             catch (Exception e)
             {
@@ -248,7 +247,6 @@ namespace TemplateCoreBusiness.Engine
                 TemplateEntity templateEntity = DataBaseFactory.GetDbInstance().GetTemplateEntity(iTemplate.CategoryName, iTemplate.HeaderName);
                 Dictionary<string, object> templateData =  templateEntity.TemplateData;
                 string template = switchValuesInTemplate(templateData["Template"].ToString(), iTemplate.Values);
-                template = TemplateSignsConvertor.switchSignsInTemplateForHtml(template);
 
                 return template;
             }

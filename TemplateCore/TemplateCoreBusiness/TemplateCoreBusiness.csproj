@@ -58,7 +58,6 @@
     <Compile Include="Engine\AppEngineImp.cs" />
     <Compile Include="Engine\IAppEngine.cs" />
     <Compile Include="Engine\IUserEngine.cs" />
-    <Compile Include="Engine\TemplateSignsConvertor.cs" />
     <Compile Include="Engine\UserEngineBuilder.cs" />
     <Compile Include="Engine\UserEngineImp.cs" />
     <Compile Include="Models\TopicEntity.cs" />
