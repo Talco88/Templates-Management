@@ -17,8 +17,22 @@ namespace TemplateCoreBusiness.Word
         private CultureInfo english = new CultureInfo("en-US");
         private CultureInfo hebrew = new CultureInfo("he-IL");
         private ParagraphProperties m_ParagraphProperties = new ParagraphProperties();
+        private const string OPEN_BOLD = "b";
+        private const string CLOSE_BOLD = "/b";
+        private const string OPEN_PARAGRAPH = "p";
+        private const string CLOSE_PARAGRAPH = "/p";
+        private const string FONT_SIZE = "font-size";
+        private const string COLOR = "color";
+        private const string ALIGNMENT = "align";
+        private const string PIXELS = "px;";
+        private const char POINTS = ':';
+        private const char SEMICOLON = ';';
+        private const char QUOTATION_MARKS = '\"';
+        private const string RIGHT_ALIGNMENT = "right";
+        private const char OPEN_COMPLEX_PARAGRAPH = 'p';
 
-        public string createTemplateInWord(string iTamplateName, string iTemlateContent)
+
+        public string CreateTemplateInWord(string iTamplateName, string iTemlateContent)
         {
             try
             {
@@ -27,7 +41,7 @@ namespace TemplateCoreBusiness.Word
             }
             catch (Exception e)
             {
-                throw new Exception($"Error during createTemplateInWord: {e.Message}");
+                throw new Exception($"Error during CreateTemplateInWord: {e.Message}");
             }
             
             //return getDefaultDocxLink(iTamplateName);
@@ -62,22 +76,22 @@ namespace TemplateCoreBusiness.Word
                     string properties = templateCopy.Substring(indexOfStart + 1, indexOfClose - indexOfStart - 1);
                     switch (properties)
                     {
-                        case "b":
+                        case OPEN_BOLD:
                         {
                             m_ParagraphProperties.IsBold = true;
                             break;
                         }
-                        case "/b":
+                        case CLOSE_BOLD:
                         {
                             m_ParagraphProperties.IsBold = false;
                             break;
                         }
-                        case "p":
+                        case OPEN_PARAGRAPH:
                         {
                             createNewParagrapg(ref doc, ref paragraph, ref isFirst);
                             break;
                         }
-                        case "/p":
+                        case CLOSE_PARAGRAPH:
                         {
                             createNewParagrapg(ref doc, ref paragraph, ref isFirst);
                             break;
@@ -111,7 +125,7 @@ namespace TemplateCoreBusiness.Word
 
         private void updateParagraphProperties(string i_StringProperties, ref bool i_IsFirst)
         {
-            if (i_StringProperties[0].Equals('p'))
+            if (i_StringProperties[0].Equals(OPEN_COMPLEX_PARAGRAPH))
             {
                 i_IsFirst = false;
                 updateAlignment(i_StringProperties);
@@ -122,13 +136,13 @@ namespace TemplateCoreBusiness.Word
 
         private void updateFontSize(string i_StringProperties)
         {
-            int indexOfFontSize = i_StringProperties.IndexOf("font-size");
+            int indexOfFontSize = i_StringProperties.IndexOf(FONT_SIZE);
             if (indexOfFontSize != -1)
             {
                 string afterFontSize = i_StringProperties.Substring(indexOfFontSize);
-                int indexFirst = afterFontSize.IndexOf(':');
+                int indexFirst = afterFontSize.IndexOf(POINTS);
                 string cutOne = afterFontSize.Substring(indexFirst + 1);
-                int indexLast = cutOne.IndexOf("px;");
+                int indexLast = cutOne.IndexOf(PIXELS);
                 string fontSizeValue = afterFontSize.Substring(indexFirst + 1, indexLast);
                 try
                 {
@@ -143,56 +157,29 @@ namespace TemplateCoreBusiness.Word
 
         private void updateColor(string i_StringProperties)
         {
-            int indexOfColor = i_StringProperties.IndexOf("color");
+            int indexOfColor = i_StringProperties.IndexOf(COLOR);
             if (indexOfColor != -1)
             {
                 string afterColor = i_StringProperties.Substring(indexOfColor);
-                int indexFirst = afterColor.IndexOf(':');
+                int indexFirst = afterColor.IndexOf(POINTS);
                 string cutOne = afterColor.Substring(indexFirst + 1);
-                int indexLast = cutOne.IndexOf(';');
+                int indexLast = cutOne.IndexOf(SEMICOLON);
                 string colorValue = afterColor.Substring(indexFirst + 1, indexLast);
-                switch (colorValue)
-                {
-                    case "green":
-                    {
-                        m_ParagraphProperties.TextColor = Color.Green;
-                        break;
-                    }
-                    case "red":
-                    {
-                        m_ParagraphProperties.TextColor = Color.Red;
-                        break;
-                    }
-                    case "blue":
-                    {
-                        m_ParagraphProperties.TextColor = Color.Blue;
-                        break;
-                    }
-                    case "yellow":
-                    {
-                        m_ParagraphProperties.TextColor = Color.Yellow;
-                        break;
-                    }
-                    default:
-                    {
-                        m_ParagraphProperties.TextColor = Color.Black;
-                        break;
-                    }
-                }
+                m_ParagraphProperties.TextColor = Color.FromName(colorValue);
             }
         }
 
         private void updateAlignment(string i_StringProperties)
         {
-            int indexOfAlign = i_StringProperties.IndexOf("align");
+            int indexOfAlign = i_StringProperties.IndexOf(ALIGNMENT);
             if (indexOfAlign != -1)
             {
                 string afterAlign = i_StringProperties.Substring(indexOfAlign);
-                int indexFirst = afterAlign.IndexOf('\"');
+                int indexFirst = afterAlign.IndexOf(QUOTATION_MARKS);
                 string cutOne = afterAlign.Substring(indexFirst + 1);
-                int indexLast = cutOne.IndexOf('\"');
+                int indexLast = cutOne.IndexOf(QUOTATION_MARKS);
                 string alignValue = afterAlign.Substring(indexFirst + 1, indexLast);
-                if (alignValue.Equals("right"))
+                if (alignValue.Equals(RIGHT_ALIGNMENT))
                 {
                     m_ParagraphProperties.IsRight = true;
                 }

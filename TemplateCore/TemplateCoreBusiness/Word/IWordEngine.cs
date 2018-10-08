@@ -8,6 +8,6 @@ namespace TemplateCoreBusiness.Word
 {
     public interface IWordEngine
     {
-        string createTemplateInWord(string iTamplateName, string iTemlateContent);
+        string CreateTemplateInWord(string iTamplateName, string iTemlateContent);
     }
 }
