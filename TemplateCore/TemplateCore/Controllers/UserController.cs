@@ -11,7 +11,6 @@ namespace TemplateCore.Controllers
 {
     public class UserController : BaseController
     {
-        private readonly string SESSION_USER_EMAIL = "UserMail";
         protected IUserEngine userEngine { get; }
 
         public UserController()
@@ -45,6 +44,20 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.GetUserData(requestBody.Data.Email.Value);
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic GetLoggedInUserData([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var user = userEngine.GetUserData(userEmail());
                 return SetSuccessResponce(user);
             }
             catch (Exception ex)
@@ -93,6 +106,21 @@ namespace TemplateCore.Controllers
             try
             {
                 var user = userEngine.LogOut(requestBody.Data.Email.Value);
+                RemovePrincipal();
+                return SetSuccessResponce(user);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic LogoutCurrentUser([FromBody] dynamic requestBody)
+        {
+            try
+            {
+                var user = userEngine.LogOut(userEmail());
                 RemovePrincipal();
                 return SetSuccessResponce(user);
             }

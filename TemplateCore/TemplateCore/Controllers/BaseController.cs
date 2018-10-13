@@ -14,7 +14,7 @@ namespace TemplateCore.Controllers
 {
     public class BaseController : ApiController
     {
-        public System.Web.SessionState.HttpSessionState Session { get; }
+        private readonly string SESSION_USER_DATA = "UserData";
         /// <summary>
         /// CTOR
         /// </summary>
@@ -35,7 +35,24 @@ namespace TemplateCore.Controllers
 
         protected bool isUserLogedOn()
         {
-            return (HttpContext.Current.User != null);
+            return (HttpContext.Current.Session[SESSION_USER_DATA] != null);
+        }
+
+        protected string userEmail()
+        {
+            var userData = HttpContext.Current.Session[SESSION_USER_DATA] as PrincipalUser;
+            if (userData != null)
+            {
+                try
+                {
+                    return userData.Identity.Name;
+                }
+                catch
+                {
+                    // do nothing
+                }
+            }
+            throw new Exception($"Unable to get user log in information");
         }
 
         protected void SetPrincipal(string iUserMail, bool iIsAdmin)
@@ -43,7 +60,8 @@ namespace TemplateCore.Controllers
             var principal = createUserIdentety(iUserMail, iIsAdmin);
             if (HttpContext.Current != null)
             {
-                HttpContext.Current.User = principal;
+                HttpContext.Current.Session[SESSION_USER_DATA] = principal;
+                //HttpContext.Current.User = principal;
             }
         }
 

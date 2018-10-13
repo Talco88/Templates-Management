@@ -32,6 +32,9 @@
         <button id="LogoutBtn" onclick="LogoutTest()">Logout Test</button>
     </div>
     <div>
+        <button id="LogoutBtn" onclick="GetLoggedInUserDataTest()">GetLoggedInUserData Test</button>
+    </div>
+    <div>
         <b>Email</b>
         <input type="text" id="gudEmail">
         <button id="GetUserDataBtn" onclick="GetUserDataTest()">GetUserData Test</button>
@@ -77,6 +80,10 @@
         function LogoutTest() {
             let email = document.querySelector('#logoutEmail');
             Platform.LogOut(email.value, ResponceFunction);
+        }
+
+        function GetLoggedInUserDataTest() {
+            Platform.GetLoggedInUserData(ResponceFunction);
         }
 
         function GetUserDataTest() {
