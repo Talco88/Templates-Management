@@ -96,7 +96,7 @@ namespace WordTests
                 */
 
                 //Office
-                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("shani", "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>"));
+                Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("shani", "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>"));
                 //Console.WriteLine();
             }
             catch (Exception ex)

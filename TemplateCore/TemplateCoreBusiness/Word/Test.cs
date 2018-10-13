@@ -43,7 +43,7 @@ namespace TemplateCoreBusiness.Word
 
             Console.WriteLine("template: " + obj.Template);
 
-            string fielsDirectory = Settings.Default.FIELS_DIRECTORY;
+            string fielsDirectory = Settings.Default.FIELS_DIRECTORY_NAME;
             bool exists = Directory.Exists(@fielsDirectory);
             if (!exists)
             {

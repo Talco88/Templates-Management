@@ -12,8 +12,7 @@ namespace TemplateCoreBusiness.Word
 {
     public class WordEngineImp : IWordEngine
     {
-        private const string UNNECESSARY_PATH = "C:\\inetpub\\wwwroot";
-        private string FILES_DIRECTORY = Settings.Default.FIELS_DIRECTORY;
+        private string FILES_DIRECTORY = AppDomain.CurrentDomain.BaseDirectory + Settings.Default.FIELS_DIRECTORY_NAME;
         private CultureInfo english = new CultureInfo("en-US");
         private CultureInfo hebrew = new CultureInfo("he-IL");
         private ParagraphProperties m_ParagraphProperties = new ParagraphProperties();
@@ -118,8 +117,9 @@ namespace TemplateCoreBusiness.Word
 
             // Save to the output directory:
             doc.Save();
-            string serverIp = getLocalIPAddress();
-            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
+            string fileFullPath = Path.GetFullPath(fileName);
+            int indexOfFileDirectory = fileFullPath.IndexOf(Settings.Default.FIELS_DIRECTORY_NAME);
+            string newValue = fileFullPath.Substring(indexOfFileDirectory, fileFullPath.Length - indexOfFileDirectory);
             return newValue;
         }
 
@@ -277,23 +277,10 @@ namespace TemplateCoreBusiness.Word
 
             // Save to the output directory:
             doc.Save();
-            string serverIp = getLocalIPAddress();
-            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
+            string fileFullPath = Path.GetFullPath(fileName);
+            int indexOfFileDirectory = fileFullPath.IndexOf(Settings.Default.FIELS_DIRECTORY_NAME);
+            string newValue = fileFullPath.Substring(indexOfFileDirectory, fileFullPath.Length - indexOfFileDirectory);
             return newValue;
-        }
-
-        private string getLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-
-            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
         private class ParagraphProperties

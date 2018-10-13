@@ -232,7 +232,7 @@ namespace TemplateCoreBusiness.Engine
         {
             try
             {
-                return WordEngineFactory.GetDbInstance().CreateTemplateInWord(iTamplateName, iTemlateContent);
+                return WordEngineFactory.GetWordEngineInstance().CreateTemplateInWord(iTamplateName, iTemlateContent);
             }
             catch (Exception e)
             {
