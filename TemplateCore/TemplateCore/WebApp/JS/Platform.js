@@ -1,13 +1,13 @@
 ﻿var Platform = {};
 
-Platform.serverURL = "http://localhost:52530/api/"; //"api/"; //
+Platform.serverURL = "../api/"; //"http://localhost:52530/api/"
 
 // User Controller API
 Platform.RegisterUser = function (iFirstName, iLastName, iEmail, iPassword, iResponseFunc) {
      var dataWrapper = {
          Data: {
              FirstName: iFirstName,
-             LastName: iLastName,
+             LastName: iLastName,   
              Email: iEmail,
              Password: iPassword
          }
@@ -37,9 +37,19 @@ Platform.LogOut = function (iEmail, iResponseFunc) {
      Platform.getDataFRomServer("User/Logout", dataWrapper, iResponseFunc);
 }
 
+Platform.LogoutCurrentUser = function (iResponseFunc) {
+    var dataWrapper = { Data: {  } };
+    Platform.getDataFRomServer("User/LogoutCurrentUser", dataWrapper, iResponseFunc);
+}
+
 Platform.GetUserData = function (iEmail, iResponseFunc) {
     var dataWrapper = { Data: { Email: iEmail } };
     Platform.getDataFRomServer("User/GetUserData", dataWrapper, iResponseFunc);
+}
+
+Platform.GetLoggedInUserData = function (iResponseFunc) {
+    var dataWrapper = { Data: {  } };
+    Platform.getDataFRomServer("User/GetLoggedInUserData", dataWrapper, iResponseFunc);
 }
 
 // Template Controller API

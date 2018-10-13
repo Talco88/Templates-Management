@@ -41,6 +41,9 @@
             <li class="nav-item">
                 <a id="login_button" class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display='block'" style="display: block;">Log In</a>
             </li>
+            <li>
+                <a id="logout_button" class="page-scroll" href="/users/logout">Logout</a>
+            </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Services</a>
             </li>
@@ -305,7 +308,6 @@
         if(modal2!=null && event.target == modal2)
         {
             modal2.style.display = "none";
-
         }
     }
 </script>
@@ -320,28 +322,30 @@
         document.getElementById("logged_in_username_text_field").textContent = "Guest";
 
     }else{
-        document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
+        //document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
+        document.getElementById("logged_in_username_text_field").textContent ="Nati";
+
         //show logout button, hide login button:
         document.getElementById("logout_button").style.display="block";
         document.getElementById("login_button").style.display="none";
 
-        var userRole = loggedInUser.role;
-        switch(userRole){
-            case "mall_manager":
-            case "store_manager":
-                //hide shopping chart:
-                document.getElementById("shopping_cart").style.display="none";
+        //var userRole = loggedInUser.role;
+        //switch(userRole){
+        //    case "mall_manager":
+        //    case "store_manager":
+        //        //hide shopping chart:
+        //        document.getElementById("shopping_cart").style.display="none";
 
-                //hide search gifts:
-                document.getElementById("search_gifts").style.display="none";
+        //        //hide search gifts:
+        //        document.getElementById("search_gifts").style.display="none";
 
-                //hide about:
-                document.getElementById("wishlists_label").style.display="none";
-                break;
+        //        //hide about:
+        //        document.getElementById("wishlists_label").style.display="none";
+        //        break;
 
-            default:
-                break;
-        }
+        //    default:
+        //        break;
+        //}
     }
     </script>
     </div>
