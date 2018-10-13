@@ -85,6 +85,10 @@ mainPage.IsLoggedIn = function () {
     }
 }
 
+mainPage.onLogOutClicked = function (isSet) {
+    Platform.LogOut();
+}
+
 mainPage.onIsloginCallback = function (iResponse) {
     mainPage.isLoggedinParam = iResponse.RetObject;
     mainPage.IsLoggedIn();
