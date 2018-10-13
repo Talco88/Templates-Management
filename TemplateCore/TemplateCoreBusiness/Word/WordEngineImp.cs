@@ -31,12 +31,12 @@ namespace TemplateCoreBusiness.Word
         private const char OPEN_COMPLEX_PARAGRAPH = 'p';
 
 
-        public string CreateTemplateInWord(string iTamplateName, string iTemlateContent)
+        public string CreateTemplateInWord(string iTemlateContent, string iTamplateName = null)
         {
             try
             {
                 createDirectory();
-                return createDocumentFromTemplate(iTamplateName, iTemlateContent);
+                return createDocumentFromTemplate(iTemlateContent, iTamplateName);
             }
             catch (Exception e)
             {
@@ -55,9 +55,13 @@ namespace TemplateCoreBusiness.Word
             }
         }
 
-        private string createDocumentFromTemplate(string iTamplateName, string iTemlateContent)
+        private string createDocumentFromTemplate(string iTemlateContent, string iTamplateName = null)
         {
-            string fileName = @FILES_DIRECTORY + $"/{iTamplateName}.docx";
+            Guid fileNameGuid = Guid.NewGuid();
+            string finalFileName = (string.IsNullOrEmpty(iTamplateName))
+                ? fileNameGuid.ToString()
+                : iTamplateName + fileNameGuid.ToString();
+            string fileName = @FILES_DIRECTORY + $"/{finalFileName}.docx";
             DocX doc = DocX.Create(fileName);
 
             Paragraph paragraph = doc.InsertParagraph();

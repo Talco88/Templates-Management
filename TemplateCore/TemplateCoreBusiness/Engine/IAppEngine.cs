@@ -26,7 +26,7 @@ namespace TemplateCoreBusiness.Engine
         string DeleteTemplate(string iCategoryName, string iTemplateName, string iUserEmail);
         string MarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
         string RemoveMarkTemplateAsFavorite(string iCategoryName, string iTemplateName, string iUserEmail);
-        string OpenTemplateInWord(string iTamplateName, string iTemlateContent);
+        string OpenTemplateInWord(string iTemlateContent, string iTamplateName = null);
         string GenerateHTMLTemplateWithValues(TemplateFormation iTemplate);
     }
 }
