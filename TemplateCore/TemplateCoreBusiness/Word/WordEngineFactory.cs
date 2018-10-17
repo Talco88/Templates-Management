@@ -11,7 +11,7 @@ namespace TemplateCoreBusiness.Word
         private static WordEngineImp m_instance = null;
         private static readonly object m_padlock = new object();
 
-        public static IWordEngine GetDbInstance()
+        public static IWordEngine GetWordEngineInstance()
         {
             if (m_instance == null)
             {

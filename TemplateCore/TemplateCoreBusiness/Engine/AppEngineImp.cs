@@ -228,11 +228,11 @@ namespace TemplateCoreBusiness.Engine
             }
         }
         
-        public string OpenTemplateInWord(string iTamplateName, string iTemlateContent)
+        public string OpenTemplateInWord(string iTemlateContent, string iTamplateName = null)
         {
             try
             {
-                return WordEngineFactory.GetDbInstance().CreateTemplateInWord(iTamplateName, iTemlateContent);
+                return WordEngineFactory.GetWordEngineInstance().CreateTemplateInWord(iTemlateContent, iTamplateName);
             }
             catch (Exception e)
             {

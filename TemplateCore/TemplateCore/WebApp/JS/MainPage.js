@@ -2,11 +2,53 @@
 var Global_index_BaseHTMLData = "";
 
 mainPage.setPage = function () {
+    mainPage.loggedInUser = "";
     if (Global_index_BaseHTMLData === "") {
         mainPage.LoadLobbyPageRes(true);
     }
     else {
         mainPage.onPagedRecived();
+    }
+}
+
+mainPage.SetUserInfo = function (iUserName) {
+    if (iUserName != "") {
+        mainPage.loggedInUser = iUserName;
+    }
+
+    if (mainPage.loggedInUser === "" && iUserName === "") {
+        //show login button, hide logout button:
+        document.getElementById("logout_button").style.display = "none";
+        document.getElementById("login_button").style.display = "block";
+
+        // define user as guest:
+        document.getElementById("logged_in_username_text_field").textContent = "Guest";
+
+    } else {
+        //document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
+        document.getElementById("logged_in_username_text_field").textContent = iUserName;
+
+        //show logout button, hide login button:
+        document.getElementById("logout_button").style.display = "block";
+        document.getElementById("login_button").style.display = "none";
+
+        //var userRole = loggedInUser.role;
+        //switch(userRole){
+        //    case "mall_manager":
+        //    case "store_manager":
+        //        //hide shopping chart:
+        //        document.getElementById("shopping_cart").style.display="none";
+
+        //        //hide search gifts:
+        //        document.getElementById("search_gifts").style.display="none";
+
+        //        //hide about:
+        //        document.getElementById("wishlists_label").style.display="none";
+        //        break;
+
+        //    default:
+        //        break;
+        //}
     }
 }
 
@@ -26,6 +68,18 @@ mainPage.onPagedRecived = function () {
 
     let birthdayBtn = document.querySelector("#birthdayBtn");
     birthdayBtn.onclick = mainPage.onCategoryClicked;
+
+    Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
+
+}
+
+mainPage.onUserLogedinResponce = function (iServerResponce) {
+    let userName = "";
+    if (iServerResponce.StatusCode === 0) {
+        userName = iServerResponce.RetObject.FirstName;
+    }
+
+    mainPage.SetUserInfo(userName);
 }
 
 mainPage.onLoginClicked = function () {
@@ -48,6 +102,8 @@ mainPage.onLogOutClicked = function () {
 
 mainPage.onLoginResponce = function (iData) {
     mainPage.nevigateToSignUpPage(iData);
+    //let respoDiv = document.querySelector('#write the div name or class');
+    //respoDiv.innerText = iData.RetObject;
 }
 
 

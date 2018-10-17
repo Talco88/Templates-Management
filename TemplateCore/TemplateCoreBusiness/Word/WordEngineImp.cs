@@ -12,8 +12,7 @@ namespace TemplateCoreBusiness.Word
 {
     public class WordEngineImp : IWordEngine
     {
-        private const string UNNECESSARY_PATH = "C:\\inetpub\\wwwroot";
-        private string FILES_DIRECTORY = Settings.Default.FIELS_DIRECTORY;
+        private string FILES_DIRECTORY = AppDomain.CurrentDomain.BaseDirectory + Settings.Default.FIELS_DIRECTORY_NAME;
         private CultureInfo english = new CultureInfo("en-US");
         private CultureInfo hebrew = new CultureInfo("he-IL");
         private ParagraphProperties m_ParagraphProperties = new ParagraphProperties();
@@ -32,33 +31,38 @@ namespace TemplateCoreBusiness.Word
         private const char OPEN_COMPLEX_PARAGRAPH = 'p';
 
 
-        public string CreateTemplateInWord(string iTamplateName, string iTemlateContent)
+        public string CreateTemplateInWord(string iTemlateContent, string iTamplateName = null)
         {
             try
             {
-                createDirectory();
-                return createDocumentFromTemplate(iTamplateName, iTemlateContent);
+                createDirectory(FILES_DIRECTORY);
+                return createDocumentFromTemplate(iTemlateContent, iTamplateName);
             }
             catch (Exception e)
             {
                 throw new Exception($"Error during CreateTemplateInWord: {e.Message}");
             }
-            
-            //return getDefaultDocxLink(iTamplateName);
         }
 
-        private void createDirectory()
+        private void createDirectory(string i_DirectoryPath)
         {
-            bool exists = Directory.Exists(@FILES_DIRECTORY);
+            bool exists = Directory.Exists(@i_DirectoryPath);
             if (!exists)
             {
-                Directory.CreateDirectory(@FILES_DIRECTORY);
+                Directory.CreateDirectory(@i_DirectoryPath);
             }
         }
 
-        private string createDocumentFromTemplate(string iTamplateName, string iTemlateContent)
+        private string createDocumentFromTemplate(string iTemlateContent, string iTamplateName = null)
         {
-            string fileName = @FILES_DIRECTORY + $"/{iTamplateName}.docx";
+            Guid fileNameGuid = Guid.NewGuid();
+            string directoryName = @FILES_DIRECTORY + "/" + fileNameGuid.ToString();
+            createDirectory(directoryName);
+
+            string finalFileName = (string.IsNullOrEmpty(iTamplateName))
+                ? fileNameGuid.ToString()
+                : iTamplateName;
+            string fileName = directoryName + $"/{finalFileName}.docx";
             DocX doc = DocX.Create(fileName);
 
             Paragraph paragraph = doc.InsertParagraph();
@@ -118,8 +122,9 @@ namespace TemplateCoreBusiness.Word
 
             // Save to the output directory:
             doc.Save();
-            string serverIp = getLocalIPAddress();
-            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
+            string fileFullPath = Path.GetFullPath(fileName);
+            int indexOfFileDirectory = fileFullPath.IndexOf(Settings.Default.FIELS_DIRECTORY_NAME);
+            string newValue = fileFullPath.Substring(indexOfFileDirectory, fileFullPath.Length - indexOfFileDirectory);
             return newValue;
         }
 
@@ -224,76 +229,6 @@ namespace TemplateCoreBusiness.Word
                 i_Paragraph.Culture(english);
                 i_Paragraph.Alignment = Alignment.left;
             }
-        }
-
-        [Obsolete]
-        //This function is for tests only
-        private string getDefaultDocxLink(string iTamplateName)
-        {
-            string fileName = @FILES_DIRECTORY + $"/{iTamplateName}.docx";
-            DocX doc = DocX.Create(fileName);
-
-            string headlineText = "Example";
-
-            // A formatting object for our headline:
-            var headLineFormat = new Xceed.Words.NET.Formatting();
-            headLineFormat.FontFamily = new Font("Arial Black");
-            headLineFormat.FontColor = Color.Red;
-            headLineFormat.Size = 18D;
-            headLineFormat.Position = 12;
-            headLineFormat.Language = english;
-
-            doc.InsertParagraph(headlineText, false, headLineFormat);
-
-            // A formatting object for our normal paragraph text:
-            Paragraph p1 = doc.InsertParagraph();
-            p1.Alignment = Alignment.right;
-            p1.Append("אור הורוביץ\n");
-            p1.Append(" וטל");
-            p1.Append(" כהן.");
-            p1.FontSize(18);
-            p1.Culture(hebrew);
-            p1.Bold();
-            p1.Color(Color.Blue);
-
-
-            Paragraph p2 = doc.InsertParagraph();
-            p2.Alignment = Alignment.left;
-            p2.AppendLine("Can you help \nme figure it out?");
-            p2.Culture(english);
-
-            Console.WriteLine();
-
-            var paraFormat = new Xceed.Words.NET.Formatting();
-            paraFormat.FontFamily = new Font("Calibri");
-            paraFormat.Size = 10D;
-            paraFormat.Bold = true;
-            paraFormat.UnderlineStyle = UnderlineStyle.singleLine;
-
-
-            // Insert the now text obejcts;
-            //doc.InsertParagraph(obj.Template, false, paraFormat);
-            //doc.InsertParagraph("or and tal", false, paraFormat);
-
-            // Save to the output directory:
-            doc.Save();
-            string serverIp = getLocalIPAddress();
-            string newValue = Path.GetFullPath(fileName).Replace(UNNECESSARY_PATH, serverIp);
-            return newValue;
-        }
-
-        private string getLocalIPAddress()
-        {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                {
-                    return ip.ToString();
-                }
-            }
-
-            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
         private class ParagraphProperties

@@ -97,10 +97,10 @@ namespace TemplateCoreBusiness.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\inetpub\\wwwroot\\TemplateCore")]
-        public string FIELS_DIRECTORY {
+        [global::System.Configuration.DefaultSettingValueAttribute("GeneratedFiles")]
+        public string FIELS_DIRECTORY_NAME {
             get {
-                return ((string)(this["FIELS_DIRECTORY"]));
+                return ((string)(this["FIELS_DIRECTORY_NAME"]));
             }
         }
     }
