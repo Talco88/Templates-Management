@@ -21,6 +21,9 @@ mainPage.onPagedRecived = function () {
     let signinBtn = document.querySelector(".signin-btn");
     signinBtn.onclick = mainPage.onSignUpClicked;
 
+    let logoutBtn = document.querySelector(".logout-btn");
+    logoutBtn.onclick = mainPage.onLogOutClicked;
+
     let birthdayBtn = document.querySelector("#birthdayBtn");
     birthdayBtn.onclick = mainPage.onCategoryClicked;
 }
@@ -37,9 +40,16 @@ mainPage.onSignUpClicked = function () {
     signIn.setPage();
 }
 
+mainPage.onLogOutClicked = function () {
+    // do this when btn is clicked
+    let lgoout = document.querySelector('.logout-btn');
+    Platform.GetLoggedInUserData();
+}
+
 mainPage.onLoginResponce = function (iData) {
     mainPage.nevigateToSignUpPage(iData);
 }
+
 
 mainPage.nevigateToSignUpPage = function (iServerReturn) {
     if (iServerReturn.Status != "OK") {
@@ -68,7 +78,7 @@ mainPage.LoadLobbyPageRes = function (isSet) {
 }
 
 mainPage.onCategoryClicked = function () {
-    mainPage.IsLoggedIn;
+    mainPage.IsLoggedIn();
 }
 
 mainPage.IsLoggedIn = function () {
@@ -83,10 +93,6 @@ mainPage.IsLoggedIn = function () {
             signIn.setPage(); // Go to LogIn page
         }
     }
-}
-
-mainPage.onLogOutClicked = function (isSet) {
-    Platform.LogOut();
 }
 
 mainPage.onIsloginCallback = function (iResponse) {
