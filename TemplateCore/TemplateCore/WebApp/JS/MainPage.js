@@ -39,6 +39,8 @@ mainPage.onSignUpClicked = function () {
 
 mainPage.onLoginResponce = function (iData) {
     mainPage.nevigateToSignUpPage(iData);
+    //let respoDiv = document.querySelector('#write the div name or class');
+    //respoDiv.innerText = iData.RetObject;
 }
 
 mainPage.nevigateToSignUpPage = function (iServerReturn) {
