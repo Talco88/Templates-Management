@@ -19,14 +19,15 @@ hr {
 
 a {
     /*color: #f05f40;*/
-    color: #067c8d;
+    color: #94d0da;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
     transition: all .2s;
 }
 
     a:hover {
-        color: #067c8d;
+        /*color: #067c8d;*/
+        color: #a9ddf5;
     }
 
 h1, h2, h3, h4, h5, h6 {
@@ -314,7 +315,7 @@ header.masthead {
 
 .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
     color: #fff;
-    background-color: #ee4b28 !important;
+    background-color: #a9ddf5 !important;
 }
 
 .btn-primary:active, .btn-primary:focus {

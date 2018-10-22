@@ -31,24 +31,6 @@ mainPage.SetUserInfo = function (iUserName) {
         //show logout button, hide login button:
         document.getElementById("logout_button").style.display = "block";
         document.getElementById("login_button").style.display = "none";
-
-        //var userRole = loggedInUser.role;
-        //switch(userRole){
-        //    case "mall_manager":
-        //    case "store_manager":
-        //        //hide shopping chart:
-        //        document.getElementById("shopping_cart").style.display="none";
-
-        //        //hide search gifts:
-        //        document.getElementById("search_gifts").style.display="none";
-
-        //        //hide about:
-        //        document.getElementById("wishlists_label").style.display="none";
-        //        break;
-
-        //    default:
-        //        break;
-        //}
     }
 }
 
@@ -66,7 +48,7 @@ mainPage.onPagedRecived = function () {
     let logoutBtn = document.querySelector("#logout_button");
     logoutBtn.onclick = mainPage.onLogOutClicked;
 
-    let birthdayBtn = document.querySelector("#birthdayBtn");
+    let birthdayBtn = document.querySelector(".birthdayBtn");
     birthdayBtn.onclick = mainPage.onCategoryClicked;
 
     Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
@@ -102,24 +84,28 @@ mainPage.onLogOutClicked = function () {
     mainPage.SetUserInfo("");
 }
 
-mainPage.onLoginResponce = function (iData) {
-    mainPage.nevigateToSignUpPage(iData);
-    //let respoDiv = document.querySelector('#write the div name or class');
-    //respoDiv.innerText = iData.RetObject;
-}
-
-
-mainPage.nevigateToSignUpPage = function (iServerReturn) {
-    if (iServerReturn.Status != "OK") {
-        signIn.setPage(); // Go to LogIn page
-    }
-    if (iServerReturn.StatusCode != 0) {
-        signIn.setPage(); // Go to LogIn page
-    }
-    else {
+mainPage.onLoginResponce = function (iServerReturn) {
+    if (iServerReturn.StatusCode === 0) { //sucesses
         mainPage.setPage(); // Go again to Main page
     }
+    else {
+        // faild to login
+        $(".server-error-response").html(iServerReturn.RetObject);
+    }
 }
+
+
+//mainPage.nevigateToSignUpPage = function (iServerReturn) {
+//    if (iServerReturn.Status != "OK") {
+//        signIn.setPage(); // Go to LogIn page
+//    }
+//    if (iServerReturn.StatusCode != 0) {
+//        signIn.setPage(); // Go to LogIn page
+//    }
+//    else {
+//        mainPage.setPage(); // Go again to Main page
+//    }
+//}
 
 mainPage.LoadLobbyPageRes = function (isSet) {
     $.ajax({

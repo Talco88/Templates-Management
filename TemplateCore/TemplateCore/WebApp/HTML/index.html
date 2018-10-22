@@ -41,8 +41,8 @@
             <li class="nav-item">
                 <a id="login_button" class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display='block'" style="display: block;">Log In</a>
             </li>
-            <li>
-                <a id="logout_button" class="page-scroll" href="#">Logout</a>
+            <li class="nav-item">
+                <a id="logout_button" class="page-scroll nav-link js-scroll-trigger" href="#">Logout</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Services</a>
@@ -123,10 +123,10 @@
 
     <section class="p-0" id="portfolio">
       <div class="container-fluid p-0">
-        <div class="row no-gutters popup-gallery">
-          <div class="col-lg-4 col-sm-6">
+        <div class="row no-gutters">
+          <div class="col-lg-4 col-sm-6 birthdayBtn">
             <a class="portfolio-box" href="WebApp/img/birthday.jpg">
-              <img id="birthdayBtn" class="img-fluid" src="WebApp/img/birthday.jpg" alt="">
+              <img class="img-fluid" src="WebApp/img/birthday.jpg" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -295,6 +295,8 @@
                       <button class="signin-btn" type="submit" style="width: 45%">Sign up</button>
                   </div>
               </div>
+              <br>
+              <div class="server-error-response" style="color:#ff0000"></div>
           </div>
           <script>
     // Get the modal
@@ -327,17 +329,5 @@
 
     <!-- Platform logic-->
     <script src="WebApp/JS/Platform.js"></script>
-    <script>
-    function loginTest() {
-        let email = document.querySelector('#loginEmail');
-        let pass = document.querySelector('#loginPass');
-        Platform.LogIn(email.value, pass.value, ResponceFunction);
-    }
-    function ResponceFunction(iResponce) {
-        let respoDiv = document.querySelector('#responce');
-        respoDiv.innerText = iResponce.RetObject;
-        console.log(iResponce.RetObject);
-    }
-    </script>
   </body>
 </html>

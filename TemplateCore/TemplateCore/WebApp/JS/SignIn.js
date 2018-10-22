@@ -57,3 +57,40 @@ signIn.LoadLobbyPageRes = function (isSet) {
         }
     });
 }
+
+function validationUserInput() {
+    //  var name = document.ContactForm.Name;
+    var email = document.singnupForm.email;
+    var gender = document.getElementsByName("gender");
+    var password = document.singnupForm.password;
+    var confirm = document.singnupForm.confirm;
+
+    if (email.value.indexOf("@", 0) < 0 || email.value.indexOf(".", 0) < 0) {
+        alert("Please enter a valid e-mail address.");
+        email.focus();
+        return false;
+    }
+    var okayGender = false;
+    var okayHobbies = false;
+    for (var i = 0, l = gender.length; i < l; i++) {
+        if (gender[i].checked) {
+            okayGender = true;
+            break;
+        }
+    }
+    if (!okayGender) {
+        alert("gender please");
+        return false;
+    }
+    if (password.value != confirm.value) {
+        password.focus;
+        confirm.focus;
+        alert("password and confirm must be equal");
+        return false
+    }
+    if (name.value == "") {
+        window.alert("Please enter your name.");
+        name.focus();
+        return false;
+    }
+}
