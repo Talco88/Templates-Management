@@ -174,8 +174,6 @@ mainPage.onIsloginCallback = function (iResponse) {
         Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
     }
     else{
-        mainPage.loggedInUser = ""
+        mainPage.loggedInUser = "";
     }
-    
-    mainPage.IsLoggedIn();
 }

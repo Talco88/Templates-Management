@@ -14,7 +14,7 @@ templatesPage.setPage = function (iCategoryName) {
 templatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html(Global_Template_BaseHTMLData);
     $(".dynamic-category-name").html(templatesPage.categoryName);
-    Platform.GetTopicsInCategory(templatesPage.onPagedResponce);
+    Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
 
 }
 
@@ -33,16 +33,27 @@ templatesPage.LoadLobbyPageRes = function (isSet) {
 }
 
 templatesPage.onPagedResponce = function (iServerResponce) {
-    let categoryName = "";
     if (iServerResponce.StatusCode === 0) {
-        categoryName = iServerResponce.RetObject.FirstName;
+        //console.log(iServerResponce.RetObject);
+        categoryNames = iServerResponce.RetObject;
     }
-    templatesPage.SetCategoryName(categoryName);
+    templatesPage.SetCategoryNames(categoryNames);
 }
 
-templatesPage.SetCategoryName = function (iCategoryName) {
-    if (iCategoryName != "") {
-        templatesPage.categoryName = iCategoryName;
+templatesPage.SetCategoryNames = function (iCategoryName) {
+    let categoryTitleContainer = document.getElementById("category_name");
+    if (iCategoryName != "" && iCategoryName != null && iCategoryName != undefined) {
+        for (let i = 0; i < iCategoryName.length; i++){
+            var topicDiv = document.createElement('div');
+            topicDiv.className = 'template-property ' + iCategoryName[i];
+            topicDiv.innerText = iCategoryName[i];
+            topicDiv.onclick = templatesPage.onTopicSelected;
+            categoryTitleContainer.appendChild(topicDiv);
+        }
     }
-    document.getElementById("category_name").textContent = iCategoryName;
+}
+
+templatesPage.onTopicSelected = function(iEvent){
+    let selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
+    console.log(selectedTopicName);
 }
