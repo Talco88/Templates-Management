@@ -31,6 +31,7 @@ namespace TemplateCore.Controllers
         protected void RemovePrincipal()
         {
             HttpContext.Current.User = null;
+            HttpContext.Current.Session[SESSION_USER_DATA] = null;
         }
 
         protected bool isUserLogedOn()

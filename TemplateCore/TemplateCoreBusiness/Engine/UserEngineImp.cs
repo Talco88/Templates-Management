@@ -13,7 +13,8 @@ namespace TemplateCoreBusiness.Engine
 
         public bool IsLogedOn(string iUserName)
         {
-            throw new NotImplementedException();
+            // nothing to do.
+            return true;
         }
 
         public UserEntity LogInUser(string iEmail, string pass)
@@ -31,7 +32,8 @@ namespace TemplateCoreBusiness.Engine
 
         public bool LogOut(string iUserName)
         {
-            throw new NotImplementedException();
+            // do nothing
+            return true;
         }
 
         public UserEntity RegisterNewUser(string iUserFirstName, string iUserLastName, string iUserEmail, string pass, bool isAdmin = false)

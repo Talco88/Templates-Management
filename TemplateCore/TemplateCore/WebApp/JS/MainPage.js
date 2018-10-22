@@ -78,6 +78,9 @@ mainPage.onUserLogedinResponce = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         userName = iServerResponce.RetObject.FirstName;
     }
+    else {
+        console.log(iServerResponce.RetObject);
+    }
 
     mainPage.SetUserInfo(userName);
 }
@@ -97,9 +100,19 @@ mainPage.onSignUpClicked = function () {
 mainPage.onLogOutClicked = function () {
     // do this when btn is clicked
     let lgoout = document.querySelector('.logout-btn');
-    Platform.LogoutCurrentUser();
+    Platform.LogoutCurrentUser(mainPage.onLogedoutResponce);
     mainPage.loggedInUser = "";
     mainPage.SetUserInfo("");
+}
+
+mainPage.onLogedoutResponce = function (iServerReturn) {
+    if (iServerReturn.StatusCode === 0) {
+        // fine
+    }
+    else {
+        // log error
+        console.log(iServerReturn.RetObject);
+    }
 }
 
 mainPage.onLoginResponce = function (iData) {
