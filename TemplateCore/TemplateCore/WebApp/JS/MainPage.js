@@ -66,8 +66,10 @@ mainPage.onPagedRecived = function () {
     let logoutBtn = document.querySelector("#logout_button");
     logoutBtn.onclick = mainPage.onLogOutClicked;
 
-    let birthdayBtn = document.querySelector("#birthdayBtn");
-    birthdayBtn.onclick = mainPage.onCategoryClicked;
+    let categoryTiles = document.getElementsByClassName("category-click-event");
+    for (var i = 0; i < categoryTiles.length; i++) {
+        categoryTiles[i].onclick = mainPage.onCategoryClicked;
+    }
 
     Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
 
@@ -148,17 +150,17 @@ mainPage.LoadLobbyPageRes = function (isSet) {
     });
 }
 
-mainPage.onCategoryClicked = function () {
-    mainPage.IsLoggedIn();
+mainPage.onCategoryClicked = function (iEvent) {
+    mainPage.IsLoggedIn(iEvent.target.classList[1]);
 }
 
-mainPage.IsLoggedIn = function () {
-    if (mainPage.isLoggedinParam === undefined) {
+mainPage.IsLoggedIn = function (iCategoryName) {
+    if (mainPage.loggedInUser === "") {
         Platform.IsLogIn(mainPage.onIsloginCallback);
     }
     else {
-        if (mainPage.isLoggedinParam) {
-            templatesPage.setPage(); // Navigate to category's page
+        if (mainPage.loggedInUser) {
+            templatesPage.setPage(iCategoryName); // Navigate to category's page
         }
         else {
             signIn.setPage(); // Go to LogIn page
@@ -167,6 +169,13 @@ mainPage.IsLoggedIn = function () {
 }
 
 mainPage.onIsloginCallback = function (iResponse) {
-    mainPage.isLoggedinParam = iResponse.RetObject;
+    if (iResponse.StatusCode === 0 && iResponse.RetObject){
+        mainPage.loggedInUser = "user";
+        Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
+    }
+    else{
+        mainPage.loggedInUser = ""
+    }
+    
     mainPage.IsLoggedIn();
 }
