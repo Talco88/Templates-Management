@@ -63,7 +63,7 @@ mainPage.onPagedRecived = function () {
     let signinBtn = document.querySelector(".signin-btn");
     signinBtn.onclick = mainPage.onSignUpClicked;
 
-    let logoutBtn = document.querySelector(".logout-btn");
+    let logoutBtn = document.querySelector("#logout_button");
     logoutBtn.onclick = mainPage.onLogOutClicked;
 
     let birthdayBtn = document.querySelector("#birthdayBtn");
@@ -97,7 +97,9 @@ mainPage.onSignUpClicked = function () {
 mainPage.onLogOutClicked = function () {
     // do this when btn is clicked
     let lgoout = document.querySelector('.logout-btn');
-    Platform.GetLoggedInUserData();
+    Platform.LogoutCurrentUser();
+    mainPage.loggedInUser = "";
+    mainPage.SetUserInfo("");
 }
 
 mainPage.onLoginResponce = function (iData) {
@@ -143,7 +145,7 @@ mainPage.IsLoggedIn = function () {
     }
     else {
         if (mainPage.isLoggedinParam) {
-            birthdayCategory.setPage(); // Navigate to category
+            templatesPage.setPage(); // Navigate to category's page
         }
         else {
             signIn.setPage(); // Go to LogIn page

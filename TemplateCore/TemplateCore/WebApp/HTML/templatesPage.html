@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Template-Me-SignUp</title>
+    <!-- Bootstrap core CSS -->
+    <link href="WebApp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="WebApp/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- Plugin CSS -->
+    <link href="WebApp/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="WebApp/css/creative.min.css" rel="stylesheet">
+
+    <style>
+        body, html {
+            height: 100%;
+            background-repeat: no-repeat;
+            background-color: #ffffff;
+            font-family: 'Oxygen', sans-serif;
+        }
+
+        .main {
+            margin-top: 70px;
+        }
+
+        h1.title {
+            font-size: 50px;
+            font-family: 'Passion One', cursive;
+            font-weight: 400;
+        }
+
+        hr {
+            width: 10%;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            margin-bottom: 15px;
+        }
+
+        input,
+        input::-webkit-input-placeholder {
+            font-size: 11px;
+            padding-top: 3px;
+        }
+
+        .main-login {
+            background-color: #fff;
+            /* shadows and rounded borders */
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-center {
+            margin-top: 30px;
+            margin: 0 auto;
+            max-width: 330px;
+            padding: 40px 40px;
+        }
+
+        .login-button {
+            margin-top: 5px;
+        }
+
+        .login-register {
+            font-size: 11px;
+            text-align: center;
+        }
+    </style>
+    <!--<script type="text/javascript">-->
+    <!--//</script>-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
+
+    <!-- Website CSS style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <!-- Website Font style -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#067c8d" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="/default.aspx">Template-Me</a>
+            <i class="fa fa-4x fa fa-pencil text-primary sr-icons"></i>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a id="login_button" class="nav-link js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display='block'" style="display: block;">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section style="background-color: #ced4da">
+        <div class="container">
+            <div class="imgcontainer">
+                <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+            </div>
+            <div style="text-align: center">
+                <h1 style="color: #808080" class="card-title">Category:</h1>
+                <h1 id="category_name" class="navbar-brand page-scroll" href="/"></h1>
+                <h1 style="color: #067c8d" class="title">List of templates </h1>
+                <hr />
+            </div>
+        </div>
+        <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
+        </div>
+      </section>
+
+    <script type="text/javascript">
+    function validationUserInput()
+    {
+        //  var name = document.ContactForm.Name;
+        var email = document.singnupForm.email;
+        var gender=document.getElementsByName("gender");
+        var password=document.singnupForm.password;
+        var confirm=document.singnupForm.confirm;
+
+        if (email.value.indexOf("@", 0) < 0||email.value.indexOf(".", 0) < 0)
+        {
+            alert("Please enter a valid e-mail address.");
+            email.focus();
+            return false;
+        }
+        var okayGender=false;
+        var okayHobbies=false;
+        for(var i=0,l=gender.length;i<l;i++)
+        {
+            if(gender[i].checked)
+            {
+                okayGender=true;
+                break;
+            }
+        }
+        if(!okayGender)
+        {
+            alert("gender please");
+            return false;
+        }
+        if (password.value!=confirm.value)
+        {
+            password.focus;
+            confirm.focus;
+            alert("password and confirm must be equal");
+            return false
+        }
+        if (name.value == "")
+        {
+            window.alert("Please enter your name.");
+            name.focus();
+            return false;
+        }
+    }
+    </script>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="my-4">
+                    <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p>
+                        <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
+                    </p>
+                    <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

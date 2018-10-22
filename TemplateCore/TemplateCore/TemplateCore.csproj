@@ -91,6 +91,7 @@
     <Content Include="WebApp\HTML\index.html" />
     <Content Include="WebApp\HTML\LoginPage.html" />
     <Content Include="WebApp\HTML\signIn.html" />
+    <Content Include="WebApp\HTML\templatesPage.html" />
     <Content Include="WebApp\img\birthday.jpg" />
     <Content Include="WebApp\img\buisness.jpg" />
     <Content Include="WebApp\img\header.jpg" />
@@ -119,6 +120,7 @@
     <Content Include="WebApp\JS\SignIn.js" />
     <Content Include="WebApp\JS\MainPage.js" />
     <Content Include="WebApp\JS\Platform.js" />
+    <Content Include="WebApp\JS\templatesPage.js" />
     <Content Include="WebApp\JS\Utill.js" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.css" />
     <Content Include="WebApp\vendor\bootstrap\css\bootstrap-grid.min.css" />
