@@ -1,9 +1,9 @@
 ﻿var templatesPage = {}
-var Global_index_BaseHTMLData = "";
+var Global_Template_BaseHTMLData = "";
 
-templatesPage.setPage = function () {
-    templatesPage.categoryName = "";
-    if (Global_index_BaseHTMLData === "") {
+templatesPage.setPage = function (iCategoryName) {
+    templatesPage.categoryName = iCategoryName;
+    if (Global_Template_BaseHTMLData === "") {
         templatesPage.LoadLobbyPageRes(true);
     }
     else {
@@ -12,23 +12,9 @@ templatesPage.setPage = function () {
 }
 
 templatesPage.onPagedRecived = function () {
-    $("#MainAppWindow").html(Global_index_BaseHTMLData);
-
-    // all the btn registered here
-
-    //let loginBtn = document.querySelector(".login-btn");
-    //loginBtn.onclick = mainPage.onLoginClicked;
-
-    //let signinBtn = document.querySelector(".signin-btn");
-    //signinBtn.onclick = mainPage.onSignUpClicked;
-
-    ////let logoutBtn = document.querySelector(".logout-btn");
-    ////logoutBtn.onclick = mainPage.onLogOutClicked;
-
-    //let birthdayBtn = document.querySelector("#birthdayBtn");
-    //birthdayBtn.onclick = mainPage.onCategoryClicked;
-
-    Platform.GetTopicsInCategory(templatesPage.onPagedResponce);
+    $("#MainAppWindow").html(Global_Template_BaseHTMLData);
+    $(".dynamic-category-name").html(templatesPage.categoryName);
+    Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
 
 }
 
@@ -37,7 +23,7 @@ templatesPage.LoadLobbyPageRes = function (isSet) {
         url: "/WebApp/HTML/templatesPage.html",
         dataType: 'text',
         success: function (data) {
-            Global_index_BaseHTMLData = data;
+            Global_Template_BaseHTMLData = data;
             templatesPage.onPagedRecived();
         },
         error: function () {
@@ -47,16 +33,27 @@ templatesPage.LoadLobbyPageRes = function (isSet) {
 }
 
 templatesPage.onPagedResponce = function (iServerResponce) {
-    let categoryName = "";
     if (iServerResponce.StatusCode === 0) {
-        categoryName = iServerResponce.RetObject.FirstName;
+        //console.log(iServerResponce.RetObject);
+        categoryNames = iServerResponce.RetObject;
     }
-    templatesPage.SetCategoryName(categoryName);
+    templatesPage.SetCategoryNames(categoryNames);
 }
 
-templatesPage.SetCategoryName = function (iCategoryName) {
-    if (iCategoryName != "") {
-        templatesPage.categoryName = iCategoryName;
+templatesPage.SetCategoryNames = function (iCategoryName) {
+    let categoryTitleContainer = document.getElementById("category_name");
+    if (iCategoryName != "" && iCategoryName != null && iCategoryName != undefined) {
+        for (let i = 0; i < iCategoryName.length; i++){
+            var topicDiv = document.createElement('div');
+            topicDiv.className = 'template-property ' + iCategoryName[i];
+            topicDiv.innerText = iCategoryName[i];
+            topicDiv.onclick = templatesPage.onTopicSelected;
+            categoryTitleContainer.appendChild(topicDiv);
+        }
     }
-    document.getElementById("category_name").textContent = iCategoryName;
+}
+
+templatesPage.onTopicSelected = function(iEvent){
+    let selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
+    console.log(selectedTopicName);
 }

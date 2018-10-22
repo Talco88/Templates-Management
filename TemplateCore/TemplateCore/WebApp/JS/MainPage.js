@@ -31,6 +31,24 @@ mainPage.SetUserInfo = function (iUserName) {
         //show logout button, hide login button:
         document.getElementById("logout_button").style.display = "block";
         document.getElementById("login_button").style.display = "none";
+
+        //var userRole = loggedInUser.role;
+        //switch(userRole){
+        //    case "mall_manager":
+        //    case "store_manager":
+        //        //hide shopping chart:
+        //        document.getElementById("shopping_cart").style.display="none";
+
+        //        //hide search gifts:
+        //        document.getElementById("search_gifts").style.display="none";
+
+        //        //hide about:
+        //        document.getElementById("wishlists_label").style.display="none";
+        //        break;
+
+        //    default:
+        //        break;
+        //}
     }
 }
 
@@ -48,8 +66,10 @@ mainPage.onPagedRecived = function () {
     let logoutBtn = document.querySelector("#logout_button");
     logoutBtn.onclick = mainPage.onLogOutClicked;
 
-    let birthdayBtn = document.querySelector(".birthdayBtn");
-    birthdayBtn.onclick = mainPage.onCategoryClicked;
+    let categoryTiles = document.getElementsByClassName("category-click-event");
+    for (var i = 0; i < categoryTiles.length; i++) {
+        categoryTiles[i].onclick = mainPage.onCategoryClicked;
+    }
 
     Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
 
@@ -59,6 +79,9 @@ mainPage.onUserLogedinResponce = function (iServerResponce) {
     let userName = "";
     if (iServerResponce.StatusCode === 0) {
         userName = iServerResponce.RetObject.FirstName;
+    }
+    else {
+        console.log(iServerResponce.RetObject);
     }
 
     mainPage.SetUserInfo(userName);
@@ -79,33 +102,39 @@ mainPage.onSignUpClicked = function () {
 mainPage.onLogOutClicked = function () {
     // do this when btn is clicked
     let lgoout = document.querySelector('.logout-btn');
-    Platform.LogoutCurrentUser();
+    Platform.LogoutCurrentUser(mainPage.onLogedoutResponce);
     mainPage.loggedInUser = "";
     mainPage.SetUserInfo("");
 }
 
-mainPage.onLoginResponce = function (iServerReturn) {
-    if (iServerReturn.StatusCode === 0) { //sucesses
-        mainPage.setPage(); // Go again to Main page
+mainPage.onLogedoutResponce = function (iServerReturn) {
+    if (iServerReturn.StatusCode === 0) {
+        // fine
     }
     else {
-        // faild to login
-        $(".server-error-response").html(iServerReturn.RetObject);
+        // log error
+        console.log(iServerReturn.RetObject);
     }
 }
 
+mainPage.onLoginResponce = function (iData) {
+    mainPage.nevigateToSignUpPage(iData);
+    //let respoDiv = document.querySelector('#write the div name or class');
+    //respoDiv.innerText = iData.RetObject;
+}
 
-//mainPage.nevigateToSignUpPage = function (iServerReturn) {
-//    if (iServerReturn.Status != "OK") {
-//        signIn.setPage(); // Go to LogIn page
-//    }
-//    if (iServerReturn.StatusCode != 0) {
-//        signIn.setPage(); // Go to LogIn page
-//    }
-//    else {
-//        mainPage.setPage(); // Go again to Main page
-//    }
-//}
+
+mainPage.nevigateToSignUpPage = function (iServerReturn) {
+    if (iServerReturn.Status != "OK") {
+        signIn.setPage(); // Go to LogIn page
+    }
+    if (iServerReturn.StatusCode != 0) {
+        signIn.setPage(); // Go to LogIn page
+    }
+    else {
+        mainPage.setPage(); // Go again to Main page
+    }
+}
 
 mainPage.LoadLobbyPageRes = function (isSet) {
     $.ajax({
@@ -121,17 +150,17 @@ mainPage.LoadLobbyPageRes = function (isSet) {
     });
 }
 
-mainPage.onCategoryClicked = function () {
-    mainPage.IsLoggedIn();
+mainPage.onCategoryClicked = function (iEvent) {
+    mainPage.IsLoggedIn(iEvent.target.classList[1]);
 }
 
-mainPage.IsLoggedIn = function () {
-    if (mainPage.isLoggedinParam === undefined) {
+mainPage.IsLoggedIn = function (iCategoryName) {
+    if (mainPage.loggedInUser === "") {
         Platform.IsLogIn(mainPage.onIsloginCallback);
     }
     else {
-        if (mainPage.isLoggedinParam) {
-            templatesPage.setPage(); // Navigate to category's page
+        if (mainPage.loggedInUser) {
+            templatesPage.setPage(iCategoryName); // Navigate to category's page
         }
         else {
             signIn.setPage(); // Go to LogIn page
@@ -140,6 +169,11 @@ mainPage.IsLoggedIn = function () {
 }
 
 mainPage.onIsloginCallback = function (iResponse) {
-    mainPage.isLoggedinParam = iResponse.RetObject;
-    mainPage.IsLoggedIn();
+    if (iResponse.StatusCode === 0 && iResponse.RetObject){
+        mainPage.loggedInUser = "user";
+        Platform.GetLoggedInUserData(mainPage.onUserLogedinResponce);
+    }
+    else{
+        mainPage.loggedInUser = "";
+    }
 }
