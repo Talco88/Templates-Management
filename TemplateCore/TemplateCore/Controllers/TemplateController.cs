@@ -22,8 +22,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                //TODO: replace the empty string with the real name of the template
-                var template = appEngine.GetTemplate(requestBody.Data.templateName.Value, "");
+                var template = appEngine.GetTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.HeaderName.Value);
                 return SetSuccessResponce(template);
             }
             catch (Exception ex)
@@ -163,7 +162,19 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var generatedTemplate = appEngine.GenerateHTMLTemplateWithValues(requestBody.Data.Template.Value);
+                TemplateFormation templateFormation = new TemplateFormation();
+                templateFormation.HeaderName = requestBody.Data.Template.HeaderName;
+                templateFormation.CategoryName = requestBody.Data.Template.CategoryName;
+                List<WebDataContainer> list = new List<WebDataContainer>();
+                foreach(var item in requestBody.Data.Template.Values)
+                {
+                    WebDataContainer webDataContainer = new WebDataContainer();
+                    webDataContainer.Name = item.Name;
+                    webDataContainer.Value = item.Value;
+                    list.Add(webDataContainer);
+                }
+                templateFormation.Values = list;
+                var generatedTemplate = appEngine.GenerateHTMLTemplateWithValues(templateFormation);
                 return SetSuccessResponce(generatedTemplate);
             }
             catch (Exception ex)
