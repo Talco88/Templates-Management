@@ -183,8 +183,22 @@ namespace TemplateCore.Controllers
             }
         }
 
+        [HttpPost]
+        public dynamic OpenTemplateInWord([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                string templateContent = requestBody.Data.Content;
+                string fileName = requestBody.Data.FileName;
 
-
+                var generatedTemplate = appEngine.OpenTemplateInWord(templateContent, fileName);
+                return SetSuccessResponce(generatedTemplate);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
 
         [HttpPost]
         [Authorize(Roles = "Administrators")]

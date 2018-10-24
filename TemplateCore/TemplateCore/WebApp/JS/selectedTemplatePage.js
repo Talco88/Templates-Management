@@ -2,6 +2,7 @@
 var templateHeaderDetails = {};
 var templatePlaceHolders = [];
 var Global_Template_BaseHTMLData = "";
+var nameOfWordFile = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
@@ -69,10 +70,38 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
 
 selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
-        document.getElementById("showTemplateContent").innerText = iServerResponce.RetObject;
+        document.getElementById("showTemplateContent").innerText = iServerResponce.RetObject + "\n";
+        var showContenttDiv = document.getElementById("showTemplateContent");
+        var wordButton = document.createElement('button');
+        wordButton.innerText = "Open template in word";
+        wordButton.addEventListener("click", function () {
+            nameOfWordFile = "shani and or";
+            Platform.OpenTemplateInWord(nameOfWordFile, "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>", selectedTemplatesPage.OpenTemplateInWordRes);
+        });
+
+        showContenttDiv.appendChild(wordButton);
     }
     else
     {
         alert(iServerResponce.RetObject);
     }
+}
+
+selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
+    $.ajax({
+        url: "/" + iContent.RetObject,
+        method: 'Get',
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function (data) {
+            var a = document.createElement('a');
+            var url = window.URL.createObjectURL(data);
+            a.href = url;
+            var fileName = iContent.RetObject.slice(iContent.RetObject.lastIndexOf(nameOfWordFile), iContent.RetObject.length);
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+    });
 }

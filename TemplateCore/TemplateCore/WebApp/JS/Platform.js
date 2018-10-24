@@ -164,6 +164,16 @@ Platform.GenerateHTMLTemplateWithValues = function (iHeaderName, iCategoryName, 
     Platform.getDataFRomServer("Template/GenerateHTMLTemplateWithValues", dataWrapper, iResponseFunc);
 }
 
+Platform.OpenTemplateInWord = function (iFileName, iContent, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            Content: iContent,
+            FileName: iFileName
+        }
+    };
+    Platform.getDataFRomServer("Template/OpenTemplateInWord", dataWrapper, iResponseFunc);
+}
+
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
     var url = Platform.serverURL + path;
