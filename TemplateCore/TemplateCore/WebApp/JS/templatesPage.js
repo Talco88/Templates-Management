@@ -1,6 +1,7 @@
 ﻿var templatesPage = {}
 var Global_Template_BaseHTMLData = "";
 var iCategoryNameGlobal = undefined;
+var birthDayFields = ["Dear", "Date", "Age", "From"];
 
 templatesPage.setPage = function (iCategoryName) {
     iCategoryNameGlobal = iCategoryName;
@@ -17,7 +18,6 @@ templatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html(Global_Template_BaseHTMLData);
     $(".dynamic-category-name").html(templatesPage.categoryName);
     Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
-
 }
 
 templatesPage.LoadLobbyPageRes = function (isSet) {
@@ -56,25 +56,34 @@ templatesPage.SetCategoryNames = function (iCategoryName) {
 }
 
 templatesPage.onTopicSelected = function (iEvent) {
-    let selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
-    Platform.GetTemplate(iCategoryNameGlobal, selectedTopicName, templatesPage.valueFromTopicSelected);
+    var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
+    var fields = getTemplateFieldsFromTopicName(selectedTopicName);
+    var templateWrapper = {
+        templateHeader:{
+            MCategoryName: iCategoryNameGlobal,
+            TemplateHeaderName: selectedTopicName
+        },
+        templatePlaceHolders: fields
+    }
+
+    selectedTemplatesPage.setPage(templateWrapper);
 }
 
-templatesPage.valueFromTopicSelected = function (iServerResponce) {
-    if (iServerResponce.StatusCode === 0) {
-        //TODO: replace with real values.
-        var valuesArray = iServerResponce.RetObject.Values;
-        valuesArray[0].Value = "Or";
-        valuesArray[1].Value = "Horovitz";
-        valuesArray[2].Value = "Shani";
-        valuesArray[3].Value = "Somech";
-        
-        Platform.GenerateHTMLTemplateWithValues(iServerResponce.RetObject.HeaderName, iServerResponce.RetObject.CategoryName, valuesArray, templatesPage.showTemplateContentInPopUp);
+function getTemplateFieldsFromTopicName(iTopicName)
+{
+    let retVal;
+    switch(iTopicName)
+    {
+        case "יום הולדת":
+            {
+                retVal = birthDayFields;
+                break;
+            }
+        default:
+            {
+                break;
+            }
     }
-}
 
-templatesPage.showTemplateContentInPopUp = function (iServerResponce) {
-    if (iServerResponce.StatusCode === 0) {
-        console.log(iServerResponce.RetObject);
-    }
+    return retVal;
 }

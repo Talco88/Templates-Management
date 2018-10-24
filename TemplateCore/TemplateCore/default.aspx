@@ -11,6 +11,7 @@
     <script src="WebApp/JS/MainPage.js"></script>
     <script src="WebApp/JS/SignIn.js"></script>
     <script src="WebApp/JS/templatesPage.js"></script>
+    <script src="WebApp/JS/selectedTemplatePage.js"></script>
 
 <%--     CSS --%>
     <link href="WebApp/CSS/creative.css" rel="stylesheet" />

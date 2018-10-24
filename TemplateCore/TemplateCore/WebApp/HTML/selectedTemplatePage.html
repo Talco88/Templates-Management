@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="WebApp/JS/selectedTemplatePage.js"></script>
-    <title>Template-Me-SignUp</title>
+    <title>Selected template</title>
     <!-- Bootstrap core CSS -->
     <link href="WebApp/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom fonts for this template -->
@@ -131,62 +130,22 @@
             <div class="imgcontainer">
                 <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
             </div>
-            <div style="text-align: center">
-                <h1 style="color: #808080" class="card-title">Category: <strong class="dynamic-category-name"></strong></h1>
-                <div id="category_name" class="navbar-brand page-scroll" href="/"></div>
-                <h1 style="color: #067c8d" class="title">List of templates </h1>
+            <div style="text-align: left">
+                <h1 style="color: #808080" class="card-title">Place-holders: </h1>
+                <div id="replaceTempateContent"></div>
+                <div class="navbar-brand page-scroll" href="/"></div>
+                <hr />
+            </div>
+            <div style="text-align: left">
+                <h1 style="color: #067c8d" class="title">Template content:</h1>
+                <div id="showTemplateContent"></div>
+                <div class="navbar-brand page-scroll" href="/"></div>
                 <hr />
             </div>
         </div>
         <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
         </div>
-      </section>
-
-    <script type="text/javascript">
-    function validationUserInput()
-    {
-        //  var name = document.ContactForm.Name;
-        var email = document.singnupForm.email;
-        var gender=document.getElementsByName("gender");
-        var password=document.singnupForm.password;
-        var confirm=document.singnupForm.confirm;
-
-        if (email.value.indexOf("@", 0) < 0||email.value.indexOf(".", 0) < 0)
-        {
-            alert("Please enter a valid e-mail address.");
-            email.focus();
-            return false;
-        }
-        var okayGender=false;
-        var okayHobbies=false;
-        for(var i=0,l=gender.length;i<l;i++)
-        {
-            if(gender[i].checked)
-            {
-                okayGender=true;
-                break;
-            }
-        }
-        if(!okayGender)
-        {
-            alert("gender please");
-            return false;
-        }
-        if (password.value!=confirm.value)
-        {
-            password.focus;
-            confirm.focus;
-            alert("password and confirm must be equal");
-            return false
-        }
-        if (name.value == "")
-        {
-            window.alert("Please enter your name.");
-            name.focus();
-            return false;
-        }
-    }
-    </script>
+    </section>
 
     <section id="contact">
         <div class="container">
