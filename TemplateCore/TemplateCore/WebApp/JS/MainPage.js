@@ -117,11 +117,16 @@ mainPage.onLogedoutResponce = function (iServerReturn) {
     }
 }
 
-mainPage.onLoginResponce = function (iData) {
-    mainPage.nevigateToSignUpPage(iData);
-    //let respoDiv = document.querySelector('#write the div name or class');
-    //respoDiv.innerText = iData.RetObject;
+mainPage.onLoginResponce = function (iServerReturn) {
+    if (iServerReturn.StatusCode === 0) { //sucesses
+        mainPage.setPage(); // Go again to Main page
+    }
+    else {
+        // faild to login
+        $(".server-error-response").html(iServerReturn.RetObject);
+    }
 }
+
 
 
 mainPage.nevigateToSignUpPage = function (iServerReturn) {
