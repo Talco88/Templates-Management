@@ -236,6 +236,14 @@ header.masthead {
     margin: 0 auto;
 }
 
+.mx-auto {
+    margin-left: auto;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
+
     .portfolio-box .portfolio-box-caption {
         position: absolute;
         bottom: 0;
@@ -245,7 +253,8 @@ header.masthead {
         text-align: center;
         opacity: 0;
         color: #fff;
-        background: rgba(240,95,64,.9);
+        /*background: rgba(240,95,64,.9);*/
+        background: #94d0da;
         -webkit-transition: all .2s;
         -moz-transition: all .2s;
         transition: all .2s;
