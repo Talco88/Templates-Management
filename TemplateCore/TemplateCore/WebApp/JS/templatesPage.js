@@ -1,7 +1,10 @@
 ﻿var templatesPage = {}
 var Global_Template_BaseHTMLData = "";
+var iCategoryNameGlobal = undefined;
+var birthDayFields = ["Dear", "Date", "Age", "From"];
 
 templatesPage.setPage = function (iCategoryName) {
+    iCategoryNameGlobal = iCategoryName;
     templatesPage.categoryName = iCategoryName;
     if (Global_Template_BaseHTMLData === "") {
         templatesPage.LoadLobbyPageRes(true);
@@ -15,7 +18,6 @@ templatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html(Global_Template_BaseHTMLData);
     $(".dynamic-category-name").html(templatesPage.categoryName);
     Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
-
 }
 
 templatesPage.LoadLobbyPageRes = function (isSet) {
@@ -53,7 +55,35 @@ templatesPage.SetCategoryNames = function (iCategoryName) {
     }
 }
 
-templatesPage.onTopicSelected = function(iEvent){
-    let selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
-    console.log(selectedTopicName);
+templatesPage.onTopicSelected = function (iEvent) {
+    var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
+    var fields = getTemplateFieldsFromTopicName(selectedTopicName);
+    var templateWrapper = {
+        templateHeader:{
+            MCategoryName: iCategoryNameGlobal,
+            TemplateHeaderName: selectedTopicName
+        },
+        templatePlaceHolders: fields
+    }
+
+    selectedTemplatesPage.setPage(templateWrapper);
+}
+
+function getTemplateFieldsFromTopicName(iTopicName)
+{
+    let retVal;
+    switch(iTopicName)
+    {
+        case "יום הולדת":
+            {
+                retVal = birthDayFields;
+                break;
+            }
+        default:
+            {
+                break;
+            }
+    }
+
+    return retVal;
 }

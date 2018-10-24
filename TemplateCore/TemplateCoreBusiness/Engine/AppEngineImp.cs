@@ -260,7 +260,10 @@ namespace TemplateCoreBusiness.Engine
         {
             for (int i = 0; i < iValues.Count; i++)
             {
-                iTemplate = iTemplate.Replace($"${iValues[i].Name}", iValues[i].Value);
+                if(iValues[i].Value != null)
+                {
+                    iTemplate = iTemplate.Replace($"${iValues[i].Name}", iValues[i].Value);
+                }
             }
 
             return iTemplate;

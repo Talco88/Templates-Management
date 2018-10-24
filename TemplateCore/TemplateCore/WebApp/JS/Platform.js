@@ -53,10 +53,11 @@ Platform.GetLoggedInUserData = function (iResponseFunc) {
 }
 
 // Template Controller API
-Platform.GetTemplate = function(iTemplateName, iResponseFunc) {
+Platform.GetTemplate = function(iCategoryName, iTemplateName, iResponseFunc) {
     var dataWrapper = {
         Data: {
-            templateName: iTemplateName
+            CategoryName: iCategoryName,
+            HeaderName: iTemplateName
         } 
     };
     Platform.getDataFRomServer("Template/GetTemplate", dataWrapper, iResponseFunc);
@@ -150,7 +151,7 @@ Platform.RemoveMarkTemplateAsFavorite = function (iCategoryName, iResponseFunc) 
     Platform.getDataFRomServer("Template/RemoveMarkTemplateAsFavorite", dataWrapper, iResponseFunc);
 }
 
-Platform.GenerateHTMLTemplateWithValues = function (iHeaderName, iCategoryName, Values, iResponseFunc) {
+Platform.GenerateHTMLTemplateWithValues = function (iHeaderName, iCategoryName, iValues, iResponseFunc) {
     var dataWrapper = {
         Data: {
             Template: {
