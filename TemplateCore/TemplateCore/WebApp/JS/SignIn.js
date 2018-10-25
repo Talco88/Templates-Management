@@ -8,6 +8,7 @@ signIn.setPage = function () {
     else {
         signIn.onPagedRecived();
     }
+    //$(document).scrollTop(0);
 }
 
 signIn.onPagedRecived = function () {
