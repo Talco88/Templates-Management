@@ -20,7 +20,6 @@ templatesPage.onPagedRecived = function () {
         $(".dynamic-category-name").html(templatesPage.categoryName);
         Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
     }, 1);
-
 }
 
 templatesPage.LoadLobbyPageRes = function (isSet) {

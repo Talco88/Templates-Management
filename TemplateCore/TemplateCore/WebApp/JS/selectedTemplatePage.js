@@ -29,9 +29,11 @@ selectedTemplatesPage.LoadTemplatePageRes = function (isSet) {
 }
 
 selectedTemplatesPage.onPagedRecived = function () {
-    $("#MainAppWindow").html(Global_Template_BaseHTMLData);
-
-    Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
+    $("#MainAppWindow").html("");
+    setTimeout(function () {
+        $("#MainAppWindow").html(Global_Template_BaseHTMLData);
+        Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
+    }, 1);
 }
 
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
