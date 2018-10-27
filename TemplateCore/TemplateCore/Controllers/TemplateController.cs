@@ -46,6 +46,20 @@ namespace TemplateCore.Controllers
         }
 
         [HttpPost]
+        public dynamic GetAllTemplatesInCategory([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var template = appEngine.GetAllTemplatesInCategory(requestBody.Data.CategoryName.Value);
+                return SetSuccessResponce(template);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
         public dynamic SearchTemplate([FromBody]dynamic requestBody)
         {
             try

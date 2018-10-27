@@ -46,6 +46,14 @@ h6 {
   background-color: #212529 !important;
 }
 
+.rating{
+  height: 40px;
+}
+
+.template-property-wrapper{
+  height: 50px;
+}
+
 .text-faded {
   color: rgba(255, 255, 255, 0.7);
 }

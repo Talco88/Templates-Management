@@ -98,6 +98,15 @@ Platform.GetTopicsInCategory = function (iCategoryName, iResponseFunc) {
     Platform.getDataFRomServer("Template/GetTopicsInCategory", dataWrapper, iResponseFunc);
 }
 
+Platform.GetAllTemplatesInCategory = function (iCategoryName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName
+        }
+    };
+    Platform.getDataFRomServer("Template/GetAllTemplatesInCategory", dataWrapper, iResponseFunc);
+}
+
 Platform.RateTamplate = function (iCategoryName, iTemplateName, iRateNumber, iResponseFunc) {
     var dataWrapper = {
         Data: {

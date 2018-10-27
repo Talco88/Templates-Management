@@ -268,6 +268,11 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
+        public List<TemplateEntity> GetAllTemplatesInCategory(string iCategoryName)
+        {
+            return getAllTemplatesInCategory(iCategoryName);
+        }
+
         private string switchValuesInTemplate(string iTemplate, List<WebDataContainer> iValues)
         {
             for (int i = 0; i < iValues.Count; i++)
@@ -389,6 +394,18 @@ namespace TemplateCoreBusiness.Engine
         private bool isAuthorizeToUpdateTemplate(TemplateEntity iTemplateEntity, UserEntity iUserEntity)
         {
             return iUserEntity.IsAdmin || iTemplateEntity.UserIdentity.Equals(iUserEntity.Email);
+        }
+
+        private List<TemplateEntity> getAllTemplatesInCategory(string iCategoryName)
+        {
+            List<TemplateEntity> retVal = new List<TemplateEntity>();
+            List<string> topicsInCategory = GetTopicsInCategory(iCategoryName);
+            foreach (string item in topicsInCategory)
+            {
+                retVal.Add(GetTemplateDetails(iCategoryName, item));
+            }
+
+            return retVal;
         }
     }
 }
