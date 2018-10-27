@@ -80,9 +80,10 @@ mainPage.onUserLogedinResponce = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         userName = iServerResponce.RetObject.FirstName;
     }
-    else {
-        console.log(iServerResponce.RetObject);
-    }
+    //else {
+    //    console.log(iServerResponce.RetObject);
+    //    alert(iServerResponce.RetObject);
+    //}
 
     mainPage.SetUserInfo(userName);
 }
@@ -162,14 +163,10 @@ mainPage.onCategoryClicked = function (iEvent) {
 mainPage.IsLoggedIn = function (iCategoryName) {
     if (mainPage.loggedInUser === "") {
         Platform.IsLogIn(mainPage.onIsloginCallback);
+        alert("You must log in first");
     }
     else {
-        if (mainPage.loggedInUser) {
-            templatesPage.setPage(iCategoryName); // Navigate to category's page
-        }
-        else {
-            signIn.setPage(); // Go to LogIn page
-        }
+        templatesPage.setPage(iCategoryName); // Navigate to category's page
     }
 }
 

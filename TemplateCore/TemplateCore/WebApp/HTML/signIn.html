@@ -100,185 +100,177 @@
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#067c8d" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/default.aspx">Template-Me</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                </ul>
-            </div>
+            <a class="navbar-brand page-scroll text-primary" href="/">Template-Me</a>
+            <a class="fa fa-2x fa fa-home text-primary sr-icons" href="/"></a>
         </div>
     </nav>
+            <section style="background-color: #ced4da">
+                <div class="container">
+                    <div class="imgcontainer">
+                        <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+                    </div>
+                    <div style="text-align: center">
+                        <h1 style="color: #808080" class="card-title">OOPS! You didn't sign up yet </h1>
+                        <h1 style="color: #067c8d" class="title">TemplateMe Sign Up </h1>
+                        <hr />
+                    </div>
+                </div>
+                <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
 
-    <section style="background-color: #ced4da">
-        <div class="container">
-            <div class="imgcontainer">
-                <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
-            </div>
-            <div style="text-align: center">
-                <h1 style="color: #808080" class="card-title">OOPS! You didn't sign up yet </h1>
-                <h1 style="color: #067c8d" class="title">TemplateMe Sign Up </h1>
-                <hr />
-            </div>
-        </div>
-        <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
+                    <!--<div class="main-login main-center">-->
+                    <div name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
+                        <br>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Your First Name</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter your First Name" required />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">Your Last Name</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter your Last Name" required />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" required />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="age" class="cols-sm-2 control-label">Your Gender</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-male" aria-hidden="true"></i></span>
+                                    <input type="radio" class="form-control" value="Male" name="gender" /> Male<br />
+                                    <span class="input-group-addon"><i class="fa fa-female" aria-hidden="true"></i></span>
+                                    <input type="radio" class="form-control" name="gender" value="Female" /> Female<br />
+                                    <span class="input-group-addon"><i class="fa fa-male" aria-hidden="true"></i></span>
+                                    <span class="input-group-addon"><i class="fa fa-female" aria-hidden="true"></i></span>
+                                    <input type="radio" class="form-control" name="gender" value="B" /> It doesn't matter <br />
+                                </div>
+                            </div>
+                        </div>
 
-            <!--<div class="main-login main-center">-->
-            <div name="singnupForm" class="form-horizontal" method="post" action="/users/signup" onsubmit="return validationUserInput()">
-                <br>
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Your First Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="fname" id="fname" placeholder="Enter your First Name" required />
+                        <!--<div class="form-group">
+                            <label for="username" class="cols-sm-2 control-label">Username</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" required />
+                                </div>
+                            </div>
+                        </div>-->
+                        <br>
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Your Last Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="lname" id="lname" placeholder="Enter your Last Name" required />
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" required />
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-group">
-                    <label for="age" class="cols-sm-2 control-label">Your Gender</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-male" aria-hidden="true"></i></span>
-                            <input type="radio" class="form-control" value="Male" name="gender" /> Male<br />
-                            <span class="input-group-addon"><i class="fa fa-female" aria-hidden="true"></i></span>
-                            <input type="radio" class="form-control" name="gender" value="Female" /> Female<br />
-                            <span class="input-group-addon"><i class="fa fa-male" aria-hidden="true"></i></span>
-                            <span class="input-group-addon"><i class="fa fa-female" aria-hidden="true"></i></span>
-                            <input type="radio" class="form-control" name="gender" value="B" /> It doesn't matter <br />
-                        </div>
-                    </div>
-                </div>
 
-                <!--<div class="form-group">
-                    <label for="username" class="cols-sm-2 control-label">Username</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" required />
+                        <div class="form-group">
+                            <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" required />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>-->
-                <br>
-                <div class="form-group">
-                    <label for="password" class="cols-sm-2 control-label">Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" required />
+                        <br><br>
+                        <div class="form-group ">
+                            <button id="register-btn" type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" required />
-                        </div>
-                    </div>
-                </div>
-                <br><br>
-                <div class="form-group ">
-                    <button id="register-btn" type="submit" class="btn btn-primary btn-lg btn-block login-button">Register</button>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a href="/login" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-sign-in"></span>Login</a>
-    <!--<a href="/signup" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-user"></span> Signup</a>-->
-
-    <!--<script type="text/javascript">
-    function validationUserInput()
-    {
-        //  var name = document.ContactForm.Name;
-        var email = document.singnupForm.email;
-        var gender=document.getElementsByName("gender");
-        var password=document.singnupForm.password;
-        var confirm=document.singnupForm.confirm;
-
-        if (email.value.indexOf("@", 0) < 0||email.value.indexOf(".", 0) < 0)
-        {
-            alert("Please enter a valid e-mail address.");
-            email.focus();
-            return false;
-        }
-        var okayGender=false;
-        var okayHobbies=false;
-        for(var i=0,l=gender.length;i<l;i++)
-        {
-            if(gender[i].checked)
+            </section>
+            <a href="/login" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-sign-in"></span>Login</a>
+            <!--<a href="/signup" class="btn btn-default" style="background-color: #d3d3d3"><span class="fa fa-user"></span> Signup</a>-->
+            <!--<script type="text/javascript">
+            function validationUserInput()
             {
-                okayGender=true;
-                break;
-            }
-        }
-        if(!okayGender)
-        {
-            alert("gender please");
-            return false;
-        }
-        if (password.value!=confirm.value)
-        {
-            password.focus;
-            confirm.focus;
-            alert("password and confirm must be equal");
-            return false
-        }
-        if (name.value == "")
-        {
-            window.alert("Please enter your name.");
-            name.focus();
-            return false;
-        }
-    }
-    </script>-->
+                //  var name = document.ContactForm.Name;
+                var email = document.singnupForm.email;
+                var gender=document.getElementsByName("gender");
+                var password=document.singnupForm.password;
+                var confirm=document.singnupForm.confirm;
 
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
-                    <hr class="my-4">
-                    <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
+                if (email.value.indexOf("@", 0) < 0||email.value.indexOf(".", 0) < 0)
+                {
+                    alert("Please enter a valid e-mail address.");
+                    email.focus();
+                    return false;
+                }
+                var okayGender=false;
+                var okayHobbies=false;
+                for(var i=0,l=gender.length;i<l;i++)
+                {
+                    if(gender[i].checked)
+                    {
+                        okayGender=true;
+                        break;
+                    }
+                }
+                if(!okayGender)
+                {
+                    alert("gender please");
+                    return false;
+                }
+                if (password.value!=confirm.value)
+                {
+                    password.focus;
+                    confirm.focus;
+                    alert("password and confirm must be equal");
+                    return false
+                }
+                if (name.value == "")
+                {
+                    window.alert("Please enter your name.");
+                    name.focus();
+                    return false;
+                }
+            }
+            </script>-->
+
+            <section id="contact">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 mx-auto text-center">
+                            <h2 class="section-heading">Let's Get In Touch!</h2>
+                            <hr class="my-4">
+                            <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                            <p>
+                                <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
+                            </p>
+                            <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p>
-                        <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
-                    </p>
-                    <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
 </body>
 </html>
