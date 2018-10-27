@@ -66,8 +66,6 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
             rateDiv.innerText =  iCategoryNames[i].Rate.toString() + "/5";
             wrapperDiv.appendChild(rateDiv);
 
-            
-
             categoryTitleContainer.appendChild(wrapperDiv);
         }
     }

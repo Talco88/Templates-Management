@@ -34,7 +34,11 @@ namespace TemplateCoreBusiness.Models
         public void AddRate(int iNewRate)
         {
             AddRateCounter();
-            AddRateSum(iNewRate);
+            if(RateCounter > 1)
+            {
+                AddRateSum(iNewRate);
+            }
+            
             Rate = (RateSum + iNewRate) / RateCounter;
         }
 

@@ -36,7 +36,19 @@ selectedTemplatesPage.onPagedRecived = function () {
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
         let backBtn = document.querySelector("#backBtn");
         backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
+        var selectedReplaceTemplate = document.getElementById("nameOfTemplate");
+        selectedReplaceTemplate.innerText = selectedReplaceTemplate.innerText + " " + templateHeaderDetails.TemplateHeaderName;
+
+        let starsTiles = document.getElementsByName("rating");
+        for (var i = 0; i < starsTiles.length; i++) {
+            starsTiles[i].onclick = selectedTemplatesPage.onStarBtnClicked;
+        }
     }, 1);
+}
+
+selectedTemplatesPage.onStarBtnClicked = function (iEvent) {
+    var index = iEvent.target.value;
+    Platform.RateTamplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, index, selectedTemplatesPage.onStarBtnClickedRes);
 }
 
 selectedTemplatesPage.onBackBtnClicked = function () {
@@ -146,4 +158,8 @@ selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
     {
         alert("You must give name to the word file!!!");
     }
+}
+
+selectedTemplatesPage.onStarBtnClickedRes = function (iContent) {
+    
 }

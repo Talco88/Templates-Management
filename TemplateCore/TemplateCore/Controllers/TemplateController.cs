@@ -143,7 +143,8 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var rateResponce = appEngine.RateTamplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, requestBody.Data.RateNumber.Value);
+                int number = Convert.ToInt32(requestBody.Data.RateNumber.Value);
+                var rateResponce = appEngine.RateTamplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, number);
                 return SetSuccessResponce(rateResponce);
             }
             catch (Exception ex)
