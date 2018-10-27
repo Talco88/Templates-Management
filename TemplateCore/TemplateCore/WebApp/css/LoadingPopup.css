@@ -1,0 +1,18 @@
+﻿#loadingPopUp {
+    position: fixed;
+    z-index: 10;
+    width:99%;
+    height: 98vh;
+    background-image: url('../img/loading/loading.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%; 
+    opacity: 0.6;
+}
+
+.show-div{
+    display: block;
+}
+
+.hide-div{
+    display: none;
+}
