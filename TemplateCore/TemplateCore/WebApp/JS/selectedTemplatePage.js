@@ -100,8 +100,13 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
         wordButton.innerText = "Open template in word";
         wordButton.addEventListener("click", function () {
             nameOfWordFile = document.getElementById("FileNameText").value;;
-            console.log(templateComtent.toString());
-            Platform.OpenTemplateInWord(nameOfWordFile, templateComtent.toString(), selectedTemplatesPage.OpenTemplateInWordRes);
+            var fileNameText = document.getElementById("FileNameText").value;
+            if (fileNameText && fileNameText !== "") {
+                Platform.OpenTemplateInWord(nameOfWordFile, templateComtent.toString(), selectedTemplatesPage.OpenTemplateInWordRes);
+            }
+            else {
+                alert("You must give name to the word file!!!");
+            }
         });
 
         showContenttDiv.appendChild(wordButton);
@@ -119,7 +124,6 @@ selectedTemplatesPage.onBackSelected = function (iEvent) {
 
 selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
     var fileNameText = document.getElementById("FileNameText").value;
-    console.log("fileNameText", fileNameText);
     if (fileNameText && fileNameText !== "")
     {
         $.ajax({
