@@ -34,6 +34,13 @@ selectedTemplatesPage.onPagedRecived = function () {
         $("#MainAppWindow").html(Global_Template_BaseHTMLData);
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
     }, 1);
+
+    let backBtn = document.querySelector("#backBtn");
+    backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
+}
+
+selectedTemplatesPage.onBackBtnClicked = function () {
+    templatesPage.setPage();
 }
 
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
@@ -100,6 +107,11 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     {
         alert(iServerResponce.RetObject);
     }
+}
+
+selectedTemplatesPage.onBackSelected = function (iEvent) {
+    backBtn
+    templatesPage.setPage();
 }
 
 selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
