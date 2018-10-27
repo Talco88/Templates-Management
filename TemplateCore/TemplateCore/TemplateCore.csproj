@@ -97,8 +97,6 @@
     <Content Include="WebApp\img\birthday.jpg" />
     <Content Include="WebApp\img\buisness.jpg" />
     <Content Include="WebApp\img\header.jpg" />
-    <Content Include="WebApp\img\loading\loading.gif" />
-    <Content Include="WebApp\img\loading\loading1.png" />
     <Content Include="WebApp\img\logo2.png" />
     <Content Include="WebApp\img\portfolio\fullsize\1.jpg" />
     <Content Include="WebApp\img\portfolio\fullsize\2.jpg" />
