@@ -480,7 +480,7 @@ ul.social-buttons li a {
 }
 
 .rating > label { 
-  color: #ddd; 
+  color: #f8f9fa; 
  float: right; 
 }
 
@@ -488,9 +488,9 @@ ul.social-buttons li a {
 
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+.rating:not(:checked) > label:hover ~ label { color: #8ed8e4;  } /* hover previous stars in list */
 
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+.rating > input:checked ~ label:hover ~ label { color: #067c8d;  } 
