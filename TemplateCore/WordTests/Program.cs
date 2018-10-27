@@ -24,8 +24,8 @@ namespace WordTests
                 //INSERT
                 //CreateAdminUsers();
                 //CreateTopics();
-                //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
-                //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
+                string jsonValue = "{\"Template\": \"<p  align=''left'' style=''font-size:20px; color:green;''><b>To: </b>$Name </p><p align=''left'' style=''font-size:16px; color:blueViolet;''><b>DATE: </b> $Date </p><p align=''left'' style=''font-size:12px; color:black; ''>So what if you are getting older</br>There are worse things to be,Like a goofy, pimply teenager</br> With zero self-esteem.</br>So what if you got a few wrinkles</br>There are worse things to have</br>Like a case of the twentysomethings</br>And a room at Mom and Dad</br>To me, you are simply wonderful.</br>Everything about you is just right</br>So have a happy birthday</br>And lets party all night</br></p><p align =''left'' style=''font-size:20px; color:red;''><b>Yours:</br></b>$From </p>\", \"numberOfChanges\": 3}";
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "Birthday", "shani", "Greetings");
                 //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
                 /*
@@ -96,7 +96,7 @@ namespace WordTests
                 */
 
                 //Office
-                Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>", "shani"));
+                //Console.WriteLine(AppEngineBuilder.GetAppEngine().OpenTemplateInWord("<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>", "shani"));
                 //Console.WriteLine();
             }
             catch (Exception ex)
@@ -107,18 +107,7 @@ namespace WordTests
 
         private static void CreateTopics()
         {
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבן"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "הולדת הבת"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "יום הולדת"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "שנה טובה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "בר מצווה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("ברכות", "בת מצווה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "חוזה עבודה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "חוזה שכר דירה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("מסמכים", "תביעה"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "מייל לעובדים"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דפוס חוזר"));
-            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("כללי", "דף שער"));
+            Console.WriteLine(AppEngineBuilder.GetAppEngine().CreateNewTopic("Greetings", "Birthday"));
         }
 
         private static void CreateAdminUsers()

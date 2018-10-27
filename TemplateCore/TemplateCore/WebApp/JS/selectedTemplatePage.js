@@ -2,6 +2,7 @@
 var templateHeaderDetails = {};
 var Global_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
+var templateComtent = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
@@ -70,7 +71,8 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
 
 selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
-        document.getElementById("showTemplateContent").innerText = iServerResponce.RetObject + "\n";
+        templateComtent = iServerResponce.RetObject;
+        $("#showTemplateContent").html(templateComtent);
         var showContenttDiv = document.getElementById("showTemplateContent");
 
         var propertyDiv = document.createElement('div');
@@ -89,7 +91,8 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
         wordButton.innerText = "Open template in word";
         wordButton.addEventListener("click", function () {
             nameOfWordFile = document.getElementById("FileNameText").value;;
-            Platform.OpenTemplateInWord(nameOfWordFile, "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>", selectedTemplatesPage.OpenTemplateInWordRes);
+            console.log(templateComtent.toString());
+            Platform.OpenTemplateInWord(nameOfWordFile, templateComtent.toString(), selectedTemplatesPage.OpenTemplateInWordRes);
         });
 
         showContenttDiv.appendChild(wordButton);
