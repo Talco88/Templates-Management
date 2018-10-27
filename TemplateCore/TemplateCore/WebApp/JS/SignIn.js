@@ -79,10 +79,16 @@ function validationUserInput() {
     //var gender = document.querySelector('.gender');
     var confirm = document.querySelector('#confirm');
 
-    if (name.value == "") {
-    window.alert("Please enter your name.");
-    name.focus();
+    if (fname.value == "") {
+    window.alert("Please enter your first name.");
+    fname.focus();
     return false;
+    }
+
+    if (lname.value == "") {
+        window.alert("Please enter your last name.");
+        lname.focus();
+        return false;
     }
 
     if (email.value.indexOf("@", 0) < 0 || email.value.indexOf(".", 0) < 0) {
