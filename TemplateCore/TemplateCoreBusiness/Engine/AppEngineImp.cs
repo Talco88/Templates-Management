@@ -51,6 +51,18 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
+        public TemplateEntity GetTemplateDetails(string iCategoryName, string iTemplateName)
+        {
+            try
+            {
+                return getTemplateDetailsFromDB(iCategoryName, iTemplateName);
+            }
+            catch (Exception e)
+            {
+                throw new Exception($"Error during GetTemplate: {e.Message}");
+            }
+        }
+
         public List<string> GetTemplateFromSearch(string iSearchKey, bool isAdmin = false, string iUserEmail = "")
         {
             return DataBaseFactory.GetDbInstance().SearchTemplate(iSearchKey, isAdmin, iUserEmail);
@@ -276,6 +288,11 @@ namespace TemplateCoreBusiness.Engine
             List<string> fieldsNames = getListFieldsNamesFromTemplate(templateData["Template"].ToString());
 
             return createTemplateFormationWithValues(templateEntity.Category, templateEntity.HeadName, fieldsNames);
+        }
+
+        private TemplateEntity getTemplateDetailsFromDB(string iCategoryName, string iTemplateName)
+        {
+            return DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
         }
 
         private TemplateFormation createTemplateFormationWithValues(string iCategoryName, string iTemplateName,

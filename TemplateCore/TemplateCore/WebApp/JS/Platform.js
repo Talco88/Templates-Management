@@ -63,6 +63,16 @@ Platform.GetTemplate = function(iCategoryName, iTemplateName, iResponseFunc) {
     Platform.getDataFRomServer("Template/GetTemplate", dataWrapper, iResponseFunc);
 }
 
+Platform.GetTemplateDetails = function (iCategoryName, iTemplateName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            HeaderName: iTemplateName
+        }
+    };
+    Platform.getDataFRomServer("Template/GetTemplateDetails", dataWrapper, iResponseFunc);
+}
+
 Platform.SearchTemplate = function(iSearchKey, iResponseFunc) {
     var dataWrapper = {
         Data: {
