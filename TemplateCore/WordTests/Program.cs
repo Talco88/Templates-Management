@@ -15,6 +15,10 @@ namespace WordTests
 {
     class Program
     {
+        const string birthday = "{\"Template\": \"<p  align=''left'' style=''font-size:20px; color:green;''><b>To: </b>$Name </p><p align=''left'' style=''font-size:16px; color:blueViolet;''><b>DATE: </b> $Date </p><p align=''left'' style=''font-size:12px; color:black; ''>So what if you are getting older</br>There are worse things to be,Like a goofy, pimply teenager</br> With zero self-esteem.</br>So what if you got a few wrinkles</br>There are worse things to have</br>Like a case of the twenty somethings</br>And a room at Mom and Dad</br>To me, you are simply wonderful.</br>Everything about you is just right</br>So have a happy birthday</br>And lets party all night</br></p><p align =''left'' style=''font-size:20px; color:red;''><b>Yours:</br></b>$From </p>\", \"numberOfChanges\": 3}";
+        const string birthdayBoss = "{\"Template\": \"<p  align=''left'' style=''font-size:30px; color:pink;''><b>To: </b>$Name </p><p align=''left'' style=''font-size:20px; color:red;''><b>DATE: </b> $Date </p><p align=''left'' style=''font-size:18px; color:black; ''>Happy Birthday, to  <b> my boss!</b> </br>You are always professional towards your employees! </br> I hope your special day goes well!.</br>I am so blessed to have a kindhearted boss like you. Your invaluable contributions in my life are fully appreciated.</br></p><p align =''left'' style=''font-size:20px; color:red;''><b>from:</br></b>$From </p>\", \"numberOfChanges\": 3}";
+        const string Bar_Mitzvah_Wishes = "{\"Template\": \"<p  align=''left'' style=''font-size:25px; color:blue;''><b>Congratulations </b>$Name </p><p align=''left'' style=''font-size:20px; color:purple;''></p><p align=''left'' style=''font-size:20px; color:black; ''>Mazel tov on your bar mitzvah!</br>What a milestone! Enjoy being celebrated today — you deserve it! </br>Wishing you lots of happiness as you enter adulthood. </br>Be proud of yourself today!</br>Thank you for inviting me to celebrate this important time with you. Congratulations! </br>Let the Torah inspire you and guide you through this beautiful life.</br>Wishing you blessings and joy as you step into adulthood</br></p><p align =''left'' style=''font-size:20px; color:red;''><b>love:</br></b>$From </p>\", \"numberOfChanges\": 2}";
+
         static void Main(string[] args)
         {
             //Test.BasicTest();
@@ -24,8 +28,8 @@ namespace WordTests
                 //INSERT
                 //CreateAdminUsers();
                 //CreateTopics();
-                string jsonValue = "{\"Template\": \"<p  align=''left'' style=''font-size:20px; color:green;''><b>To: </b>$Name </p><p align=''left'' style=''font-size:16px; color:blueViolet;''><b>DATE: </b> $Date </p><p align=''left'' style=''font-size:12px; color:black; ''>So what if you are getting older</br>There are worse things to be,Like a goofy, pimply teenager</br> With zero self-esteem.</br>So what if you got a few wrinkles</br>There are worse things to have</br>Like a case of the twenty somethings</br>And a room at Mom and Dad</br>To me, you are simply wonderful.</br>Everything about you is just right</br>So have a happy birthday</br>And lets party all night</br></p><p align =''left'' style=''font-size:20px; color:red;''><b>Yours:</br></b>$From </p>\", \"numberOfChanges\": 3}";
-                AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "Birthday", "shani", "Greetings");
+                string jsonValue = Bar_Mitzvah_Wishes;
+                AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "Bar Mitzvah Wishes", "shani", "Greetings");
                 //string jsonValue = "{\"Template\": \" this is a $firstName $lastName \n $FriendFirstName $FriendLastName\", \"numberOfChanges\": 4}";
                 //AppEngineBuilder.GetAppEngine().CreateNewTemplate(jsonValue, "יום הולדת", "orho@gmail.com", "ברכות");
                 /*

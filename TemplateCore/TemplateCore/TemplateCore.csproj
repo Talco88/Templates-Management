@@ -116,6 +116,7 @@
     <Content Include="WebApp\img\team\SHANI.jpg" />
     <Content Include="WebApp\img\team\TAL.jpg" />
     <Content Include="WebApp\img\thankyou.jpg" />
+    <Content Include="WebApp\JS\createTemplatePage.js" />
     <Content Include="WebApp\JS\creative.js" />
     <Content Include="WebApp\JS\creative.min.js" />
     <Content Include="WebApp\JS\gulpfile.js" />
