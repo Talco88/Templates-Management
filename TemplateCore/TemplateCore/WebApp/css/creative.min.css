@@ -500,11 +500,11 @@ section#contact .form-group textarea.form-control {
     height: 300px;
 }
 textarea.form-control {
-    height: auto;
+    height: 15rem;
 }
 .form-control {
     display: block;
-    width: 100%;
+    width: 50%;
     height: calc(2.25rem + 2px);
     padding: .375rem .75rem;
     font-size: 1rem;
