@@ -1,12 +1,10 @@
 ﻿var selectedTemplatesPage = {};
 var templateHeaderDetails = {};
-var templatePlaceHolders = [];
 var Global_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
-    templatePlaceHolders = iTemplateWrapper.templatePlaceHolders;
 
     if (Global_Template_BaseHTMLData === "") {
         selectedTemplatesPage.LoadTemplatePageRes(true);
@@ -39,10 +37,13 @@ selectedTemplatesPage.onPagedRecived = function () {
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         var replacementDiv = document.getElementById("replaceTempateContent");
-        for (var i = 0; i < templatePlaceHolders.length; i++)
+        var valuesArray = iServerResponce.RetObject.Values;
+        var lengthArray = valuesArray.length;
+
+        for (var i = 0; i < lengthArray; i++)
         {
             var propertyDiv = document.createElement('div');
-            propertyDiv.innerText = templatePlaceHolders[i] + ":  ";
+            propertyDiv.innerText = valuesArray[i].Name + ":  ";
         
             var inputField = document.createElement("INPUT");
             inputField.setAttribute("type", "text");
@@ -56,7 +57,6 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
         var submitButton = document.createElement('button');
         submitButton.innerText = "Show values in template";
         submitButton.addEventListener("click", function () {
-            var valuesArray = iServerResponce.RetObject.Values;
             for (var i = 0; i < valuesArray.length; i++) {
                 valuesArray[i].Value = document.getElementById(i).value;
             }
@@ -72,10 +72,23 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         document.getElementById("showTemplateContent").innerText = iServerResponce.RetObject + "\n";
         var showContenttDiv = document.getElementById("showTemplateContent");
+
+        var propertyDiv = document.createElement('div');
+        propertyDiv.innerText = "Insert name to the word document file:  ";
+
+        var inputField = document.createElement("INPUT");
+        inputField.setAttribute("type", "text");
+        inputField.setAttribute("id", "FileNameText");
+        inputField.setAttribute("placeholder", "Insert value");
+        inputField.setAttribute("required", "");
+        propertyDiv.appendChild(inputField);
+
+        showContenttDiv.appendChild(propertyDiv);
+
         var wordButton = document.createElement('button');
         wordButton.innerText = "Open template in word";
         wordButton.addEventListener("click", function () {
-            nameOfWordFile = "shani and or";
+            nameOfWordFile = document.getElementById("FileNameText").value;;
             Platform.OpenTemplateInWord(nameOfWordFile, "<p  align=\"right\" style=\"font-size:20px; color:green;\">אני <b>ושני </b>גדולים.</p><p align=\"left\" style=\"font-size:16px; color:blueViolet;\"><b>This text</b> is <b>bold or.</b></p><p align=\"left\" style=\"font-size:12px; color:blue; \">YESSSSSSS\nYOOOOOOOOOHOOOOOOOO</p>", selectedTemplatesPage.OpenTemplateInWordRes);
         });
 
@@ -88,20 +101,29 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
 }
 
 selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
-    $.ajax({
-        url: "/" + iContent.RetObject,
-        method: 'Get',
-        xhrFields: {
-            responseType: 'blob'
-        },
-        success: function (data) {
-            var a = document.createElement('a');
-            var url = window.URL.createObjectURL(data);
-            a.href = url;
-            var fileName = iContent.RetObject.slice(iContent.RetObject.lastIndexOf(nameOfWordFile), iContent.RetObject.length);
-            a.download = fileName;
-            a.click();
-            window.URL.revokeObjectURL(url);
-        }
-    });
+    var fileNameText = document.getElementById("FileNameText").value;
+    console.log("fileNameText", fileNameText);
+    if (fileNameText && fileNameText !== "")
+    {
+        $.ajax({
+            url: "/" + iContent.RetObject,
+            method: 'Get',
+            xhrFields: {
+                responseType: 'blob'
+            },
+            success: function (data) {
+                var a = document.createElement('a');
+                var url = window.URL.createObjectURL(data);
+                a.href = url;
+                var fileName = iContent.RetObject.slice(iContent.RetObject.lastIndexOf(nameOfWordFile), iContent.RetObject.length);
+                a.download = fileName;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }
+        });
+    }
+    else
+    {
+        alert("You must give name to the word file!!!");
+    }
 }

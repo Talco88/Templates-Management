@@ -1,7 +1,6 @@
 ﻿var templatesPage = {}
 var Global_Template_BaseHTMLData = "";
 var iCategoryNameGlobal = undefined;
-var birthDayFields = ["Dear", "Date", "Age", "From"];
 
 templatesPage.setPage = function (iCategoryName) {
     iCategoryNameGlobal = iCategoryName;
@@ -57,33 +56,12 @@ templatesPage.SetCategoryNames = function (iCategoryName) {
 
 templatesPage.onTopicSelected = function (iEvent) {
     var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
-    var fields = getTemplateFieldsFromTopicName(selectedTopicName);
     var templateWrapper = {
         templateHeader:{
             MCategoryName: iCategoryNameGlobal,
             TemplateHeaderName: selectedTopicName
-        },
-        templatePlaceHolders: fields
+        }
     }
 
     selectedTemplatesPage.setPage(templateWrapper);
-}
-
-function getTemplateFieldsFromTopicName(iTopicName)
-{
-    let retVal;
-    switch(iTopicName)
-    {
-        case "יום הולדת":
-            {
-                retVal = birthDayFields;
-                break;
-            }
-        default:
-            {
-                break;
-            }
-    }
-
-    return retVal;
 }
