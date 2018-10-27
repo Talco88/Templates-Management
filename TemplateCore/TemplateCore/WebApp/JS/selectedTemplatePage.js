@@ -74,7 +74,7 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
         var showContenttDiv = document.getElementById("showTemplateContent");
 
         var propertyDiv = document.createElement('div');
-        propertyDiv.innerText = "File name:  ";
+        propertyDiv.innerText = "Insert name to the word document file:  ";
 
         var inputField = document.createElement("INPUT");
         inputField.setAttribute("type", "text");
