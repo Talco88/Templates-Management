@@ -86,7 +86,7 @@
     <!--<script type="text/javascript">-->
     <!--//</script>-->
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 
     <!-- Website CSS style -->
@@ -100,97 +100,51 @@
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#067c8d" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/default.aspx">Template-Me</a>
+            <a class="navbar-brand page-scroll text-primary" href="/">Template-Me</a>
+            <a class="fa fa-2x fa fa-home text-primary sr-icons" href="/"></a>
+            <a id="backBtn" class="fa fa-2x fa fa-arrow-left text-primary sr-icons"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-
-    <section style="background-color: #ced4da">
-        <div class="container">
-            <div class="imgcontainer">
-                <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
-            </div>
-            <div style="text-align: center">
-                <h1 style="color: #808080" class="card-title">Category: <strong class="dynamic-category-name"></strong></h1>
-                <h1 style="color: #067c8d" class="title">List of templates: </h1>
-                <div id="category_name" class="navbar-brand page-scroll" href="/"></div>
-                <hr />
-            </div>
-        </div>
-        <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
-        </div>
-      </section>
-
-    <script type="text/javascript">
-    function validationUserInput()
-    {
-        //  var name = document.ContactForm.Name;
-        var email = document.singnupForm.email;
-        var gender=document.getElementsByName("gender");
-        var password=document.singnupForm.password;
-        var confirm=document.singnupForm.confirm;
-
-        if (email.value.indexOf("@", 0) < 0||email.value.indexOf(".", 0) < 0)
-        {
-            alert("Please enter a valid e-mail address.");
-            email.focus();
-            return false;
-        }
-        var okayGender=false;
-        var okayHobbies=false;
-        for(var i=0,l=gender.length;i<l;i++)
-        {
-            if(gender[i].checked)
-            {
-                okayGender=true;
-                break;
-            }
-        }
-        if(!okayGender)
-        {
-            alert("gender please");
-            return false;
-        }
-        if (password.value!=confirm.value)
-        {
-            password.focus;
-            confirm.focus;
-            alert("password and confirm must be equal");
-            return false
-        }
-        if (name.value == "")
-        {
-            window.alert("Please enter your name.");
-            name.focus();
-            return false;
-        }
-    }
-    </script>
-
-    <section id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="section-heading">Let's Get In Touch!</h2>
-                    <hr class="my-4">
-                    <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
+        <section style="background-color: #ced4da">
+            <div class="container">
+                <div class="imgcontainer">
+                    <!--<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>-->
+                </div>
+                <div style="text-align: center">
+                    <h1 style="color: #808080" class="card-title">Category: <strong class="dynamic-category-name"></strong></h1>
+                    <h1 style="color: #067c8d" class="title">List of templates: </h1>
+                    <div id="category_name" class="navbar-brand page-scroll" href="/"></div>
+                    <hr />
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                    <p>
-                        <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
-                    </p>
-                    <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
+            <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto text-center">
+                        <h2 class="section-heading">Let's Get In Touch!</h2>
+                        <hr class="my-4">
+                        <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                        <p>
+                            <a href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
+                        </p>
+                        <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-
+         </section>
 </body>
 </html>
