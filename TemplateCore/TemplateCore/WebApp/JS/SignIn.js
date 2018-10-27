@@ -23,12 +23,18 @@ signIn.onPagedRecived = function () {
 
 signIn.onRegisterClicked = function () {
     // do this when btn is clicked
+    var checkValidationUserInput;
+    checkValidationUserInput = validationUserInput();
+
+    if (checkValidationUserInput) { //when the register is valid
     let fname = document.querySelector('#fname');
     let lname = document.querySelector('#lname');
     let email = document.querySelector('#email');
     let pass = document.querySelector('#password');
     Platform.RegisterUser(fname.value, lname.value, email.value, pass.value, signIn.onLoginResponce);
+    }
 }
+
 signIn.onLoginResponce = function (iData) {
     signIn.nevigateFromSignUpPage(iData);
 }
@@ -61,37 +67,47 @@ signIn.LoadLobbyPageRes = function (isSet) {
 
 function validationUserInput() {
     //  var name = document.ContactForm.Name;
-    var email = document.singnupForm.email;
-    var gender = document.getElementsByName("gender");
-    var password = document.singnupForm.password;
-    var confirm = document.singnupForm.confirm;
+    //var email = document.singnupForm.email;
+    //var gender = document.getElementsByName("gender");
+    //var password = document.singnupForm.password;
+    //var confirm = document.singnupForm.confirm;
+
+    let fname = document.querySelector('#fname');
+    let lname = document.querySelector('#lname');
+    let email = document.querySelector('#email');
+    let password = document.querySelector('#password');
+    //var gender = document.querySelector('.gender');
+    var confirm = document.querySelector('#confirm');
+
+    if (name.value == "") {
+    window.alert("Please enter your name.");
+    name.focus();
+    return false;
+    }
 
     if (email.value.indexOf("@", 0) < 0 || email.value.indexOf(".", 0) < 0) {
         alert("Please enter a valid e-mail address.");
         email.focus();
         return false;
     }
-    var okayGender = false;
-    var okayHobbies = false;
-    for (var i = 0, l = gender.length; i < l; i++) {
-        if (gender[i].checked) {
-            okayGender = true;
-            break;
-        }
-    }
-    if (!okayGender) {
-        alert("gender please");
-        return false;
-    }
+    //var okayGender = false;
+    //var okayHobbies = false;
+    //for (var i = 0, l = gender.length; i < l; i++) {
+    //    if (gender[i].checked) {
+    //        okayGender = true;
+    //        break;
+    //    }
+    //}
+    //if (!okayGender) {
+    //    alert("gender please");
+    //    return false;
+    //}
     if (password.value != confirm.value) {
         password.focus;
         confirm.focus;
         alert("password and confirm must be equal");
         return false
     }
-    if (name.value == "") {
-        window.alert("Please enter your name.");
-        name.focus();
-        return false;
-    }
+
+    return true;
 }
