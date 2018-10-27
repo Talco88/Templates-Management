@@ -1,12 +1,10 @@
 ﻿var selectedTemplatesPage = {};
 var templateHeaderDetails = {};
-var templatePlaceHolders = [];
 var Global_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
-    templatePlaceHolders = iTemplateWrapper.templatePlaceHolders;
 
     if (Global_Template_BaseHTMLData === "") {
         selectedTemplatesPage.LoadTemplatePageRes(true);
@@ -39,10 +37,13 @@ selectedTemplatesPage.onPagedRecived = function () {
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         var replacementDiv = document.getElementById("replaceTempateContent");
-        for (var i = 0; i < templatePlaceHolders.length; i++)
+        var valuesArray = iServerResponce.RetObject.Values;
+        var lengthArray = valuesArray.length;
+
+        for (var i = 0; i < lengthArray; i++)
         {
             var propertyDiv = document.createElement('div');
-            propertyDiv.innerText = templatePlaceHolders[i] + ":  ";
+            propertyDiv.innerText = valuesArray[i].Name + ":  ";
         
             var inputField = document.createElement("INPUT");
             inputField.setAttribute("type", "text");
@@ -56,7 +57,6 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
         var submitButton = document.createElement('button');
         submitButton.innerText = "Show values in template";
         submitButton.addEventListener("click", function () {
-            var valuesArray = iServerResponce.RetObject.Values;
             for (var i = 0; i < valuesArray.length; i++) {
                 valuesArray[i].Value = document.getElementById(i).value;
             }
