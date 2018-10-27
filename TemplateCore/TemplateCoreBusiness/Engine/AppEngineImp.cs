@@ -304,12 +304,18 @@ namespace TemplateCoreBusiness.Engine
         private List<string> getListFieldsNamesFromTemplate(string iTemplateJson)
         {
             List<string> retVal = new List<string>();
+            HashSet<string> valuesInserted = new HashSet<string>();
             string[] splittedArray = iTemplateJson.Split('$');
             for (int i = 0; i < splittedArray.Length; i++)
             {
                 if (i != 0)
                 {
-                    retVal.Add(splittedArray[i].Split(' ')[0]);
+                    string valueToInsert = splittedArray[i].Split(' ')[0];                   
+                    if (valuesInserted.Contains(valueToInsert) == false)
+                    {
+                        valuesInserted.Add(valueToInsert);
+                        retVal.Add(valueToInsert);
+                    }
                 }
             }
 
