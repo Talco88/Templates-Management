@@ -1,13 +1,13 @@
 ﻿var selectedTemplatesPage = {};
 var templateHeaderDetails = {};
-var Global_Template_BaseHTMLData = "";
+var Global_Selected_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
 var templateComtent = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
 
-    if (Global_Template_BaseHTMLData === "") {
+    if (Global_Selected_Template_BaseHTMLData === "") {
         selectedTemplatesPage.LoadTemplatePageRes(true);
     }
     else {
@@ -20,7 +20,7 @@ selectedTemplatesPage.LoadTemplatePageRes = function (isSet) {
         url: "/WebApp/HTML/selectedTemplatePage.html",
         dataType: 'text',
         success: function (data) {
-            Global_Template_BaseHTMLData = data;
+            Global_Selected_Template_BaseHTMLData = data;
             selectedTemplatesPage.onPagedRecived();
         },
         error: function () {
@@ -32,7 +32,7 @@ selectedTemplatesPage.LoadTemplatePageRes = function (isSet) {
 selectedTemplatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html("");
     setTimeout(function () {
-        $("#MainAppWindow").html(Global_Template_BaseHTMLData);
+        $("#MainAppWindow").html(Global_Selected_Template_BaseHTMLData);
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
         let backBtn = document.querySelector("#backBtn");
         backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;

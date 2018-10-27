@@ -1,10 +1,12 @@
 ﻿var templatesPage = {}
 var Global_Template_BaseHTMLData = "";
-var iCategoryNameGlobal = undefined;
+var CategoryNameGlobal = undefined;
 
 templatesPage.setPage = function (iCategoryName) {
-    iCategoryNameGlobal = iCategoryName;
-    templatesPage.categoryName = iCategoryName;
+    if (iCategoryName) {
+        CategoryNameGlobal = iCategoryName;
+    }
+    templatesPage.categoryName = CategoryNameGlobal;
     if (Global_Template_BaseHTMLData === "") {
         templatesPage.LoadLobbyPageRes(true);
     }
@@ -61,7 +63,7 @@ templatesPage.onTopicSelected = function (iEvent) {
     var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
     var templateWrapper = {
         templateHeader:{
-            MCategoryName: iCategoryNameGlobal,
+            MCategoryName: CategoryNameGlobal,
             TemplateHeaderName: selectedTopicName
         }
     }
