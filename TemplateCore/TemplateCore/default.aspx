@@ -16,11 +16,12 @@
 <%--     CSS --%>
     <link href="WebApp/CSS/creative.css" rel="stylesheet" />
     <link href="WebApp/CSS/creative.min.css" rel="stylesheet" />
+    <link href="WebApp/CSS/LoadingPopup.css" rel="stylesheet" />
     <title>Template Core</title>
 </head>
 <body>
+    <div id="loadingPopUp" class="popup-page hide-div"></div>
     <div id="MainAppWindow" class="app-main">
-        
     </div>
     <script>
         mainPage.setPage();

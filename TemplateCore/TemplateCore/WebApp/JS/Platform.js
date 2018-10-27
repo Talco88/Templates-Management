@@ -177,6 +177,7 @@ Platform.OpenTemplateInWord = function (iFileName, iContent, iResponseFunc) {
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
     var url = Platform.serverURL + path;
+    Platform.ShowLoading();
     fetch(`${url}`, {
         method: 'POST',
         credentials: 'include',
@@ -189,13 +190,29 @@ Platform.getDataFRomServer = function(path, requestData, callback) {
                 return response.json().then((json) => {
                     if (callback != null) {
                         callback(json);
+                        Platform.HideLoading();
                     }
                 }).catch(err => {
                     console.log(err);
+                    Platform.HideLoading();
                 });
             } else {
                 console.log("Oops, we haven't got JSON from server");
+                Platform.HideLoading();
             }
+            Platform.HideLoading();
         })
         .catch(err => console.log(err));
+}
+
+Platform.ShowLoading = function () {
+    let popupDiv = document.querySelector(".popup-page")
+    popupDiv.classList.add("show-div");
+    popupDiv.classList.remove("hide-div");
+}
+
+Platform.HideLoading = function () {
+    let popupDiv = document.querySelector(".popup-page")
+    popupDiv.classList.add("hide-div");
+    popupDiv.classList.remove("show-div");
 }
