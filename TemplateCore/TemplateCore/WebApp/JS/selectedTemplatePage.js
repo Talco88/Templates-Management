@@ -34,10 +34,9 @@ selectedTemplatesPage.onPagedRecived = function () {
     setTimeout(function () {
         $("#MainAppWindow").html(Global_Template_BaseHTMLData);
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
+        let backBtn = document.querySelector("#backBtn");
+        backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
     }, 1);
-
-    let backBtn = document.querySelector("#backBtn");
-    backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
 }
 
 selectedTemplatesPage.onBackBtnClicked = function () {
