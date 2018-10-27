@@ -14,9 +14,12 @@ templatesPage.setPage = function (iCategoryName) {
 }
 
 templatesPage.onPagedRecived = function () {
-    $("#MainAppWindow").html(Global_Template_BaseHTMLData);
-    $(".dynamic-category-name").html(templatesPage.categoryName);
-    Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
+    $("#MainAppWindow").html("");
+    setTimeout(function () {
+        $("#MainAppWindow").html(Global_Template_BaseHTMLData);
+        $(".dynamic-category-name").html(templatesPage.categoryName);
+        Platform.GetTopicsInCategory(templatesPage.categoryName, templatesPage.onPagedResponce);
+    }, 1);
 }
 
 templatesPage.LoadLobbyPageRes = function (isSet) {

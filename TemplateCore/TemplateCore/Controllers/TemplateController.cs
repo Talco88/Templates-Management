@@ -46,6 +46,43 @@ namespace TemplateCore.Controllers
         }
 
         [HttpPost]
+        public dynamic CreateNewTemplate([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var createtemplate = appEngine.CreateNewTemplate(
+                    requestBody.Data.Data.Value, 
+                    requestBody.Data.TemplateName.Value,
+                    userEmail(),
+                    requestBody.Data.Category.Value,
+                    requestBody.Data.IsShared.Value);
+                return SetSuccessResponce(createtemplate);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
+        public dynamic UpdateHeaderInTopic([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var createtemplate = appEngine.UpdateHeaderInTopic(
+                    requestBody.Data.CategoryName.Value,
+                    requestBody.Data.OldHeaderName.Value,
+                    requestBody.Data.NewHeaderName.Value);
+                return SetSuccessResponce(createtemplate);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+
+        [HttpPost]
         public dynamic GetAllTopics([FromBody]dynamic requestBody)
         {
             try

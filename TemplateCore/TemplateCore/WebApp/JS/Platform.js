@@ -174,6 +174,29 @@ Platform.OpenTemplateInWord = function (iFileName, iContent, iResponseFunc) {
     Platform.getDataFRomServer("Template/OpenTemplateInWord", dataWrapper, iResponseFunc);
 }
 
+Platform.CreateNewTemplate = function (iData, iTemplateName, iCategory, iIsShared, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            Data: iData,
+            TemplateName: iTemplateName,
+            Category: iCategory,
+            IsShared: iIsShared
+        }
+    };
+    Platform.getDataFRomServer("Template/CreateNewTemplate", dataWrapper, iResponseFunc);
+}
+
+Platform.UpdateHeaderInTopic = function (iCategoryName, iOldHeaderName, iNewHeaderName, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            CategoryName: iCategoryName,
+            OldHeaderName: iOldHeaderName,
+            NewHeaderName: iNewHeaderName,
+            IsShared: iIsShared
+        }
+    };
+    Platform.getDataFRomServer("Template/UpdateHeaderInTopic", dataWrapper, iResponseFunc);
+}
 
 Platform.getDataFRomServer = function(path, requestData, callback) {
     var url = Platform.serverURL + path;
