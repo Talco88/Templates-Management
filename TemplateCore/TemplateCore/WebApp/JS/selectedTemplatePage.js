@@ -1,13 +1,13 @@
 ﻿var selectedTemplatesPage = {};
 var templateHeaderDetails = {};
-var Global_Template_BaseHTMLData = "";
+var Global_Selected_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
 var templateComtent = "";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
 
-    if (Global_Template_BaseHTMLData === "") {
+    if (Global_Selected_Template_BaseHTMLData === "") {
         selectedTemplatesPage.LoadTemplatePageRes(true);
     }
     else {
@@ -20,7 +20,7 @@ selectedTemplatesPage.LoadTemplatePageRes = function (isSet) {
         url: "/WebApp/HTML/selectedTemplatePage.html",
         dataType: 'text',
         success: function (data) {
-            Global_Template_BaseHTMLData = data;
+            Global_Selected_Template_BaseHTMLData = data;
             selectedTemplatesPage.onPagedRecived();
         },
         error: function () {
@@ -32,12 +32,11 @@ selectedTemplatesPage.LoadTemplatePageRes = function (isSet) {
 selectedTemplatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html("");
     setTimeout(function () {
-        $("#MainAppWindow").html(Global_Template_BaseHTMLData);
+        $("#MainAppWindow").html(Global_Selected_Template_BaseHTMLData);
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
+        let backBtn = document.querySelector("#backBtn");
+        backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
     }, 1);
-
-    let backBtn = document.querySelector("#backBtn");
-    backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
 }
 
 selectedTemplatesPage.onBackBtnClicked = function () {
@@ -100,8 +99,13 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
         wordButton.innerText = "Open template in word";
         wordButton.addEventListener("click", function () {
             nameOfWordFile = document.getElementById("FileNameText").value;;
-            console.log(templateComtent.toString());
-            Platform.OpenTemplateInWord(nameOfWordFile, templateComtent.toString(), selectedTemplatesPage.OpenTemplateInWordRes);
+            var fileNameText = document.getElementById("FileNameText").value;
+            if (fileNameText && fileNameText !== "") {
+                Platform.OpenTemplateInWord(nameOfWordFile, templateComtent.toString(), selectedTemplatesPage.OpenTemplateInWordRes);
+            }
+            else {
+                alert("You must give name to the word file!!!");
+            }
         });
 
         showContenttDiv.appendChild(wordButton);
@@ -119,7 +123,6 @@ selectedTemplatesPage.onBackSelected = function (iEvent) {
 
 selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
     var fileNameText = document.getElementById("FileNameText").value;
-    console.log("fileNameText", fileNameText);
     if (fileNameText && fileNameText !== "")
     {
         $.ajax({
