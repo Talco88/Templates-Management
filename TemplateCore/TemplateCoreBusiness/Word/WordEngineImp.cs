@@ -20,13 +20,14 @@ namespace TemplateCoreBusiness.Word
         private const string CLOSE_BOLD = "/b";
         private const string OPEN_PARAGRAPH = "p";
         private const string CLOSE_PARAGRAPH = "/p";
+        private const string UNDER_LINE = "/br";
         private const string FONT_SIZE = "font-size";
         private const string COLOR = "color";
         private const string ALIGNMENT = "align";
         private const string PIXELS = "px;";
         private const char POINTS = ':';
         private const char SEMICOLON = ';';
-        private const char QUOTATION_MARKS = '\"';
+        private const char QUOTATION_MARKS = '\'';
         private const string RIGHT_ALIGNMENT = "right";
         private const char OPEN_COMPLEX_PARAGRAPH = 'p';
 
@@ -96,6 +97,11 @@ namespace TemplateCoreBusiness.Word
                             break;
                         }
                         case CLOSE_PARAGRAPH:
+                        {
+                            createNewParagrapg(ref doc, ref paragraph, ref isFirst);
+                            break;
+                        }
+                        case UNDER_LINE:
                         {
                             createNewParagrapg(ref doc, ref paragraph, ref isFirst);
                             break;
