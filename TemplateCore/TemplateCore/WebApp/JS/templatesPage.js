@@ -59,12 +59,16 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
             topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName;
             topicDiv.innerText = iCategoryNames[i].HeadName;
             topicDiv.onclick = templatesPage.onTopicSelected;
-            wrapperDiv.appendChild(topicDiv);
+            //wrapperDiv.appendChild(topicDiv);
             
             var rateDiv = document.createElement('div');
             rateDiv.className = "server-rating";
-            rateDiv.innerText =  iCategoryNames[i].Rate.toString() + "/5";
-            wrapperDiv.appendChild(rateDiv);
+            rateDiv.innerText =  "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
+            //wrapperDiv.appendChild(rateDiv);
+
+            var bothValues = document.createElement('div');
+            bothValues.textContent = '*' + iCategoryNames[i].HeadName+  "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
+            wrapperDiv.appendChild(bothValues);
 
             categoryTitleContainer.appendChild(wrapperDiv);
         }
