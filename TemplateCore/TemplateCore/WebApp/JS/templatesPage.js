@@ -73,7 +73,7 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
             rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
             //wrapperDiv.appendChild(rateDiv);
 
-            topicDiv.innerHTML = iCategoryNames[i].HeadName + "&nbsp;&nbsp;&nbsp;&nbsp;" + rateDiv.innerText;
+            topicDiv.innerHTML = '*' + iCategoryNames[i].HeadName + "&nbsp;&nbsp;&nbsp;&nbsp;" + rateDiv.innerText;
             topicDiv.onclick = templatesPage.onTopicSelected;
             wrapperDiv.appendChild(topicDiv);
 
