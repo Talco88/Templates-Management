@@ -37,9 +37,13 @@ namespace TemplateCoreBusiness.Models
             if(RateCounter > 1)
             {
                 AddRateSum(iNewRate);
+                Rate = RateSum / RateCounter;
             }
-            
-            Rate = (RateSum + iNewRate) / RateCounter;
+            else
+            {
+                Rate = (RateSum + iNewRate) / RateCounter;
+                AddRateSum(iNewRate);
+            }
         }
 
         public void AddComment(string iNewComment)
