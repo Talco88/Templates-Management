@@ -70,7 +70,7 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
 
             var rateDiv = document.createElement('div');
             rateDiv.className = "server-rating";
-            rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
+            rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5 ⭐";
             wrapperDiv.appendChild(rateDiv);
 
             categoryTitleContainer.appendChild(wrapperDiv);
