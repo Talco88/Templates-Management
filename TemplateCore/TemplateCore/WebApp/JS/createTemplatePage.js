@@ -39,7 +39,6 @@ createTemplatesPage.onPlaceHolderBtnTemplate = function () {
 createTemplatesPage.onSaveTemplatetnBtn = function () {
     let templateContent = document.getElementById("message").value;
     let templateContentAfterReplace = templateContent.split("\n").join("</br>");
-    console.log("templateContentAfterReplace: ", templateContentAfterReplace);
     let templateName = document.getElementById("templateName").value;
     if (templateName && templateName !== "") {
         let newTemplateContent = "{\"Template\": \"<p>" + templateContentAfterReplace + "</p>\", \"numberOfChanges\": 0}";
