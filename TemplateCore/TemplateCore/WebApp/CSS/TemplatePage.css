@@ -10,7 +10,15 @@
 
 .template-property {
     width: 320px;
+    height: 40px;
+    justify-content: center;
 }
+
+    .template-property:hover {
+        color: #067c8d;
+        font-size: 1.40rem;
+        cursor: pointer;
+    }
 
 .server-rating {
     width: 150px;
