@@ -5,7 +5,7 @@ createTemplatesPage.setPage = function (iCategoryName) {
     if (iCategoryName) {
         createTemplatesPage.CategoryName = iCategoryName;
     }
-    
+
     if (Global_Creat_Template_BaseHTMLData === "") {
         createTemplatesPage.LoadLobbyPageRes(true);
     }
@@ -18,20 +18,20 @@ createTemplatesPage.onPagedRecived = function () {
     $("#MainAppWindow").html("");
     setTimeout(function () {
         $("#MainAppWindow").html(Global_Creat_Template_BaseHTMLData);
-        $(".dynamic-category-name").html(createTemplatesPage.categoryName);
+        $(".dynamic-category-name").html(createTemplatesPage.CategoryName);
     }, 1);
 }
 
 createTemplatesPage.LoadLobbyPageRes = function (isSet) {
     $.ajax({
-        url: "/WebApp/HTML/createTemplatesPage.html",
+        url: "/WebApp/HTML/createTemplatePage.html",
         dataType: 'text',
         success: function (data) {
             Global_Creat_Template_BaseHTMLData = data;
             createTemplatesPage.onPagedRecived();
         },
         error: function () {
-            alert("error Loading Lobby Page");
+            alert("error Loading create Template Page");
         }
     });
 }

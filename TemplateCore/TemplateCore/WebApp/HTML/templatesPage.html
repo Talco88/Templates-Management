@@ -85,13 +85,11 @@
     </style>
     <!--<script type="text/javascript">-->
     <!--//</script>-->
-
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css">
 
     <!-- Website CSS style -->
     <!--<link rel="stylesheet" type="text/css" href="assets/css/main.css">-->
-
     <!-- Website Font style -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
@@ -106,42 +104,43 @@
             <a class="fa fa-2x fa fa-home text-primary sr-icons" href="/"></a>
         </div>
     </nav>
-        <section style="background-color: #ced4da">
-            <div class="container">
-                <div class="row">
-                    <div style="text-align: center">
-                        <h1 style="color: #808080" class="card-title">Category: <strong class="dynamic-category-name"></strong></h1>
-                        <h1 style="color: #067c8d" class="title">List of templates: </h1>
-                        <div id="category_name" class="navbar-brand page-scroll" href="/" onclick="document.getElementsByClassName('name_rate')"></div>
-                        <!--<div id="rate_cat" class="navbar-brand page-scroll" href="/"></div>-->
-                    </div>
+    <section style="background-color: #ced4da">
+        <div class="container">
+            <div class="row" style="text-align: center">
+                <div style="text-align: center">
+                    <h1 style="color: #808080" class="card-title">Category: <strong class="dynamic-category-name"></strong></h1>
+                    <h1 style="color: #067c8d" class="title">List of templates: </h1>
+                    <div id="category_name" class="navbar-brand page-scroll" href="/"></div>
+                    <div id="rate_cat" class="navbar-brand page-scroll" href="/"></div>
                 </div>
             </div>
-            <br />
-            <div style="text-align: center">
-                <a class="btn btn-primary btn-xl js-scroll-trigger mx-auto text-center">Create new template</a>
-            </div>
-        </section>
+        </div>
+        <br />
+        <div style="text-align: center">
+            <button id="createNewTemplate-btn" type="submit" class="btn btn-primary btn-xl js-scroll-trigger mx-auto text-center">Create new template</button>
+            <!--<a class="btn btn-primary btn-xl js-scroll-trigger mx-auto text-center">Create new template</a>-->
+        </div>
+    </section>
 
-        <section id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 mx-auto text-center">
-                        <h2 class="section-heading">Let's Get In Touch!</h2>
-                        <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12 text-center">
-                        <i class="fa fa-envelope-o fa-3x sr-contact"></i>
-                        <p>
-                            <a class="font-weight-bold" href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
-                        </p>
-                        <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
-                    </div>
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <p class="mb-5">Would you like to tell us something? Any comments, suggestions or other? That's great! Send us an email and we will get back to you shortly!</p>
                 </div>
             </div>
-         </section>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <i class="fa fa-envelope-o fa-3x sr-contact"></i>
+                    <p>
+                        <a class="font-weight-bold" href="mailto:your-email@your-domain.com">contact-us@tamplate-me.com</a>
+                    </p>
+                    <img class="img-circle" src="WebApp/img/logo.jpg" height="8" width="12"><br>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Bootstrap core JavaScript -->
     <script src="WebApp/vendor/jquery/jquery.min.js"></script>

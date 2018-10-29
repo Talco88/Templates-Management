@@ -24,6 +24,10 @@ templatesPage.onPagedRecived = function () {
     }, 1);
 }
 
+templatesPage.onCreateTemplatetnBtn = function () {
+    createTemplatesPage.setPage(CategoryNameGlobal);
+}
+
 templatesPage.LoadLobbyPageRes = function (isSet) {
     $.ajax({
         url: "/WebApp/HTML/templatesPage.html",
@@ -42,6 +46,9 @@ templatesPage.onPagedResponce = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         //console.log(iServerResponce.RetObject);
         categoryNames = iServerResponce.RetObject;
+
+        let createTemplatetnBtn = document.querySelector("#createNewTemplate-btn");
+        createTemplatetnBtn.onclick = templatesPage.onCreateTemplatetnBtn;
     }
     templatesPage.SetCategoryNames(categoryNames);
 }
@@ -51,25 +58,23 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
 
     let categoryTitleContainer = document.getElementById("category_name");
     if (iCategoryNames != "" && iCategoryNames != null && iCategoryNames != undefined) {
-        for (let i = 0; i < iCategoryNames.length; i++){
+        for (let i = 0; i < iCategoryNames.length; i++) {
             var wrapperDiv = document.createElement('div');
             wrapperDiv.className = 'template-property-wrapper';
-                
-            var topicDiv = document.createElement('div');            
+
+            var topicDiv = document.createElement('div');
             topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName;
             topicDiv.innerText = iCategoryNames[i].HeadName;
-            //topicDiv.onclick = templatesPage.onTopicSelected;
+            topicDiv.onclick = templatesPage.onTopicSelected;
             //wrapperDiv.appendChild(topicDiv);
-            
+
             var rateDiv = document.createElement('div');
             rateDiv.className = "server-rating";
-            rateDiv.innerText =  "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
+            rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
             //wrapperDiv.appendChild(rateDiv);
 
             var bothValues = document.createElement('div');
-            bothValues.className = "name_rate";
-            bothValues.innerHTML = '*' + iCategoryNames[i].HeadName + "&nbsp;&nbsp;&nbsp;&nbsp;" + "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
-            bothValues.onclick = templatesPage.onTopicSelected;
+            bothValues.textContent = '*' + iCategoryNames[i].HeadName + "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
             wrapperDiv.appendChild(bothValues);
 
             categoryTitleContainer.appendChild(wrapperDiv);
@@ -80,7 +85,7 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
 templatesPage.onTopicSelected = function (iEvent) {
     var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
     var templateWrapper = {
-        templateHeader:{
+        templateHeader: {
             MCategoryName: CategoryNameGlobal,
             TemplateHeaderName: selectedTopicName
         }
