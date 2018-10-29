@@ -106,29 +106,35 @@
                     <div id="category_name" class="navbar-brand page-scroll" href="/"></div>
                 </div>
             </div>
-            <div>
-                <p>
-                    Insert template content:
-                    <textarea class="form-control" id="message" placeholder="Insert your template" required="required" data-validation-required-message="Insert your template"></textarea>
-                </p>
+            <div class="template-content-wrapper">
+                <div class="template-content-data">
+                    <div>
+                        Insert template content:
+                    </div>
+                    <div>
+                        <textarea class="form-control create-template-input-size" id="message" placeholder="Insert your template" required="required" data-validation-required-message="Insert your template"></textarea>
+                    </div>
+                </div>
+                <div class="place-holder-wrapper">
+                    <div>
+                        Place holder:
+                    </div>
+                    <div>
+                        <input type="text" class="form-control create-template-input-size" name="placeHolderName" id="placeHolderName" placeholder="Enter Template Name" required/>
+                    </div>
+                    <div style="text-align: center">
+                        <button id="InsertPlaceHolder-btn" type="submit" class="btn btn-primary js-scroll-trigger mx-auto text-center">Insert place holder</button>
+                    </div>
+                </div>
             </div>
             <div>
-                <p>
+                <div>
                     Insert template name:
                     <input type="text" class="form-control" name="templateName" id="templateName" placeholder="Enter Template Name" required />
-                </p>
+                </div>
             </div>
             <div style="text-align: center">
                 <button id="registerTemplate-btn" type="submit" class="btn btn-primary btn-xl js-scroll-trigger mx-auto text-center">Save new template</button>
-            </div>
-            <div>
-                <p>
-                    Place holder:
-                    <input type="text" class="form-control" name="placeHolderName" id="placeHolderName" placeholder="Enter Template Name" required />
-                </p>
-            </div>
-            <div style="text-align: center">
-                <button id="InsertPlaceHolder-btn" type="submit" class="btn btn-primary btn-xl js-scroll-trigger mx-auto text-center">Insert place holder</button>
             </div>
         </div>
         <div style="color: black ;background-color: #ced4da; align-items: center;margin-left: 25%;margin-right: 25%">
