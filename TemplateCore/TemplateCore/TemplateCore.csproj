@@ -88,6 +88,7 @@
     <Content Include="WebApp\CSS\creative.css" />
     <Content Include="WebApp\CSS\creative.min.css" />
     <Content Include="WebApp\CSS\LoadingPopup.css" />
+    <Content Include="WebApp\CSS\TemplatePage.css" />
     <Content Include="WebApp\HtmlPageTest.html" />
     <Content Include="WebApp\HTML\createTemplatePage.html" />
     <Content Include="WebApp\HTML\index.html" />

@@ -18,6 +18,7 @@
     <link href="WebApp/CSS/creative.css" rel="stylesheet" />
     <link href="WebApp/CSS/creative.min.css" rel="stylesheet" />
     <link href="WebApp/CSS/LoadingPopup.css" rel="stylesheet" />
+    <link href="WebApp/CSS/TemplatePage.css" rel="stylesheet" />
     <title>Template Core</title>
 </head>
 <body>

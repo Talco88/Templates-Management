@@ -64,25 +64,14 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
 
             var topicDiv = document.createElement('div');
             topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName;
-            //topicDiv.innerText = iCategoryNames[i].HeadName;
-            //topicDiv.onclick = templatesPage.onTopicSelected;
-            //wrapperDiv.appendChild(topicDiv);
-
-            var rateDiv = document.createElement('div');
-            rateDiv.className = "server-rating";
-            rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
-            //wrapperDiv.appendChild(rateDiv);
-
-            topicDiv.innerHTML = '*' + iCategoryNames[i].HeadName + "&nbsp;&nbsp;&nbsp;&nbsp;" + rateDiv.innerText;
+            topicDiv.innerText = iCategoryNames[i].HeadName;
             topicDiv.onclick = templatesPage.onTopicSelected;
             wrapperDiv.appendChild(topicDiv);
 
-            //var bothValues = document.createElement('div');
-            //bothValues.className = "name_rate";
-            ////bothValues.innerHTML = '*' + iCategoryNames[i].HeadName + "&nbsp;&nbsp;&nbsp;&nbsp;" + "Rate:" + iCategoryNames[i].Rate.toString() + "/5";
-            //bothValues.innerHTML = topicDiv.innerText + "&nbsp;&nbsp;&nbsp;&nbsp;" + "Rate:" + rateDiv.innerText
-            //bothValues.onclick = templatesPage.onTopicSelected;
-            //wrapperDiv.appendChild(bothValues);
+            var rateDiv = document.createElement('div');
+            rateDiv.className = "server-rating";
+            rateDiv.innerText = "Rate:" + iCategoryNames[i].Rate.toString() + "/5 ⭐";
+            wrapperDiv.appendChild(rateDiv);
 
             categoryTitleContainer.appendChild(wrapperDiv);
         }
