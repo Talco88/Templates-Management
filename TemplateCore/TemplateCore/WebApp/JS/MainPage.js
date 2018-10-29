@@ -1,5 +1,6 @@
 ﻿var mainPage = {}
 var Global_index_BaseHTMLData = "";
+var Global_User_Data = undefined;
 
 mainPage.setPage = function () {
     mainPage.loggedInUser = "";
@@ -11,12 +12,15 @@ mainPage.setPage = function () {
     }
 }
 
-mainPage.SetUserInfo = function (iUserName) {
-    if (iUserName != "") {
-        mainPage.loggedInUser = iUserName;
+mainPage.SetUserInfo = function (iUser) {
+    let firstName = "";
+    if (iUser && iUser.firstName != "") {
+        firstName = iUser.FirstName;
+        mainPage.loggedInUser = firstName;
+        Global_User_Data = iUser;
     }
 
-    if (mainPage.loggedInUser === "" && iUserName === "") {
+    if (mainPage.loggedInUser === "" && firstName === "") {
         //show login button, hide logout button:
         document.getElementById("logout_button").style.display = "none";
         document.getElementById("login_button").style.display = "block";
@@ -26,29 +30,11 @@ mainPage.SetUserInfo = function (iUserName) {
 
     } else {
         //document.getElementById("logged_in_username_text_field").textContent = loggedInUser.name;
-        document.getElementById("logged_in_username_text_field").textContent = iUserName;
+        document.getElementById("logged_in_username_text_field").textContent = firstName;
 
         //show logout button, hide login button:
         document.getElementById("logout_button").style.display = "block";
         document.getElementById("login_button").style.display = "none";
-
-        //var userRole = loggedInUser.role;
-        //switch(userRole){
-        //    case "mall_manager":
-        //    case "store_manager":
-        //        //hide shopping chart:
-        //        document.getElementById("shopping_cart").style.display="none";
-
-        //        //hide search gifts:
-        //        document.getElementById("search_gifts").style.display="none";
-
-        //        //hide about:
-        //        document.getElementById("wishlists_label").style.display="none";
-        //        break;
-
-        //    default:
-        //        break;
-        //}
     }
 }
 
@@ -76,16 +62,12 @@ mainPage.onPagedRecived = function () {
 }
 
 mainPage.onUserLogedinResponce = function (iServerResponce) {
-    let userName = "";
+    let userData = {};
     if (iServerResponce.StatusCode === 0) {
-        userName = iServerResponce.RetObject.FirstName;
+        userData = iServerResponce.RetObject;
     }
-    //else {
-    //    console.log(iServerResponce.RetObject);
-    //    alert(iServerResponce.RetObject);
-    //}
 
-    mainPage.SetUserInfo(userName);
+    mainPage.SetUserInfo(userData);
 }
 
 mainPage.onLoginClicked = function () {
