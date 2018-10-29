@@ -64,13 +64,23 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
         for (var i = 0; i < lengthArray; i++)
         {
             var propertyDiv = document.createElement('div');
-            propertyDiv.innerText = valuesArray[i].Name + ":  ";
-        
+            propertyDiv.className = "property-div-wrapper";
+
+            var propertyNameDiv = document.createElement('div');
+            propertyNameDiv.className = "property-name-text";
+            propertyNameDiv.innerText = valuesArray[i].Name + ":";
+            propertyDiv.appendChild(propertyNameDiv);
+
+            var inputwrapperDiv = document.createElement('div');
+            inputwrapperDiv.className = "property-input-wrapper-div";
+
             var inputField = document.createElement("INPUT");
             inputField.setAttribute("type", "text");
             inputField.setAttribute("id", i);
             inputField.setAttribute("placeholder", "Insert value");
-            propertyDiv.appendChild(inputField);
+            inputwrapperDiv.appendChild(inputField);
+
+            propertyDiv.appendChild(inputwrapperDiv);
         
             replacementDiv.appendChild(propertyDiv);
         }

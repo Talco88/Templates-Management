@@ -24,3 +24,14 @@
     width: 150px;
     justify-content: center;
 }
+
+.property-name-text {
+    width: 130px;
+}
+
+.property-div-wrapper {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    align-items: center;
+}
