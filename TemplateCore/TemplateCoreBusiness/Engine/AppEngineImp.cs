@@ -272,6 +272,11 @@ namespace TemplateCoreBusiness.Engine
             return getAllTemplatesInCategory(iCategoryName);
         }
 
+        public List<TemplateEntity> GetAllFavoriteTemplates(string iUserEmail)
+        {
+            return getAllFavoriteTemplates(iUserEmail);
+        }
+
         private string switchValuesInTemplate(string iTemplate, List<WebDataContainer> iValues)
         {
             for (int i = 0; i < iValues.Count; i++)
@@ -405,6 +410,25 @@ namespace TemplateCoreBusiness.Engine
                 retVal.Add(GetTemplateDetails(iCategoryName, item));
             }
 
+            return retVal;
+        }
+
+        private List<TemplateEntity> getAllFavoriteTemplates(string iUserEmail)
+        {
+            List<TemplateEntity> retVal = new List<TemplateEntity>();
+            UserEntity user = DataBaseFactory.GetDbInstance().GetUser(iUserEmail);
+            string[] favoriteTemplatesArray = user.FavoriteTemplates.Split('|');
+            for(int i=0;i<favoriteTemplatesArray.Length;i++)
+            {
+                if (string.IsNullOrEmpty(favoriteTemplatesArray[i]) == false)
+                {
+                    string[] currentFavoriteTemplateArray = favoriteTemplatesArray[i].Split(':');
+                    if(currentFavoriteTemplateArray.Length == 2)
+                    {
+                        retVal.Add(DataBaseFactory.GetDbInstance().GetTemplateEntity(currentFavoriteTemplateArray[0], currentFavoriteTemplateArray[1]));
+                    }
+                }
+            }
             return retVal;
         }
     }

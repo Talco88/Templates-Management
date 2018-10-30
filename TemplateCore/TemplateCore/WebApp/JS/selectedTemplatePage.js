@@ -3,6 +3,8 @@ var templateHeaderDetails = {};
 var Global_Selected_Template_BaseHTMLData = "";
 var nameOfWordFile = "";
 var templateComtent = "";
+var markAsFavoriteString = "Mark as favorite";
+var unmarkFavoriteString = "Unmark favorite";
 
 selectedTemplatesPage.setPage = function (iTemplateWrapper) {
     templateHeaderDetails = iTemplateWrapper.templateHeader;
@@ -46,6 +48,9 @@ selectedTemplatesPage.onPagedRecived = function () {
         let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
         deleteTemplateBtn.onclick = selectedTemplatesPage.onDeleteTemplateBtnClicked;
 
+        let markFavoritBtn = document.querySelector("#markFavoritBtn");
+        markFavoritBtn.onclick = selectedTemplatesPage.onMarkFavoritBtnClicked;
+
         let starsTiles = document.getElementsByName("rating");
         for (var i = 0; i < starsTiles.length; i++) {
             starsTiles[i].onclick = selectedTemplatesPage.onStarBtnClicked;
@@ -53,6 +58,27 @@ selectedTemplatesPage.onPagedRecived = function () {
 
         selectedTemplatesPage.AddCommentField = document.getElementById("message");
     }, 1);
+}
+
+selectedTemplatesPage.onMarkFavoritBtnClicked = function () {
+    var markFavoriteTemplate = document.getElementById("markFavoritBtn");
+    selectedTemplatesPage.isFavoriteTemplate = (markFavoriteTemplate.text === markAsFavoriteString) ? true : false;
+    if (selectedTemplatesPage.isFavoriteTemplate) {
+        Platform.MarkTemplateAsFavorite(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.onMarkFavoritBtnRes);
+    }
+    else {
+        Platform.RemoveMarkTemplateAsFavorite(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.onMarkFavoritBtnRes);
+    }
+}
+
+selectedTemplatesPage.onMarkFavoritBtnRes = function (iEvent) {
+    var markFavoriteTemplate = document.getElementById("markFavoritBtn");
+    if (selectedTemplatesPage.isFavoriteTemplate) {
+        markFavoriteTemplate.text = unmarkFavoriteString;
+    }
+    else {
+        markFavoriteTemplate.text = markAsFavoriteString;
+    }
 }
 
 selectedTemplatesPage.onAddCommentBtnClicked = function (iEvent) {
@@ -83,10 +109,17 @@ selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         selectedTemplatesPage.SelectedTemplateFromServer = iServerResponce.RetObject;
         let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
-        deleteTemplateBtn.style.visibility = (Global_User_Data.IsAdmin || Global_User_Data.Email === templateComtent.UserIdentity) ? "visible" : "hidden"; 
+        deleteTemplateBtn.style.visibility = (Global_User_Data.IsAdmin || Global_User_Data.Email === selectedTemplatesPage.SelectedTemplateFromServer.UserIdentity) ? "visible" : "hidden";
+        selectedTemplatesPage.isFavoriteTemplate = (selectedTemplatesPage.isTemplateInFavoriteList(Global_User_Data.FavoriteTemplates)) ? true : false;
+        selectedTemplatesPage.onMarkFavoritBtnRes();
         selectedTemplatesPage.buildTemplatePartOfPage(selectedTemplatesPage.SelectedTemplateFromServer);
         selectedTemplatesPage.buildCommentsList(selectedTemplatesPage.SelectedTemplateFromServer.Comments);
     }
+}
+
+selectedTemplatesPage.isTemplateInFavoriteList = function (favoriteListString) {
+    var selectedTemplate = templateHeaderDetails.MCategoryName + ":" + templateHeaderDetails.TemplateHeaderName;
+    return favoriteListString.includes(selectedTemplate);
 }
 
 selectedTemplatesPage.buildCommentsList = function (commentsList) {

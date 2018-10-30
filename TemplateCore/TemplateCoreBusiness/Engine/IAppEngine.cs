@@ -20,6 +20,7 @@ namespace TemplateCoreBusiness.Engine
         string DeleteTopic(string iCategoryName, string iHeaderName);
         List<string> GetTopicsInCategory(string iCategoryName);
         List<TemplateEntity> GetAllTemplatesInCategory(string iCategoryName);
+        List<TemplateEntity> GetAllFavoriteTemplates(string iUserEmail);
         List<string> GetTopicsNames();
         List<TopicEntity> GetAllTopics();
         string RateTamplate(string iCategoryName, string iTemplateName, int iRateNumber);

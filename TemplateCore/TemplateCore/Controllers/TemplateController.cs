@@ -139,6 +139,20 @@ namespace TemplateCore.Controllers
         }
 
         [HttpPost]
+        public dynamic GetAllFavoriteTemplates([FromBody]dynamic requestBody)
+        {
+            try
+            {
+                var favoriteTemplatesList = appEngine.GetAllFavoriteTemplates(requestBody.Data.UserEmail.Value);
+                return SetSuccessResponce(favoriteTemplatesList);
+            }
+            catch (Exception ex)
+            {
+                return SetExceptionResponce(ex);
+            }
+        }
+
+        [HttpPost]
         public dynamic RateTamplate([FromBody]dynamic requestBody)
         {
             try
@@ -172,7 +186,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var setSheredResponce = appEngine.SetSharedTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name, requestBody.Data.IsShared.Value);
+                var setSheredResponce = appEngine.SetSharedTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, userEmail(), requestBody.Data.IsShared.Value);
                 return SetSuccessResponce(setSheredResponce);
             }
             catch (Exception ex)
@@ -200,7 +214,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var favoritResponce = appEngine.MarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                var favoritResponce = appEngine.MarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, userEmail());
                 return SetSuccessResponce(favoritResponce);
             }
             catch (Exception ex)
@@ -214,7 +228,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var favoritResponce = appEngine.RemoveMarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                var favoritResponce = appEngine.RemoveMarkTemplateAsFavorite(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, userEmail());
                 return SetSuccessResponce(favoritResponce);
             }
             catch (Exception ex)

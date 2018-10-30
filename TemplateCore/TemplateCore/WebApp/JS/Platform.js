@@ -98,6 +98,15 @@ Platform.GetTopicsInCategory = function (iCategoryName, iResponseFunc) {
     Platform.getDataFRomServer("Template/GetTopicsInCategory", dataWrapper, iResponseFunc);
 }
 
+Platform.GetAllFavoriteTemplates = function (iUserEmail, iResponseFunc) {
+    var dataWrapper = {
+        Data: {
+            UserEmail: iUserEmail
+        }
+    };
+    Platform.getDataFRomServer("Template/GetAllFavoriteTemplates", dataWrapper, iResponseFunc);
+}
+
 Platform.GetAllTemplatesInCategory = function (iCategoryName, iResponseFunc) {
     var dataWrapper = {
         Data: {
@@ -160,7 +169,7 @@ Platform.MarkTemplateAsFavorite = function (iCategoryName, iTemplateName, iRespo
     Platform.getDataFRomServer("Template/MarkTemplateAsFavorite", dataWrapper, iResponseFunc);
 }
 
-Platform.RemoveMarkTemplateAsFavorite = function (iCategoryName, iResponseFunc) {
+Platform.RemoveMarkTemplateAsFavorite = function (iCategoryName, iTemplateName, iResponseFunc) {
     var dataWrapper = {
         Data: {
             CategoryName: iCategoryName,
