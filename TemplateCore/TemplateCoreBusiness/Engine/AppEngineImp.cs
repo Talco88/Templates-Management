@@ -292,7 +292,7 @@ namespace TemplateCoreBusiness.Engine
             Dictionary<string, object> templateData = templateEntity.TemplateData;
             List<string> fieldsNames = getListFieldsNamesFromTemplate(templateData["Template"].ToString());
 
-            return createTemplateFormationWithValues(templateEntity.Category, templateEntity.HeadName, templateEntity.UserIdentity, fieldsNames);
+            return createTemplateFormationWithValues(templateEntity, fieldsNames);
         }
 
         private TemplateEntity getTemplateDetailsFromDB(string iCategoryName, string iTemplateName)
@@ -300,13 +300,13 @@ namespace TemplateCoreBusiness.Engine
             return DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
         }
 
-        private TemplateFormation createTemplateFormationWithValues(string iCategoryName, string iTemplateName,
-            string iUserIdentity, List<string> iWebDataContainerValues)
+        private TemplateFormation createTemplateFormationWithValues(TemplateEntity templateEntity, List<string> iWebDataContainerValues)
         {
             TemplateFormation retVal = new TemplateFormation();
-            retVal.CategoryName = iCategoryName;
-            retVal.HeaderName = iTemplateName;
-            retVal.UserIdentity = iUserIdentity;
+            retVal.CategoryName = templateEntity.Category;
+            retVal.HeaderName = templateEntity.HeadName;
+            retVal.UserIdentity = templateEntity.UserIdentity;
+            retVal.Comments = templateEntity.Comments;
             retVal.Values = createWebDataContainerWithNames(iWebDataContainerValues);
             return retVal;
         }

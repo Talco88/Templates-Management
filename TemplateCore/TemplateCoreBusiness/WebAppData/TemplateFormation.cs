@@ -7,6 +7,7 @@ namespace TemplateCoreBusiness.Engine
         public string HeaderName { get; set; }
         public string CategoryName { get; set; }
         public string UserIdentity { get; set; }
+        public string Comments { get; set; } = "";
         public List<WebDataContainer> Values { get; set; }
     }
 }

@@ -36,14 +36,34 @@ selectedTemplatesPage.onPagedRecived = function () {
         Platform.GetTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, selectedTemplatesPage.valueFromTopicSelected);
         let backBtn = document.querySelector("#backBtn");
         backBtn.onclick = selectedTemplatesPage.onBackBtnClicked;
+
         var selectedReplaceTemplate = document.getElementById("nameOfTemplate");
         selectedReplaceTemplate.innerText = selectedReplaceTemplate.innerText + " " + templateHeaderDetails.TemplateHeaderName;
+
+        let addCommentBtn = document.querySelector("#InsertComment-btn");
+        addCommentBtn.onclick = selectedTemplatesPage.onAddCommentBtnClicked;
 
         let starsTiles = document.getElementsByName("rating");
         for (var i = 0; i < starsTiles.length; i++) {
             starsTiles[i].onclick = selectedTemplatesPage.onStarBtnClicked;
         }
     }, 1);
+}
+
+selectedTemplatesPage.onAddCommentBtnClicked = function (iEvent) {
+    selectedTemplatesPage.AddCommentField = document.getElementById("message");
+    var finalCommentMessage = Global_User_Data.FirstName + " " + Global_User_Data.LastName + ": " + selectedTemplatesPage.AddCommentField.value;
+    Platform.AddCommentToTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, finalCommentMessage, selectedTemplatesPage.onAddCommentBtnReceived);
+}
+
+selectedTemplatesPage.onAddCommentBtnReceived = function (iServerResponce) {
+    if (iServerResponce.StatusCode === 0) {
+        selectedTemplatesPage.AddCommentField.value = "";
+        selectedTemplatesPage.onPagedRecived();
+    }
+    else {
+        alert(iServerResponce.RetObject);
+    }
 }
 
 selectedTemplatesPage.onStarBtnClicked = function (iEvent) {
@@ -54,49 +74,74 @@ selectedTemplatesPage.onStarBtnClicked = function (iEvent) {
 selectedTemplatesPage.onBackBtnClicked = function () {
     templatesPage.setPage();
 }
-
+//TODO: Add loading of the comments
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
-        var replacementDiv = document.getElementById("replaceTempateContent");
-        var valuesArray = iServerResponce.RetObject.Values;
-        var lengthArray = valuesArray.length;
+        selectedTemplatesPage.SelectedTemplateFromServer = iServerResponce.RetObject;
+        selectedTemplatesPage.buildTemplatePartOfPage(selectedTemplatesPage.SelectedTemplateFromServer);
+        selectedTemplatesPage.buildCommentsList(selectedTemplatesPage.SelectedTemplateFromServer.Comments);
+    }
+}
 
-        for (var i = 0; i < lengthArray; i++)
-        {
-            var propertyDiv = document.createElement('div');
-            propertyDiv.className = "property-div-wrapper";
-
-            var propertyNameDiv = document.createElement('div');
-            propertyNameDiv.className = "property-name-text";
-            propertyNameDiv.innerText = valuesArray[i].Name + ":";
-            propertyDiv.appendChild(propertyNameDiv);
-
-            var inputwrapperDiv = document.createElement('div');
-            inputwrapperDiv.className = "property-input-wrapper-div";
-
-            var inputField = document.createElement("INPUT");
-            inputField.setAttribute("type", "text");
-            inputField.setAttribute("id", i);
-            inputField.setAttribute("placeholder", "Insert value");
-            inputwrapperDiv.appendChild(inputField);
-
-            propertyDiv.appendChild(inputwrapperDiv);
-        
-            replacementDiv.appendChild(propertyDiv);
+selectedTemplatesPage.buildCommentsList = function (commentsList) {
+    if (commentsList && commentsList !== "") {
+        var lastCommentsField = document.getElementById("lastComments-message");
+        var commentsArray = commentsList.split("|");
+        for (var i = 0; i < commentsArray.length; i++) {
+            console.log(commentsArray[i]);
+            if (commentsArray[i] && commentsArray[i] !== "") {
+                if (i === 0) {
+                    lastCommentsField.value = commentsArray[i];
+                }
+                else {
+                    lastCommentsField.value = lastCommentsField.value + "\n" + commentsArray[i];
+                }
+            }
         }
 
-        var submitButton = document.createElement('button');
-        submitButton.innerText = "Show values in template";
-        submitButton.addEventListener("click", function () {
-            for (var i = 0; i < valuesArray.length; i++) {
-                valuesArray[i].Value = document.getElementById(i).value;
-            }
-
-            Platform.GenerateHTMLTemplateWithValues(iServerResponce.RetObject.HeaderName, iServerResponce.RetObject.CategoryName, valuesArray, selectedTemplatesPage.showTemplateContent);
-        });
-
-        replacementDiv.appendChild(submitButton);
+        selectedTemplatesPage.AddCommentField.value = "";
     }
+}
+
+selectedTemplatesPage.buildTemplatePartOfPage = function (templateDetails) {
+    var replacementDiv = document.getElementById("replaceTempateContent");
+    var valuesArray = templateDetails.Values;
+    var lengthArray = valuesArray.length;
+
+    for (var i = 0; i < lengthArray; i++) {
+        var propertyDiv = document.createElement('div');
+        propertyDiv.className = "property-div-wrapper";
+
+        var propertyNameDiv = document.createElement('div');
+        propertyNameDiv.className = "property-name-text";
+        propertyNameDiv.innerText = valuesArray[i].Name + ":";
+        propertyDiv.appendChild(propertyNameDiv);
+
+        var inputwrapperDiv = document.createElement('div');
+        inputwrapperDiv.className = "property-input-wrapper-div";
+
+        var inputField = document.createElement("INPUT");
+        inputField.setAttribute("type", "text");
+        inputField.setAttribute("id", i);
+        inputField.setAttribute("placeholder", "Insert value");
+        inputwrapperDiv.appendChild(inputField);
+
+        propertyDiv.appendChild(inputwrapperDiv);
+
+        replacementDiv.appendChild(propertyDiv);
+    }
+
+    var submitButton = document.createElement('button');
+    submitButton.innerText = "Show values in template";
+    submitButton.addEventListener("click", function () {
+        for (var i = 0; i < valuesArray.length; i++) {
+            valuesArray[i].Value = document.getElementById(i).value;
+        }
+
+        Platform.GenerateHTMLTemplateWithValues(templateDetails.HeaderName, templateDetails.CategoryName, valuesArray, selectedTemplatesPage.showTemplateContent);
+    });
+
+    replacementDiv.appendChild(submitButton);
 }
 
 selectedTemplatesPage.showTemplateContent = function (iServerResponce) {

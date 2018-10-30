@@ -138,12 +138,29 @@
                         </fieldset>
                         <br />
                         <hr />
-                        <h1 style="color: #067c8d" class="title">Comment:</h1>
-                        <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
-
-                        <br />
-                        <hr />
-                        <h1 style="color: #067c8d" class="title">Last comment:</h1>
+                    </div>
+                </div>
+                <div class="template-comments-wrapper">
+                    <div class="template-comment-data">
+                        <h1 style="color: #067c8d" class="title">
+                            Comment:
+                        </h1>
+                        <div>
+                            <textarea class="form-control create-template-input-size" id="message" placeholder="Insert your comment" required="required" data-validation-required-message="Insert your comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="comment-btn-wrapper">
+                        <div style="text-align: center">
+                            <button id="InsertComment-btn" type="submit" class="btn btn-primary js-scroll-trigger mx-auto text-center">Add comment</button>
+                        </div>
+                    </div>
+                    <div class="last-comments-wrapper">
+                        <h1 style="color: #067c8d" class="title">
+                            Last Comments:
+                        </h1>
+                        <div style="text-align: center">
+                            <textarea class="form-control create-template-input-size" id="lastComments-message" disabled ="disabled" style="background-color: #ced4da"></textarea>
+                        </div>
                     </div>
                 </div>
             </section>
