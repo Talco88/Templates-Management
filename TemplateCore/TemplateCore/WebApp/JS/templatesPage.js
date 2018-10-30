@@ -79,7 +79,7 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
             wrapperDiv.className = 'template-property-wrapper';
 
             var topicDiv = document.createElement('div');
-            topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName + ' ' + iCategoryNames[i].Category;
+            topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName;
             topicDiv.innerText = iCategoryNames[i].HeadName;
             topicDiv.onclick = templatesPage.onTopicSelected;
             wrapperDiv.appendChild(topicDiv);
@@ -95,10 +95,11 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
 }
 
 templatesPage.onTopicSelected = function (iEvent) {
+    var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
     var templateWrapper = {
         templateHeader: {
-            MCategoryName: iEvent.target.classList.item(2),
-            TemplateHeaderName: iEvent.target.classList.item(1)
+            MCategoryName: CategoryNameGlobal,
+            TemplateHeaderName: selectedTopicName
         }
     }
 
