@@ -83,6 +83,8 @@ selectedTemplatesPage.onBackBtnClicked = function () {
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         selectedTemplatesPage.SelectedTemplateFromServer = iServerResponce.RetObject;
+        let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
+        deleteTemplateBtn.style.visibility = (Global_User_Data.IsAdmin || Global_User_Data.Email === templateComtent.UserIdentity) ? "visible" : "hidden"; 
         selectedTemplatesPage.buildTemplatePartOfPage(selectedTemplatesPage.SelectedTemplateFromServer);
         selectedTemplatesPage.buildCommentsList(selectedTemplatesPage.SelectedTemplateFromServer.Comments);
     }
@@ -150,10 +152,8 @@ selectedTemplatesPage.buildTemplatePartOfPage = function (templateDetails) {
 
 selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
-        let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
         templateComtent = iServerResponce.RetObject;
         
-        deleteTemplateBtn.style.visibility = (Global_User_Data.IsAdmin || Global_User_Data.Email === templateComtent.UserIdentity) ? "visible" : "hidden"; 
         $("#showTemplateContent").html(templateComtent);
         var showContenttDiv = document.getElementById("showTemplateContent");
 

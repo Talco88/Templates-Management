@@ -125,8 +125,18 @@
                  </div>
             </section>
             <section id="rate_comments" style="background-color:#9da6af">
-                <div>
-                    <a id="deleteTemplate-btn" class="btn btn-primary btn-xl js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display='block'">Delete Tamplate</a>
+                <div class="container">
+                    <div class="template-property-wrapper">
+                        <div class="single-buttion-wrapper">
+                            <a id="deleteTemplate-btn" class="btn btn-primary btn-xl js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display = 'block'">Delete Tamplate</a>
+                        </div>
+                        <div class="single-buttion-wrapper">
+                            <a id="markFavoritBtn" class="btn btn-primary btn-xl js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display = 'block'">Mark as favorit</a>
+                        </div>
+                        <div class="single-buttion-wrapper">
+                            <a id="unmarkFavoritBtn" class="btn btn-primary btn-xl js-scroll-trigger" href="#" onclick="document.getElementById('id01').style.display = 'block'">Unmark favorit</a>
+                        </div>
+                    </div>
                     <div class="server-error-response"></div>
                 </div>
                 <div class="container">
@@ -143,7 +153,7 @@
                         <hr />
                     </div>
                 </div>
-                <div class="template-comments-wrapper">
+                <div class="template-comments-wrapper container">
                     <div class="template-comment-data">
                         <h1 style="color: #067c8d" class="title">
                             Comment:

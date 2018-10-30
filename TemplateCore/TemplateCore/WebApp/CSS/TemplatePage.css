@@ -8,6 +8,10 @@
     flex-direction: row;
 }
 
+.single-buttion-wrapper {
+    margin: 3px;
+}
+
 .template-property {
     width: 320px;
     height: 40px;
