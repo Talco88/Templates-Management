@@ -62,7 +62,7 @@ mainPage.onPagedRecived = function () {
 }
 
 mainPage.onUserLogedinResponce = function (iServerResponce) {
-    let userData = {};
+    let userData = undefined;
     if (iServerResponce.StatusCode === 0) {
         userData = iServerResponce.RetObject;
     }
@@ -84,8 +84,9 @@ mainPage.onSignUpClicked = function () {
 
 mainPage.onLogOutClicked = function () {
     // do this when btn is clicked
-    let lgoout = document.querySelector('.logout-btn');
+    //let lgoout = document.querySelector('.logout-btn');
     Platform.LogoutCurrentUser(mainPage.onLogedoutResponce);
+    Global_User_Data = undefined;
     mainPage.loggedInUser = "";
     mainPage.SetUserInfo("");
 }
