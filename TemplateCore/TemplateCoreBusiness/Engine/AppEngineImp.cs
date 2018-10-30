@@ -137,14 +137,13 @@ namespace TemplateCoreBusiness.Engine
             }
         }
 
-        public string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iUserEmail,
-            string iComment)
+        public string AddCommentToTemplate(string iCategoryName, string iTemplateName, string iComment)
         {
             try
             {
                 TemplateEntity templateEntity =
                     DataBaseFactory.GetDbInstance().GetTemplateEntity(iCategoryName, iTemplateName);
-                templateEntity.AddComment($"{iUserEmail} :{iComment}");
+                templateEntity.AddComment(iComment);
                 return DataBaseFactory.GetDbInstance().UpdateTemplate(templateEntity);
             }
             catch (Exception ex)

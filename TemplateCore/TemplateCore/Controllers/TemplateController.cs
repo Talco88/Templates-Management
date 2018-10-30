@@ -158,7 +158,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var addComentResponce = appEngine.AddCommentToTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name, requestBody.Data.Comment.Value);
+                var addComentResponce = appEngine.AddCommentToTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, requestBody.Data.Comment.Value);
                 return SetSuccessResponce(addComentResponce);
             }
             catch (Exception ex)
