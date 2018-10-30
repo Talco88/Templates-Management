@@ -98,6 +98,7 @@
     <Content Include="WebApp\HTML\templatesPage.html" />
     <Content Include="WebApp\img\birthday.jpg" />
     <Content Include="WebApp\img\buisness.jpg" />
+    <Content Include="WebApp\img\favorite.jpg" />
     <Content Include="WebApp\img\header.jpg" />
     <Content Include="WebApp\img\logo2.png" />
     <Content Include="WebApp\img\portfolio\fullsize\1.jpg" />
