@@ -57,7 +57,6 @@ selectedTemplatesPage.onPagedRecived = function () {
 
 selectedTemplatesPage.onAddCommentBtnClicked = function (iEvent) {
     var finalCommentMessage = Global_User_Data.FirstName + " " + Global_User_Data.LastName + ": " + selectedTemplatesPage.AddCommentField.value;
-    console.log("finalCommentMessage:", finalCommentMessage);
     Platform.AddCommentToTemplate(templateHeaderDetails.MCategoryName, templateHeaderDetails.TemplateHeaderName, finalCommentMessage, selectedTemplatesPage.onAddCommentBtnReceived);
 }
 
@@ -79,7 +78,7 @@ selectedTemplatesPage.onStarBtnClicked = function (iEvent) {
 selectedTemplatesPage.onBackBtnClicked = function () {
     templatesPage.setPage();
 }
-//TODO: Add loading of the comments
+
 selectedTemplatesPage.valueFromTopicSelected = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         selectedTemplatesPage.SelectedTemplateFromServer = iServerResponce.RetObject;
@@ -104,7 +103,7 @@ selectedTemplatesPage.buildCommentsList = function (commentsList) {
                 }
             }
         }
-        console.log("selectedTemplatesPage.AddCommentField: ", selectedTemplatesPage.AddCommentField);
+        
         selectedTemplatesPage.AddCommentField.value = "";
     }
 }
