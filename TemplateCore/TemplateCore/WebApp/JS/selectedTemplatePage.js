@@ -43,6 +43,9 @@ selectedTemplatesPage.onPagedRecived = function () {
         let addCommentBtn = document.querySelector("#InsertComment-btn");
         addCommentBtn.onclick = selectedTemplatesPage.onAddCommentBtnClicked;
 
+        let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
+        deleteTemplateBtn.onclick = selectedTemplatesPage.onDeleteTemplateBtnClicked;
+
         let starsTiles = document.getElementsByName("rating");
         for (var i = 0; i < starsTiles.length; i++) {
             starsTiles[i].onclick = selectedTemplatesPage.onStarBtnClicked;
@@ -147,7 +150,10 @@ selectedTemplatesPage.buildTemplatePartOfPage = function (templateDetails) {
 
 selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
+        let deleteTemplateBtn = document.querySelector("#deleteTemplate-btn");
         templateComtent = iServerResponce.RetObject;
+        
+        deleteTemplateBtn.style.visibility = (Global_User_Data.IsAdmin || Global_User_Data.Email === templateComtent.UserIdentity) ? "visible" : "hidden"; 
         $("#showTemplateContent").html(templateComtent);
         var showContenttDiv = document.getElementById("showTemplateContent");
 
@@ -185,7 +191,6 @@ selectedTemplatesPage.showTemplateContent = function (iServerResponce) {
 }
 
 selectedTemplatesPage.onBackSelected = function (iEvent) {
-    backBtn
     templatesPage.setPage();
 }
 
@@ -213,6 +218,21 @@ selectedTemplatesPage.OpenTemplateInWordRes = function (iContent) {
     else
     {
         alert("You must give name to the word file!!!");
+    }
+}
+
+selectedTemplatesPage.onDeleteTemplateBtnClicked = function() {
+    Platform.DeleteTemplate(templateHeaderDetails.MCategoryName,
+        templateHeaderDetails.TemplateHeaderName,
+        selectedTemplatesPage.onDeleteResponce);
+}
+
+selectedTemplatesPage.onDeleteResponce = function(iServerResponse) {
+    if (iServerResponse.StatusCode === 0) {
+        selectedTemplatesPage.onBackBtnClicked();
+    } else {
+        let serverResponce = document.querySelector(".server-error-response");
+        serverResponce.innerHTML = iServerResponse.RetObject;
     }
 }
 
