@@ -53,7 +53,6 @@ templatesPage.LoadLobbyPageRes = function (isSet) {
 templatesPage.onPagedResponce = function (iServerResponce) {
     if (iServerResponce.StatusCode === 0) {
         categoryNames = iServerResponce.RetObject;
-
         let createTemplatetnBtn = document.querySelector("#createNewTemplate-btn");
         if(templatesPage.isFavoriteTemplates)
         {
@@ -81,6 +80,7 @@ templatesPage.SetCategoryNames = function (iCategoryNames) {
             var topicDiv = document.createElement('div');
             topicDiv.className = 'template-property ' + iCategoryNames[i].HeadName;
             topicDiv.innerText = iCategoryNames[i].HeadName;
+            topicDiv.id = iCategoryNames[i].Category;
             topicDiv.onclick = templatesPage.onTopicSelected;
             wrapperDiv.appendChild(topicDiv);
 
@@ -98,7 +98,7 @@ templatesPage.onTopicSelected = function (iEvent) {
     var selectedTopicName = iEvent.target.className.substring(iEvent.target.classList[0].length + 1);
     var templateWrapper = {
         templateHeader: {
-            MCategoryName: CategoryNameGlobal,
+            MCategoryName: iEvent.target.id,
             TemplateHeaderName: selectedTopicName
         }
     }
