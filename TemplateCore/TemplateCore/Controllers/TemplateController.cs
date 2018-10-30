@@ -186,7 +186,7 @@ namespace TemplateCore.Controllers
         {
             try
             {
-                var deleteResponce = appEngine.DeleteTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, HttpContext.Current.User.Identity.Name);
+                var deleteResponce = appEngine.DeleteTemplate(requestBody.Data.CategoryName.Value, requestBody.Data.TemplateName.Value, userEmail());
                 return SetSuccessResponce(deleteResponce);
             }
             catch (Exception ex)
