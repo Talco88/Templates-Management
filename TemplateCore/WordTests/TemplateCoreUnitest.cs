@@ -12,6 +12,7 @@ namespace WordTests
         private string _TestTemplateName = "BirthdayTest";
         private string _TestCategory = "Greetings";
         private string _TestTemplateNameWord = "BirthdayTestWord";
+        private string _succeededUpdateToDB = "The update to DB succeeded";
 
         private IUserEngine userEngine { get; }
         private IAppEngine appEngine { get; }
@@ -40,8 +41,9 @@ namespace WordTests
             generateTemplate();
             templateCommentsTest();
             addRateTest();
-            favoritTest();
+            favoriteTest();
             testDeleteTemplate();
+            Console.ReadKey();
         }
 
         private void loginTest()
@@ -153,7 +155,7 @@ namespace WordTests
             try
             {
                 var commentResult = appEngine.AddCommentToTemplate(_TestCategory, _TestTemplateName, "SomeTest Comment");
-                result = (commentResult == "");
+                result = (commentResult == _succeededUpdateToDB);
             }
             catch
             {
@@ -170,12 +172,12 @@ namespace WordTests
             try
             {
                 var commentResult = appEngine.RateTamplate(_TestCategory, _TestTemplateName, 4);
-                if (commentResult == "")
+                if (commentResult == _succeededUpdateToDB)
                 {
                     if (appEngine.GetTemplateDetails(_TestCategory, _TestTemplateName).Rate == 4)
                     {
                         commentResult = appEngine.RateTamplate(_TestCategory, _TestTemplateName, 2);
-                        if (commentResult == "")
+                        if (commentResult == _succeededUpdateToDB)
                         {
                             result = appEngine.GetTemplateDetails(_TestCategory, _TestTemplateName).Rate == 3;
                         }
@@ -191,21 +193,21 @@ namespace WordTests
             Console.WriteLine($"[Rate Template] : {status}");
         }
 
-        private void favoritTest()
+        private void favoriteTest()
         {
-            markAsFavorit();
-            testExistingFavorit();
-            unmarkFavorit();
-            testNoFavorits();
+            markAsFavorite();
+            testExistingFavorite();
+            unmarkFavorite();
+            testNoFavorites();
         }
 
-        private void markAsFavorit()
+        private void markAsFavorite()
         {
             bool result;
             try
             {
                 var commentResult = appEngine.MarkTemplateAsFavorite(_TestCategory, _TestTemplateName, _TestUserEmail);
-                result = (commentResult == "");
+                result = (commentResult == _succeededUpdateToDB);
 
             }
             catch
@@ -217,7 +219,7 @@ namespace WordTests
             Console.WriteLine($"[Mark Favorit] : {status}");
         }
 
-        private void testExistingFavorit()
+        private void testExistingFavorite()
         {
             bool result;
             try
@@ -234,13 +236,13 @@ namespace WordTests
             Console.WriteLine($"[Check Existing Favorit] : {status}");
         }
 
-        private void unmarkFavorit()
+        private void unmarkFavorite()
         {
             bool result;
             try
             {
                 var commentResult = appEngine.RemoveMarkTemplateAsFavorite(_TestCategory, _TestTemplateName, _TestUserEmail);
-                result = commentResult == "";
+                result = (commentResult == _succeededUpdateToDB);
             }
             catch
             {
@@ -251,7 +253,7 @@ namespace WordTests
             Console.WriteLine($"[Unmark Favorit] : {status}");
         }
 
-        private void testNoFavorits()
+        private void testNoFavorites()
         {
             bool result;
             try
@@ -274,7 +276,7 @@ namespace WordTests
             try
             {
                 var userResult = appEngine.DeleteTemplate(_TestCategory, _TestTemplateName, _TestUserEmail);
-                result = (userResult == "");
+                result = (userResult == "Delete succeeded");
             }
             catch
             {
