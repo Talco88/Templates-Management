@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateCoreBusiness", "Tem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TemplateCore", "TemplateCore\TemplateCore.csproj", "{C3C22910-6FFA-40D0-B576-BDA39A25C2DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordTests", "WordTests\WordTests.csproj", "{A1BAC4B2-3FBB-4292-BC5C-FD2D930241FC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{A1BAC4B2-3FBB-4292-BC5C-FD2D930241FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

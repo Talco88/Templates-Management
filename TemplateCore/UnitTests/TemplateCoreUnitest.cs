@@ -67,7 +67,7 @@ namespace WordTests
                  string.IsNullOrEmpty(userEntity.FavoriteTemplates) && !userEntity.IsAdmin);
 
             string status = resultString(result);
-            Console.WriteLine($"[Create New User] : {status}");
+            Console.WriteLine($"[Create New User] : \t{status}");
         }
 
         private void loginWithUser(string iUnitestMail, string iUnitestPass)
@@ -84,7 +84,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Login User] : {status}");
+            Console.WriteLine($"[Login with User] : \t{status}");
         }
 
         private void createTemplateTest()
@@ -102,7 +102,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Create New Template] : {status}");
+            Console.WriteLine($"[Create Template] : \t{status}");
         }
 
         private void getServerTemplateDetailsAfterCreation()
@@ -121,7 +121,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Get Template Details] : {status}");
+            Console.WriteLine($"[Get Template] : \t{status}");
         }
 
         private void generateTemplate()
@@ -146,7 +146,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Generate Template] : {status}");
+            Console.WriteLine($"[Generate Template] : \t{status}");
         }
 
         private void templateCommentsTest()
@@ -163,7 +163,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Template Comment] : {status}");
+            Console.WriteLine($"[Template Comment] : \t{status}");
         }
 
         private void addRateTest()
@@ -190,7 +190,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Rate Template] : {status}");
+            Console.WriteLine($"[Rate Template] : \t{status}");
         }
 
         private void favoriteTest()
@@ -216,7 +216,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Mark Favorit] : {status}");
+            Console.WriteLine($"[Mark Favorit] : \t{status}");
         }
 
         private void testExistingFavorite()
@@ -233,7 +233,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Check Existing Favorit] : {status}");
+            Console.WriteLine($"[Check Favorit] : \t{status}");
         }
 
         private void unmarkFavorite()
@@ -250,7 +250,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Unmark Favorit] : {status}");
+            Console.WriteLine($"[Unmark Favorit] : \t{status}");
         }
 
         private void testNoFavorites()
@@ -267,7 +267,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Check No Favorit] : {status}");
+            Console.WriteLine($"[Check No Favorit] : \t{status}");
         }
 
         private void testDeleteTemplate()
@@ -284,7 +284,7 @@ namespace WordTests
             }
 
             string status = resultString(result);
-            Console.WriteLine($"[Delete Template] : {status}");
+            Console.WriteLine($"[Delete Template] : \t{status}");
         }
 
         private TemplateFormation CreateTemplateFormation()
