@@ -43,6 +43,13 @@ namespace WordTests
             addRateTest();
             favoriteTest();
             testDeleteTemplate();
+            finishUniTest();
+        }
+
+        private void finishUniTest()
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("Press any key to exit");
             Console.ReadKey();
         }
 
